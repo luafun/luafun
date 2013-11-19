@@ -1,0 +1,15 @@
+language: c
+
+install:
+  - sudo apt-get update > /dev/null
+  - sudo apt-get -q install luajit
+
+script:
+  - LUAJIT=`echo /usr/bin/luajit* | cut -f 1 -d ' '`
+  - ${LUAJIT} -v
+  - cd tests
+  - ${LUAJIT} ./runtest *.lua
+
+notifications:
+  email:
+    - roman@tsisyk.com

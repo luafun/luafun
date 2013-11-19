@@ -1,0 +1,82 @@
+#!/usr/bin/env luajit
+
+package.path = "../"..package.path
+require "fun" ()
+function dump(gen, init, state) each(print, gen, init, state) end
+
+function file_print(file, ...)
+    local n, i = select("#",...)
+    for i=1,n do
+        file:write(tostring(select(i,...)))
+        if i~=n then
+            file:write(' ')
+        end
+    end
+    file:write('\n')
+end
+
+function process(test_name)
+    io.write("Testing ", test_name, "\n")
+    local new_name = test_name..".new"
+    local test_file = io.open(test_name, 'r')
+    local content = test_file:read("*a");
+    test_file:close()
+
+    local new_file = io.open(new_name, 'w')
+
+    local prev_print = print
+    print = function(...) file_print(new_file, ...) end
+
+    io.flush()
+    local expr
+    for expr in content:gmatch("(.-)%s*--%[%[test.-test%]%]") do
+        new_file:write(expr)
+        new_file:write("\n--[[test\n")
+        local res, err = loadstring(expr)
+        if res then
+            res, err = pcall(res, expr)
+        end
+        if not res then
+            new_file:write('error: ', err:match(".-:%d+:%s*(.*)"), "\n")
+        end
+        new_file:write("--test]]")
+    end
+    new_file:write("\n")
+    new_file:close()
+
+    print = prev_print
+
+    local r = os.execute(string.format('diff -U4 "%s" "%s" 2>&1',
+        test_name, new_name))
+    if r == 0 then
+        os.remove(new_name)
+        return true
+    else
+        return false
+    end
+end
+
+if #arg <= 0 then
+    io.write("Usage: runtest *.lua", "\n")
+    os.exit(1)
+end
+
+local failed, i = {}
+for i=1,#arg,1 do
+    local test_name = arg[i]
+    if not process(test_name) then
+        table.insert(failed, test_name)
+    end
+end
+
+if #failed == 0 then
+    io.write("All tests have passed!", "\n")
+    os.exit(0)
+else
+    io.write("\n")
+    io.write("Failed tests:", "\n")
+    for _k,test_name in ipairs(failed) do
+        io.write("   ", test_name, "\n")
+    end
+    io.write("\n", "Please review *.new files and update tests", "\n")
+end
