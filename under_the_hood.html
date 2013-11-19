@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Under the Hood &mdash; Lua Functional 0.1-alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
+    <link rel="next" title="About" href="about.html" />
+    <link rel="prev" title="Operators" href="operators.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Lua Functional 0.1-alpha documentation</span></a></h1>
+        <h2 class="heading"><span>Under the Hood</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="operators.html">Operators</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="about.html">About</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-fun">
+<span id="under-the-hood"></span><h1>Under the Hood<a class="headerlink" href="#module-fun" title="Permalink to this headline">¶</a></h1>
+<p>The section shed some light on the internal library structure and working
+principles.</p>
+<div class="section" id="iterators">
+<h2>Iterators<a class="headerlink" href="#iterators" title="Permalink to this headline">¶</a></h2>
+<p>A basic primitive of the library after functions is an iterator. Most functions
+takes an iterator and returns a new iteraror(s). Iterators all the way down!
+<a class="footnote-reference" href="#id8" id="id1">[1]</a>.</p>
+<p>The simplest iterator is (surprise!) <tt class="xref lua lua-func docutils literal"><span class="pre">pairs()</span></tt> and <tt class="xref lua lua-func docutils literal"><span class="pre">ipairs()</span></tt>
+Lua functions. Have you ever tried to call, say, <tt class="xref lua lua-func docutils literal"><span class="pre">ipairs()</span></tt> function
+without using it inside a <tt class="docutils literal"><span class="pre">for</span></tt> loop? Try to do that on any Lua
+implementation:</p>
+<div class="highlight-lua" id="iterator-triplet"><pre>&gt; =ipairs({'a', 'b', 'c'})
+function: builtin#6     table: 0x40f80e38       0</pre>
+</div>
+<p>The function returned three strange values which look useless without a <tt class="docutils literal"><span class="pre">for</span></tt>
+loop. We call these values <strong>iterator triplet</strong>.
+Let&#8217;s see how each value is used for:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">gen</span></tt> &#8211; first value</dt>
+<dd>A generating function that can produce a next value on each iteration.
+Usually returns a new <tt class="docutils literal"><span class="pre">state</span></tt> and iteration values (multireturn).</dd>
+<dt><tt class="docutils literal"><span class="pre">param</span></tt> &#8211; second value</dt>
+<dd>A permanent (constant) parameter of a generating function is used to create
+specific instance of the generating function. For example, a table itself
+for <tt class="docutils literal"><span class="pre">ipairs</span></tt> case.</dd>
+<dt><tt class="docutils literal"><span class="pre">state</span></tt> &#8211; third value</dt>
+<dd>A some transient state of an iterator that is changed after each iteration.
+For example, an array index for <tt class="docutils literal"><span class="pre">ipairs</span></tt> case.</dd>
+</dl>
+<p>Try to call <tt class="docutils literal"><span class="pre">gen</span></tt> function manually:</p>
+<blockquote>
+<div><div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="nb">ipairs</span><span class="p">({</span><span class="s1">&#39;</span><span class="s">a&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">b&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">c&#39;</span><span class="p">})</span>
+<span class="o">&gt;</span> <span class="o">=</span><span class="n">gen</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+<span class="mi">1</span>       <span class="n">a</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <tt class="docutils literal"><span class="pre">gen</span></tt> function returned a new state <tt class="docutils literal"><span class="pre">1</span></tt> and the next iteration
+value <tt class="docutils literal"><span class="pre">a</span></tt>. The second call to <tt class="docutils literal"><span class="pre">gen</span></tt> with the new state will return the next
+state  and the next iteration value. When the iterator finishes to the end
+the <tt class="docutils literal"><span class="pre">nil</span></tt> value is returned instead of the next state.</p>
+<p><strong>Please do not panic!</strong> You do not have to use these values directly.
+It is just a nice trick to get <tt class="docutils literal"><span class="pre">for</span> <span class="pre">..</span> <span class="pre">in</span></tt> loop working in Lua.</p>
+</div>
+<div class="section" id="iterations">
+<h2>Iterations<a class="headerlink" href="#iterations" title="Permalink to this headline">¶</a></h2>
+<p>What happens when you type the following code into a Lua console:</p>
+<div class="highlight-python"><pre>for _it, x in ipairs({'a', 'b', 'c'}) do print(x) end</pre>
+</div>
+<p>According to Lua reference manual <a class="footnote-reference" href="#lua-for" id="id2">[2]</a> the code above is equivalent to:</p>
+<div class="highlight-python"><pre>do
+    -- Initialize the iterator
+    local gen, param, state = ipairs({'a', 'b', 'c'})
+    while true do
+        -- Next iteration
+        local state, var_1, ···, var_n = f(param, state)
+        if state == nil then break end
+        -- Assign values to our variables
+        _it = state
+        x = var_1
+        -- Execute the code block
+        print(x)
+    end
+end</pre>
+</div>
+<p>What does it mean for us?</p>
+<ul>
+<li><p class="first">An iterator can be used together with <tt class="docutils literal"><span class="pre">for</span> <span class="pre">..</span> <span class="pre">in</span></tt> to generate a loop</p>
+</li>
+<li><p class="first">An iterator is fully defined using <tt class="docutils literal"><span class="pre">gen</span></tt>, <tt class="docutils literal"><span class="pre">param</span></tt> and <tt class="docutils literal"><span class="pre">state</span></tt> iterator
+triplet</p>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">nil</span></tt> state marks the end of an iteration</p>
+</li>
+<li><p class="first">An iterator can return an arbitrary number of values (multireturn)</p>
+</li>
+<li><p class="first">It is possible to make some wrapping functions to take an iterator and</p>
+<p>return a new modified iterator</p>
+</li>
+</ul>
+<p><strong>The library provides a set of iterators</strong> that can be used like <tt class="docutils literal"><span class="pre">pairs</span></tt>
+and <tt class="docutils literal"><span class="pre">ipairs</span></tt>.</p>
+</div>
+<div class="section" id="iterator-types">
+<h2>Iterator Types<a class="headerlink" href="#iterator-types" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pure-functional-iterators">
+<h3>Pure functional iterators<a class="headerlink" href="#pure-functional-iterators" title="Permalink to this headline">¶</a></h3>
+<p>Iterators can be either pure functional or have some side effects and returns
+different values for some initial conditions <a class="footnote-reference" href="#pure-function" id="id3">[3]</a>. An <strong>iterator is
+pure functional</strong> if it meets the following criteria:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">gen</span></tt> function always returns the same values for the same <tt class="docutils literal"><span class="pre">param</span></tt> and
+<tt class="docutils literal"><span class="pre">state</span></tt> values (idempotence property)</li>
+<li><tt class="docutils literal"><span class="pre">param</span></tt> and <tt class="docutils literal"><span class="pre">state</span></tt> values are not modified during <tt class="docutils literal"><span class="pre">gen</span></tt> call and
+a new <tt class="docutils literal"><span class="pre">state</span></tt> object is returned instead (referential transparency
+property).</li>
+</ul>
+<p>Pure functional iterators are very important for us. Pure functional iterator
+can be safety cloned or reapplied without creating side effects. Many library
+function use these properties.</p>
+</div>
+<div class="section" id="finite-iterators">
+<h3>Finite iterators<a class="headerlink" href="#finite-iterators" title="Permalink to this headline">¶</a></h3>
+<p>Iterators can be <strong>finite</strong> (sooner or later end up) or <strong>infinite</strong>
+(never end).
+Since there is no way to determine automatically if an iterator is finite or
+not <a class="footnote-reference" href="#turing" id="id4">[4]</a> the library function can not automatically resolve infinite
+loops. It is your obligation to do not pass infinite iterator to reducing
+functions.</p>
+</div>
+</div>
+<div class="section" id="tracing-jit">
+<h2>Tracing JIT<a class="headerlink" href="#tracing-jit" title="Permalink to this headline">¶</a></h2>
+<p>Tracing just-in-time compilation is a technique used by virtual machines to
+optimize the execution of a program at runtime. This is done by recording a
+linear sequence of frequently executed operations, compiling them to native
+machine code and executing them.</p>
+<p>First profiling information for loops is collected. After a hot loop has been
+identified, a special tracing mode is entered which records all executed
+operations of that loop. This sequence of operations is called a <strong>trace</strong>.
+The trace is then optimized and compiled to machine code (trace). When this
+loop is executed again the compiled trace is called instead of the program
+counterpart <a class="footnote-reference" href="#id9" id="id5">[5]</a>.</p>
+<p>Why the tracing JIT is important for us? The LuaJIT tracing compiler can detect
+tail-, up- and down-recursion <a class="footnote-reference" href="#luajit-recursion" id="id6">[6]</a>, unroll compositions of
+functions and inline high-order functions <a class="footnote-reference" href="#luajit-optimizations" id="id7">[7]</a>.
+All of these concepts make the foundation for functional programming.</p>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://en.wikipedia.org/wiki/Turtles_all_the_way_down">http://en.wikipedia.org/wiki/Turtles_all_the_way_down</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="lua-for" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://www.lua.org/manual/5.2/manual.html#3.3.5">http://www.lua.org/manual/5.2/manual.html#3.3.5</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="pure-function" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td><a class="reference external" href="http://en.wikipedia.org/wiki/Pure_function">http://en.wikipedia.org/wiki/Pure_function</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="turing" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td><a class="reference external" href="http://en.wikipedia.org/wiki/Halting_problem">Proved by Turing</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td><a class="reference external" href="http://en.wikipedia.org/wiki/Tracing_just-in-time_compilation">http://en.wikipedia.org/wiki/Tracing_just-in-time_compilation</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="luajit-recursion" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td><a class="reference external" href="http://lambda-the-ultimate.org/node/3851#comment-57679">http://lambda-the-ultimate.org/node/3851#comment-57679</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="luajit-optimizations" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[7]</a></td><td><a class="reference external" href="http://wiki.luajit.org/Optimizations">http://wiki.luajit.org/Optimizations</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="operators.html">Operators</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="about.html">About</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Roman Tsisyk.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

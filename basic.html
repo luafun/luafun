@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic Functions &mdash; Lua Functional 0.1-alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
+    <link rel="up" title="API Reference" href="reference.html" />
+    <link rel="next" title="Generators" href="generators.html" />
+    <link rel="prev" title="API Reference" href="reference.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Lua Functional 0.1-alpha documentation</span></a></h1>
+        <h2 class="heading"><span>Basic Functions</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="reference.html">API Reference</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="generators.html">Generators</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-fun">
+<span id="basic-functions"></span><h1>Basic Functions<a class="headerlink" href="#module-fun" title="Permalink to this headline">¶</a></h1>
+<p>The section contains functions to create iterators from Lua objects.</p>
+<dl class="function">
+<dt id="fun.iter">
+<tt class="descclassname">fun.</tt><tt class="descname">iter</tt><big>(</big><em>array</em><big>)</big><a class="headerlink" href="#fun.iter" title="Permalink to this definition">¶</a></dt>
+<dt>
+<tt class="descclassname">fun.</tt><tt class="descname">iter</tt><big>(</big><em>map</em><big>)</big></dt>
+<dt>
+<tt class="descclassname">fun.</tt><tt class="descname">iter</tt><big>(</big><em>string</em><big>)</big></dt>
+<dt>
+<tt class="descclassname">fun.</tt><tt class="descname">iter</tt><big>(</big><em>gen</em>, <em>param</em>, <em>state</em><big>)</big></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> &#8211; <a class="reference internal" href="under_the_hood.html#iterator-triplet"><em>iterator triplet</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>Make <tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> iterator from the iterable object.
+The function is a generalized version of <tt class="xref lua lua-func docutils literal"><span class="pre">pairs()</span></tt> and <tt class="xref lua lua-func docutils literal"><span class="pre">ipairs()</span></tt>.</p>
+<p>The function distinguish between arrays and maps using <tt class="docutils literal"><span class="pre">#arg</span> <span class="pre">==</span> <span class="pre">0</span></tt>
+check to detect maps. For arrays <tt class="docutils literal"><span class="pre">ipairs</span></tt> is used. For maps a modified
+version of <tt class="docutils literal"><span class="pre">pairs</span></tt> is used that also returns keys. Userdata objects
+are handled in the same way as tables.</p>
+<p>If <tt class="docutils literal"><span class="pre">LUAJIT_ENABLE_LUA52COMPAT</span></tt> <a class="footnote-reference" href="#luajit-lua52compat" id="id1">[1]</a> mode is enabled and
+argument has metamethods <tt class="docutils literal"><span class="pre">__pairs</span></tt> (for maps) or <tt class="docutils literal"><span class="pre">__ipairs</span></tt> for (arrays),
+call it with the table or userdata as argument and return the first three
+results from the call <a class="footnote-reference" href="#lua52-ipairs" id="id2">[2]</a>.</p>
+<p>All library iterator are suitable to use with Lua&#8217;s <tt class="docutils literal"><span class="pre">for</span> <span class="pre">..</span> <span class="pre">in</span></tt> loop.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">a</span> <span class="k">in</span> <span class="n">iter</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">iter</span><span class="p">({</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span><span class="p">})</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="n">b</span> <span class="mi">2</span>
+<span class="n">a</span> <span class="mi">1</span>
+<span class="n">c</span> <span class="mi">3</span>
+
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">a</span> <span class="k">in</span> <span class="n">iter</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">abcde&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">end</span>
+<span class="n">a</span>
+<span class="n">b</span>
+<span class="n">c</span>
+<span class="n">d</span>
+<span class="n">e</span>
+</pre></div>
+</div>
+<p>The first cycle variable <em>_it</em> is needed to store an internal state of
+the iterator. The value must be always ignored in loops:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="k">in</span> <span class="n">iter</span><span class="p">({</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span><span class="p">})</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">end</span>
+<span class="c1">-- _it is some internal iterator state - always ignore it</span>
+<span class="c1">-- a, b are values return from the iterator</span>
+</pre></div>
+</div>
+<p>Simple iterators like <tt class="docutils literal"><span class="pre">iter({1,</span> <span class="pre">2,</span> <span class="pre">3})</span></tt> have simple states, whereas
+other iterators like <a class="reference internal" href="compositions.html#fun.zip" title="fun.zip"><tt class="xref lua lua-func docutils literal"><span class="pre">zip()</span></tt></a> or <a class="reference internal" href="compositions.html#fun.chain" title="fun.chain"><tt class="xref lua lua-func docutils literal"><span class="pre">chain()</span></tt></a> have complicated
+internal states which values senseless for the end user.</p>
+<p>Check out <a class="reference internal" href="under_the_hood.html"><em>Under the Hood</em></a> section for more details.</p>
+<p>There is also the possibility to supply custom iterators to the
+function:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="kd">local</span> <span class="k">function</span> <span class="nf">mypairs_gen</span><span class="p">(</span><span class="n">max</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">&gt;=</span> <span class="n">max</span><span class="p">)</span> <span class="k">then</span>
+            <span class="k">return</span> <span class="kc">nil</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">state</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">state</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">end</span>
+
+<span class="o">&gt;</span> <span class="kd">local</span> <span class="k">function</span> <span class="nf">mypairs</span><span class="p">(</span><span class="n">max</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mypairs_gen</span><span class="p">,</span> <span class="n">max</span><span class="p">,</span> <span class="mi">0</span>
+<span class="k">end</span>
+
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">a</span> <span class="k">in</span> <span class="n">iter</span><span class="p">(</span><span class="n">mypairs</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+<span class="mi">6</span>
+<span class="mi">7</span>
+<span class="mi">8</span>
+<span class="mi">9</span>
+<span class="mi">10</span>
+</pre></div>
+</div>
+<p>Iterators can return multiple values.</p>
+<p>Check out <a class="reference internal" href="under_the_hood.html"><em>Under the Hood</em></a> section for more details.</p>
+<table class="docutils footnote" frame="void" id="luajit-lua52compat" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://luajit.org/extensions.html">http://luajit.org/extensions.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="lua52-ipairs" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://www.lua.org/manual/5.2/manual.html#pdf-ipairs">http://www.lua.org/manual/5.2/manual.html#pdf-ipairs</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.each">
+<tt class="descclassname">fun.</tt><tt class="descname">each</tt><big>(</big><em>fun</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.each" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">none</td>
+</tr>
+</tbody>
+</table>
+<p>Execute the <em>fun</em> for each iteration value. The function is equivalent to
+the code below:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="o">...</span> <span class="k">in</span> <span class="n">iter</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">fun</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="p">{</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span><span class="p">})</span>
+<span class="n">b</span> <span class="mi">2</span>
+<span class="n">a</span> <span class="mi">1</span>
+<span class="n">c</span> <span class="mi">3</span>
+
+<span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+</pre></div>
+</div>
+<p>The function is used for its side effects. Implementation directly applies
+<em>fun</em> to all iteration values without returning a new iterator, in contrast
+to functions like <a class="reference internal" href="transformations.html#fun.map" title="fun.map"><tt class="xref lua lua-func docutils literal"><span class="pre">map()</span></tt></a>.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="transformations.html#fun.map" title="fun.map"><tt class="xref lua lua-func docutils literal"><span class="pre">map()</span></tt></a>, <a class="reference internal" href="reducing.html#fun.reduce" title="fun.reduce"><tt class="xref lua lua-func docutils literal"><span class="pre">reduce()</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.for_each">
+<tt class="descclassname">fun.</tt><tt class="descname">for_each</tt><big>(</big><em>fun</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.for_each" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.each" title="fun.each"><tt class="xref lua lua-func docutils literal"><span class="pre">each()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.foreach">
+<tt class="descclassname">fun.</tt><tt class="descname">foreach</tt><big>(</big><em>fun</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.foreach" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.each" title="fun.each"><tt class="xref lua lua-func docutils literal"><span class="pre">each()</span></tt></a>.</p>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="reference.html">API Reference</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="generators.html">Generators</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Roman Tsisyk.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Filtering &mdash; Lua Functional 0.1-alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
+    <link rel="up" title="API Reference" href="reference.html" />
+    <link rel="next" title="Reducing" href="reducing.html" />
+    <link rel="prev" title="Indexing" href="indexing.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Lua Functional 0.1-alpha documentation</span></a></h1>
+        <h2 class="heading"><span>Filtering</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="indexing.html">Indexing</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="reducing.html">Reducing</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-fun">
+<span id="filtering"></span><h1>Filtering<a class="headerlink" href="#module-fun" title="Permalink to this headline">¶</a></h1>
+<p>This section contains functions to filter values during iteration.</p>
+<dl class="function">
+<dt id="fun.filter">
+<tt class="descclassname">fun.</tt><tt class="descname">filter</tt><big>(</big><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.filter" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>param</strong> (<em>(function(...) -&gt; bool)</em>) &#8211; an predicate to filter the iterator</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Return a new iterator of those elements that satisfy the <strong>predicate</strong>.</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">filter</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+<span class="mi">0</span>
+<span class="mi">3</span>
+<span class="mi">6</span>
+<span class="mi">9</span>
+
+<span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">filter</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span>
+    <span class="n">enumerate</span><span class="p">(</span><span class="n">duplicate</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">x&#39;</span><span class="p">)))))</span>
+<span class="mi">0</span> <span class="n">x</span>
+<span class="mi">3</span> <span class="n">x</span>
+<span class="mi">6</span> <span class="n">x</span>
+<span class="mi">9</span> <span class="n">x</span>
+<span class="mi">12</span> <span class="n">x</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Multireturn iterators are supported but can cause performance
+regressions.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="slicing.html#fun.take_while" title="fun.take_while"><tt class="xref lua lua-func docutils literal"><span class="pre">take_while()</span></tt></a> and <a class="reference internal" href="slicing.html#fun.drop_while" title="fun.drop_while"><tt class="xref lua lua-func docutils literal"><span class="pre">drop_while()</span></tt></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.remove_if">
+<tt class="descclassname">fun.</tt><tt class="descname">remove_if</tt><big>(</big><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.remove_if" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.filter" title="fun.filter"><tt class="xref lua lua-func docutils literal"><span class="pre">filter()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.grep">
+<tt class="descclassname">fun.</tt><tt class="descname">grep</tt><big>(</big><em>regexp_or_predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.grep" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <strong>regexp_or_predicate</strong> is string then the parameter is used as a regular
+expression to build filtering predicate. Otherwise the function is just an
+alias for <a class="reference internal" href="#fun.filter" title="fun.filter"><tt class="xref lua lua-func docutils literal"><span class="pre">filter()</span></tt></a>.</p>
+<p>Equivalent to:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="kd">local</span> <span class="n">fun</span> <span class="o">=</span> <span class="n">regexp_or_predicate</span>
+<span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">regexp_or_predicate</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">string&quot;</span> <span class="k">then</span>
+    <span class="n">fun</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="nb">string.find</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">regexp_or_predicate</span><span class="p">)</span> <span class="o">~=</span> <span class="kc">nil</span> <span class="k">end</span>
+<span class="k">end</span>
+<span class="k">return</span> <span class="n">filter</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="n">lines_to_grep</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">[[Emily]]</span><span class="p">,</span>
+    <span class="s">[[Chloe]]</span><span class="p">,</span>
+    <span class="s">[[Megan]]</span><span class="p">,</span>
+    <span class="s">[[Jessica]]</span><span class="p">,</span>
+    <span class="s">[[Emma]]</span><span class="p">,</span>
+    <span class="s">[[Sarah]]</span><span class="p">,</span>
+    <span class="s">[[Elizabeth]]</span><span class="p">,</span>
+    <span class="s">[[Sophie]]</span><span class="p">,</span>
+    <span class="s">[[Olivia]]</span><span class="p">,</span>
+    <span class="s">[[Lauren]]</span>
+<span class="p">}</span>
+
+<span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">grep</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">^Em&quot;</span><span class="p">,</span> <span class="n">lines_to_grep</span><span class="p">))</span>
+<span class="cm">--[[test</span>
+<span class="cm">Emily</span>
+<span class="cm">Emma</span>
+<span class="cm">--test]]</span>
+
+<span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">grep</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">^P&quot;</span><span class="p">,</span> <span class="n">lines_to_grep</span><span class="p">))</span>
+<span class="cm">--[[test</span>
+<span class="cm">--test]]</span>
+
+<span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">grep</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+<span class="mi">0</span>
+<span class="mi">3</span>
+<span class="mi">6</span>
+<span class="mi">9</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.partition">
+<tt class="descclassname">fun.</tt><tt class="descname">partition</tt><big>(</big><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.partition" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> &#8211; a value to find</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">{gen1, param1, state1}, {gen2, param2, state2}</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The function returns two iterators where elements do and do not satisfy the
+prediucate. Equivalent to:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="k">return</span> <span class="p">{</span><span class="n">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">gen</span><span class="s1">&#39;</span><span class="s">, param&#39;</span><span class="p">,</span> <span class="n">state</span><span class="s1">&#39;</span><span class="s">)},</span>
+<span class="p">{</span><span class="n">filter</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">return</span> <span class="ow">not</span> <span class="n">predicate</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">end</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)};</span>
+</pre></div>
+</div>
+<p>The function make a clone of the source iterator. Iterators especially
+returned in tables to work with <a class="reference internal" href="compositions.html#fun.zip" title="fun.zip"><tt class="xref lua lua-func docutils literal"><span class="pre">zip()</span></tt></a> and other functions.</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">zip</span><span class="p">(</span><span class="n">partition</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
+<span class="cm">--[[test</span>
+<span class="cm">0 1</span>
+<span class="cm">3 2</span>
+<span class="cm">6 4</span>
+<span class="cm">9 5</span>
+<span class="cm">--test]]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> must be pure functional to work properly
+with the function.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="slicing.html#fun.span" title="fun.span"><tt class="xref lua lua-func docutils literal"><span class="pre">span()</span></tt></a></p>
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="indexing.html">Indexing</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="reducing.html">Reducing</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Roman Tsisyk.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; Lua Functional 0.1-alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
+    <link rel="next" title="Getting Started" href="getting_started.html" />
+    <link rel="prev" title="Lua Functional Library" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Lua Functional 0.1-alpha documentation</span></a></h1>
+        <h2 class="heading"><span>Introduction</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Lua Functional Library</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="getting_started.html">Getting Started</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-fun">
+<span id="introduction"></span><h1>Introduction<a class="headerlink" href="#module-fun" title="Permalink to this headline">¶</a></h1>
+<p><strong>Lua Fun</strong> is a high-performance functional programming library
+designed for <a class="reference external" href="http://luajit.org/luajit.html">LuaJIT tracing just-in-time compiler</a>.</p>
+<p>The library provides a set of more than 50 programming primitives typically
+found in languages like Standard ML, Haskell, Erlang, JavaScript, Python and
+even Lisp. High-order functions such as <a class="reference internal" href="transformations.html#fun.map" title="fun.map"><tt class="xref lua lua-func docutils literal"><span class="pre">map()</span></tt></a>, <a class="reference internal" href="filtering.html#fun.filter" title="fun.filter"><tt class="xref lua lua-func docutils literal"><span class="pre">filter()</span></tt></a>,
+<a class="reference internal" href="reducing.html#fun.reduce" title="fun.reduce"><tt class="xref lua lua-func docutils literal"><span class="pre">reduce()</span></tt></a>, <a class="reference internal" href="compositions.html#fun.zip" title="fun.zip"><tt class="xref lua lua-func docutils literal"><span class="pre">zip()</span></tt></a> will help you to <strong>write simple and efficient
+functional code</strong>.</p>
+<p>Let&#8217;s see an example:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="hll"> <span class="o">&gt;</span> <span class="nb">require</span> <span class="s2">&quot;</span><span class="s">fun&quot;</span><span class="p">()</span>
+</span> <span class="o">&gt;</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="hll"> <span class="o">&gt;</span> <span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="p">.</span><span class="n">add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">map</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+</span> <span class="o">&gt;</span> <span class="c1">-- calculate sum(x for x^2 in 1..n)</span>
+ <span class="mi">328350</span>
+</pre></div>
+</div>
+<p><strong>Lua Fun</strong> takes full advantage of the innovative <strong>tracing JIT compiler</strong>
+to achieve transcendental performance on nested functional expressions.
+Functional compositions and high-order functions can be translated into
+<strong>efficient machine code</strong>. Can you believe it? Just try to run the example above
+with <tt class="docutils literal"><span class="pre">luajit</span> <span class="pre">-jdump</span></tt> and see what happens:</p>
+<div class="highlight-none"><div class="highlight"><pre> -- skip some initilization code --
+<span class="hll"> -&gt;LOOP:
+</span> 0bcaffd0  movaps xmm5, xmm7
+ 0bcaffd3  movaps xmm7, xmm1
+ 0bcaffd6  addsd xmm7, xmm5
+ 0bcaffda  ucomisd xmm7, xmm0
+ 0bcaffde  jnb 0x0bca0024        -&gt;5
+ 0bcaffe4  movaps xmm5, xmm7
+ 0bcaffe7  mulsd xmm5, xmm5
+ 0bcaffeb  addsd xmm6, xmm5
+<span class="hll"> 0bcaffef  jmp 0x0bcaffd0        -&gt;LOOP
+</span> ---- TRACE 1 stop -&gt; loop
+</pre></div>
+</div>
+<p>The functional chain above was translated by LuaJIT to (!) <strong>one machine loop</strong>
+containing just 10 CPU assembly instructions without CALL. Unbelievable!</p>
+<p>Readable? Efficient? Can your Python/Ruby/V8 do better?</p>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Lua Functional Library</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="getting_started.html">Getting Started</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Roman Tsisyk.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

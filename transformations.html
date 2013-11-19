@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Transformations &mdash; Lua Functional 0.1-alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
+    <link rel="up" title="API Reference" href="reference.html" />
+    <link rel="next" title="Compositions" href="compositions.html" />
+    <link rel="prev" title="Reducing" href="reducing.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Lua Functional 0.1-alpha documentation</span></a></h1>
+        <h2 class="heading"><span>Transformations</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="reducing.html">Reducing</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="compositions.html">Compositions</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-fun">
+<span id="transformations"></span><h1>Transformations<a class="headerlink" href="#module-fun" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="fun.map">
+<tt class="descclassname">fun.</tt><tt class="descname">map</tt><big>(</big><em>fun</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.map" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fun</strong> (<em>(function(...) -&gt; ...)</em>) &#8211; a function to apply</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a new iterator</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Return a new iterator by applying the <strong>fun</strong> to each element of
+<tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> iterator. The mapping is performed on the fly
+and no values are buffered.</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">map</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="mi">0</span>
+<span class="mi">2</span>
+<span class="mi">4</span>
+<span class="mi">6</span>
+
+<span class="n">fun</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">return</span> <span class="s1">&#39;</span><span class="s">map&#39;</span><span class="p">,</span> <span class="o">...</span> <span class="k">end</span>
+<span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">map</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="n">map</span> <span class="mi">0</span>
+<span class="n">map</span> <span class="mi">1</span>
+<span class="n">map</span> <span class="mi">2</span>
+<span class="n">map</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.enumerate">
+<tt class="descclassname">fun.</tt><tt class="descname">enumerate</tt><big>(</big><em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.enumerate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a new iterator</td>
+</tr>
+</tbody>
+</table>
+<p>Return a new iterator by enumerating all elements of the
+<tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> iterator. The mapping is performed on the fly
+and no values are buffered.</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">enumerate</span><span class="p">({</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">d&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">e&quot;</span><span class="p">}))</span>
+<span class="mi">0</span> <span class="n">a</span>
+<span class="mi">1</span> <span class="n">b</span>
+<span class="mi">2</span> <span class="n">c</span>
+<span class="mi">3</span> <span class="n">d</span>
+<span class="mi">4</span> <span class="n">e</span>
+
+<span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">zip</span><span class="p">({</span><span class="s2">&quot;</span><span class="s">one&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">two&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">three&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">four&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">five&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">d&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">e&quot;</span><span class="p">})))</span>
+<span class="mi">0</span> <span class="n">one</span> <span class="n">a</span>
+<span class="mi">1</span> <span class="n">two</span> <span class="n">b</span>
+<span class="mi">2</span> <span class="n">three</span> <span class="n">c</span>
+<span class="mi">3</span> <span class="n">four</span> <span class="n">d</span>
+<span class="mi">4</span> <span class="n">five</span> <span class="n">e</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.intersperse">
+<tt class="descclassname">fun.</tt><tt class="descname">intersperse</tt><big>(</big><em>x</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.intersperse" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a new iterator</td>
+</tr>
+</tbody>
+</table>
+<p>Return a new iterator where the <strong>x</strong> value is interspersed between the
+elements of the source iterator. The <strong>x</strong> value can also be added as a
+last element of returning iterator if the source iterator contains the odd
+number of elements.</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">intersperse</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">x&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">d&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">e&quot;</span><span class="p">}))</span>
+<span class="n">a</span>
+<span class="n">x</span>
+<span class="n">b</span>
+<span class="n">x</span>
+<span class="n">c</span>
+<span class="n">x</span>
+<span class="n">d</span>
+<span class="n">x</span>
+<span class="n">e</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="reducing.html">Reducing</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="compositions.html">Compositions</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Roman Tsisyk.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

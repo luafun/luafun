@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Indexing &mdash; Lua Functional 0.1-alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
+    <link rel="up" title="API Reference" href="reference.html" />
+    <link rel="next" title="Filtering" href="filtering.html" />
+    <link rel="prev" title="Slicing" href="slicing.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Lua Functional 0.1-alpha documentation</span></a></h1>
+        <h2 class="heading"><span>Indexing</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="slicing.html">Slicing</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="filtering.html">Filtering</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-fun">
+<span id="indexing"></span><h1>Indexing<a class="headerlink" href="#module-fun" title="Permalink to this headline">¶</a></h1>
+<p>This section contains functions to find elements by its values.</p>
+<dl class="function">
+<dt id="fun.index">
+<tt class="descclassname">fun.</tt><tt class="descname">index</tt><big>(</big><em>x</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.index" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> &#8211; a value to find</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the position of the first element that equals to the <strong>x</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The function returns the position of the first element in the given iterator
+which is equal (using <tt class="docutils literal"><span class="pre">==</span></tt>) to the query element, or <tt class="docutils literal"><span class="pre">nil</span></tt> if there is
+no such element.</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+<span class="kc">nil</span>
+
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">d&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">e&quot;</span><span class="p">}))</span>
+<span class="mi">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.index_of">
+<tt class="descclassname">fun.</tt><tt class="descname">index_of</tt><big>(</big><em>x</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.index_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.index" title="fun.index"><tt class="xref lua lua-func docutils literal"><span class="pre">index()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.elem_index">
+<tt class="descclassname">fun.</tt><tt class="descname">elem_index</tt><big>(</big><em>x</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.elem_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.index" title="fun.index"><tt class="xref lua lua-func docutils literal"><span class="pre">index()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.indexes">
+<tt class="descclassname">fun.</tt><tt class="descname">indexes</tt><big>(</big><em>x</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.indexes" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> &#8211; a value to find</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an iterator which positions of elements that equal to the <strong>x</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The function returns an iterator to positions of elements which equals to
+the query element.</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">indexes</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">d&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">e&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">}))</span>
+<span class="mi">1</span>
+<span class="mi">6</span>
+<span class="mi">9</span>
+<span class="mi">10</span>
+</pre></div>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="filtering.html#fun.filter" title="fun.filter"><tt class="xref lua lua-func docutils literal"><span class="pre">filter()</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.indices">
+<tt class="descclassname">fun.</tt><tt class="descname">indices</tt><big>(</big><em>x</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.indexes" title="fun.indexes"><tt class="xref lua lua-func docutils literal"><span class="pre">indexes()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.elem_indexes">
+<tt class="descclassname">fun.</tt><tt class="descname">elem_indexes</tt><big>(</big><em>x</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.elem_indexes" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.indexes" title="fun.indexes"><tt class="xref lua lua-func docutils literal"><span class="pre">indexes()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.elem_indices">
+<tt class="descclassname">fun.</tt><tt class="descname">elem_indices</tt><big>(</big><em>x</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.elem_indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.indexes" title="fun.indexes"><tt class="xref lua lua-func docutils literal"><span class="pre">indexes()</span></tt></a>.</p>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="slicing.html">Slicing</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="filtering.html">Filtering</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Roman Tsisyk.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

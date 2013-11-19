@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Generators &mdash; Lua Functional 0.1-alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
+    <link rel="up" title="API Reference" href="reference.html" />
+    <link rel="next" title="Slicing" href="slicing.html" />
+    <link rel="prev" title="Basic Functions" href="basic.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Lua Functional 0.1-alpha documentation</span></a></h1>
+        <h2 class="heading"><span>Generators</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="basic.html">Basic Functions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="slicing.html">Slicing</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-fun">
+<span id="generators"></span><h1>Generators<a class="headerlink" href="#module-fun" title="Permalink to this headline">¶</a></h1>
+<p>This section contains a number of useful generators modeled after Standard ML,
+Haskell, Python, Ruby, JavaScript and other languages.</p>
+<div class="section" id="finite-generators">
+<h2>Finite Generators<a class="headerlink" href="#finite-generators" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fun.range">
+<tt class="descclassname">fun.</tt><tt class="descname">range</tt><big>(</big><span class="optional">[</span><em>start</em><span class="optional">]</span>, <em>stop</em><span class="optional">[</span>, <em>step</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#fun.range" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start</strong> (<em>number</em>) &#8211; an endpoint of the interval (see below)</li>
+<li><strong>stop</strong> (<em>number</em>) &#8211; an endpoint of the interval (see below)</li>
+<li><strong>step</strong> (<em>number</em>) &#8211; a step</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an iterator</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The iterator to create arithmetic progressions. Iteration values are generated
+within the half-open interval <tt class="docutils literal"><span class="pre">[start,</span> <span class="pre">stop)</span></tt> (i.e. <em>stop</em> is not included).
+If the <em>step</em> argument is omitted, it defaults to <tt class="docutils literal"><span class="pre">1</span></tt>.  If the <em>start</em>
+argument is omitted, it defaults to <tt class="docutils literal"><span class="pre">0</span></tt>. If <em>step</em> is positive, the last
+element is the largest <tt class="docutils literal"><span class="pre">start</span> <span class="pre">+</span> <span class="pre">i</span> <span class="pre">*</span> <span class="pre">step</span></tt> less than <em>stop</em>; if <em>step</em> is
+negative, the last element is the smallest <tt class="docutils literal"><span class="pre">start</span> <span class="pre">+</span> <span class="pre">i</span> <span class="pre">*</span> <span class="pre">step</span></tt> greater than
+<em>stop</em>.  <em>step</em> must not be zero (or else an error is raised)</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">0</span>
+<span class="mi">5</span>
+<span class="mi">10</span>
+<span class="mi">15</span>
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">0</span>
+<span class="mi">3</span>
+<span class="mi">6</span>
+<span class="mi">9</span>
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">0</span>
+<span class="mf">0.2</span>
+<span class="mf">0.4</span>
+<span class="mf">0.6</span>
+<span class="mf">0.8</span>
+<span class="mi">1</span>
+<span class="mf">1.2</span>
+<span class="mf">1.4</span>
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">0</span>
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="nb">error</span><span class="p">:</span> <span class="n">step</span> <span class="n">must</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">zero</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="infinity-generators">
+<h2>Infinity Generators<a class="headerlink" href="#infinity-generators" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fun.duplicate">
+<tt class="descclassname">fun.</tt><tt class="descname">duplicate</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#fun.duplicate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>...</strong> (<em>non nil</em>) &#8211; objects to duplicate</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an iterator</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The iterator returns values over and over again indefinitely. All values
+that passed to the iterator are returned as-is during the iteration.</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">duplicate</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">a&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">b&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">c&#39;</span><span class="p">)))</span>
+<span class="n">a</span>       <span class="n">b</span>       <span class="n">c</span>
+<span class="n">a</span>       <span class="n">b</span>       <span class="n">c</span>
+<span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">duplicate</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">x&#39;</span><span class="p">)))</span>
+<span class="n">x</span>
+<span class="n">x</span>
+<span class="n">x</span>
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span> <span class="k">in</span> <span class="n">take</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">duplicate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">a&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">b&#39;</span><span class="p">))</span> <span class="k">do</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="k">end</span>
+<span class="mi">1</span>       <span class="mi">2</span>       <span class="n">a</span>       <span class="mi">3</span>       <span class="n">b</span>
+<span class="mi">1</span>       <span class="mi">2</span>       <span class="n">a</span>       <span class="mi">3</span>       <span class="n">b</span>
+<span class="mi">1</span>       <span class="mi">2</span>       <span class="n">a</span>       <span class="mi">3</span>       <span class="n">b</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.xrepeat">
+<tt class="descclassname">fun.</tt><tt class="descname">xrepeat</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#fun.xrepeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.duplicate" title="fun.duplicate"><tt class="xref lua lua-func docutils literal"><span class="pre">duplicate()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.replicate">
+<tt class="descclassname">fun.</tt><tt class="descname">replicate</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#fun.replicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.duplicate" title="fun.duplicate"><tt class="xref lua lua-func docutils literal"><span class="pre">duplicate()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.tabulate">
+<tt class="descclassname">fun.</tt><tt class="descname">tabulate</tt><big>(</big><em>fun</em><big>)</big><a class="headerlink" href="#fun.tabulate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fun</strong> (<em>function(n: uint) -&gt; ...</em>) &#8211; an unary generating function</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an iterator</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The iterator that returns <tt class="docutils literal"><span class="pre">fun(0)</span></tt>, <tt class="docutils literal"><span class="pre">fun(1)</span></tt>, <tt class="docutils literal"><span class="pre">fun(2)</span></tt>, <tt class="docutils literal"><span class="pre">...</span></tt> values
+indefinitely.</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">tabulate</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="k">return</span> <span class="s1">&#39;</span><span class="s">a&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="k">end</span><span class="p">)))</span>
+<span class="n">a</span>       <span class="n">b</span>       <span class="mi">0</span>
+<span class="n">a</span>       <span class="n">b</span>       <span class="mi">2</span>
+<span class="n">a</span>       <span class="n">b</span>       <span class="mi">4</span>
+<span class="n">a</span>       <span class="n">b</span>       <span class="mi">6</span>
+<span class="n">a</span>       <span class="n">b</span>       <span class="mi">8</span>
+<span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">tabulate</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="k">end</span><span class="p">)))</span>
+<span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">4</span>
+<span class="mi">9</span>
+<span class="mi">16</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.zeros">
+<tt class="descclassname">fun.</tt><tt class="descname">zeros</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.zeros" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">an iterator</td>
+</tr>
+</tbody>
+</table>
+<p>The iterator returns <tt class="docutils literal"><span class="pre">0</span></tt> indefinitely.</p>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">zeros</span><span class="p">()))</span>
+<span class="mi">0</span>
+<span class="mi">0</span>
+<span class="mi">0</span>
+<span class="mi">0</span>
+<span class="mi">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fun.ones">
+<tt class="descclassname">fun.</tt><tt class="descname">ones</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.ones" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">an iterator</td>
+</tr>
+</tbody>
+</table>
+<p>The iterator that returns <tt class="docutils literal"><span class="pre">1</span></tt> indefinitely.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>&gt; each(print, take(5, ones()))
+1
+1
+1
+1
+1</pre>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="random-sampling">
+<h2>Random sampling<a class="headerlink" href="#random-sampling" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fun.rands">
+<tt class="descclassname">fun.</tt><tt class="descname">rands</tt><big>(</big><span class="optional">[</span><em>n</em><span class="optional">[</span>, <em>m</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#fun.rands" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>uint</em>) &#8211; an endpoint of the interval (see below)</li>
+<li><strong>m</strong> (<em>uint</em>) &#8211; an endpoint of the interval (see below)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an iterator</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The iterator returns random values using <tt class="xref lua lua-func docutils literal"><span class="pre">math.random()</span></tt>.
+If the <strong>n</strong> and <strong>m</strong> are set then the iterator returns pseudo-random
+integers in the <tt class="docutils literal"><span class="pre">[n,</span> <span class="pre">m)</span></tt> interval (i.e. <strong>m</strong> is not included).
+If the <strong>m</strong> is not set then the iterator generates pseudo-random integers
+in the <tt class="docutils literal"><span class="pre">[0,</span> <span class="pre">n)</span></tt> interval. When called without arguments returns
+pseudo-random real numbers with uniform distribution in the
+interval <tt class="docutils literal"><span class="pre">[0,</span> <span class="pre">1)</span></tt>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This iterator is not pure-functional and may not work as
+expected with some library functions.</p>
+</div>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">rands</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)))</span>
+<span class="mi">19</span>
+<span class="mi">17</span>
+<span class="mi">11</span>
+<span class="mi">19</span>
+<span class="mi">12</span>
+<span class="mi">13</span>
+<span class="mi">14</span>
+<span class="mi">16</span>
+<span class="mi">10</span>
+<span class="mi">11</span>
+
+<span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">rands</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+<span class="mi">7</span>
+<span class="mi">6</span>
+<span class="mi">5</span>
+<span class="mi">9</span>
+<span class="mi">0</span>
+
+<span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">rands</span><span class="p">()))</span>
+<span class="mf">0.79420629243124</span>
+<span class="mf">0.69885246563716</span>
+<span class="mf">0.5901037417281</span>
+<span class="mf">0.7532286166836</span>
+<span class="mf">0.080971251199854</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="basic.html">Basic Functions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="slicing.html">Slicing</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Roman Tsisyk.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
