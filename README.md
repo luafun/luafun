@@ -91,3 +91,6 @@ Please **"Like"** the project on GitHub to help it to survive! Thanks!
 *****
 
 **Lua Fun**. Simple, Efficient and Functional. In Lua. With JIT.
+
+<img src="https://d2weczhvl823v0.cloudfront.net/rtsisyk/luafun/trend.png"
+width="1px" height="1px" />
