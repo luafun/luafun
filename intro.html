@@ -94,11 +94,12 @@ even Lisp. High-order functions such as <a class="reference internal" href="tran
 <a class="reference internal" href="reducing.html#fun.reduce" title="fun.reduce"><tt class="xref lua lua-func docutils literal"><span class="pre">reduce()</span></tt></a>, <a class="reference internal" href="compositions.html#fun.zip" title="fun.zip"><tt class="xref lua lua-func docutils literal"><span class="pre">zip()</span></tt></a> will help you to <strong>write simple and efficient
 functional code</strong>.</p>
 <p>Let&#8217;s see an example:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="hll"> <span class="o">&gt;</span> <span class="nb">require</span> <span class="s2">&quot;</span><span class="s">fun&quot;</span><span class="p">()</span>
-</span> <span class="o">&gt;</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="hll"> <span class="o">&gt;</span> <span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="p">.</span><span class="n">add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">map</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
-</span> <span class="o">&gt;</span> <span class="c1">-- calculate sum(x for x^2 in 1..n)</span>
- <span class="mi">328350</span>
+<div class="highlight-lua"><div class="highlight"><pre><span class="hll"> <span class="nb">require</span> <span class="s2">&quot;</span><span class="s">fun&quot;</span> <span class="p">()</span>
+</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="hll"> <span class="n">x</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">map</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="k">end</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">tabulate</span><span class="p">(</span><span class="nb">math.sin</span><span class="p">))))</span>
+</span> <span class="c1">-- calculate sum(sin(x)^2 for x in 0..n-1)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+ <span class="mf">50.011981355266</span>
 </pre></div>
 </div>
 <p><strong>Lua Fun</strong> takes full advantage of the innovative <strong>tracing JIT compiler</strong>
@@ -108,15 +109,18 @@ Functional compositions and high-order functions can be translated into
 with <tt class="docutils literal"><span class="pre">luajit</span> <span class="pre">-jdump</span></tt> and see what happens:</p>
 <div class="highlight-none"><div class="highlight"><pre> -- skip some initilization code --
 <span class="hll"> -&gt;LOOP:
-</span> 0bcaffd0  movaps xmm5, xmm7
- 0bcaffd3  movaps xmm7, xmm1
- 0bcaffd6  addsd xmm7, xmm5
- 0bcaffda  ucomisd xmm7, xmm0
- 0bcaffde  jnb 0x0bca0024        -&gt;5
- 0bcaffe4  movaps xmm5, xmm7
- 0bcaffe7  mulsd xmm5, xmm5
- 0bcaffeb  addsd xmm6, xmm5
-<span class="hll"> 0bcaffef  jmp 0x0bcaffd0        -&gt;LOOP
+</span> 0bcaffd0  movsd [rsp+0x8], xmm7
+ 0bcaffd6  addsd xmm4, xmm5
+ 0bcaffda  ucomisd xmm6, xmm1
+ 0bcaffde  jnb 0x0bca0028        -&gt;6
+ 0bcaffe4  addsd xmm6, xmm0
+ 0bcaffe8  addsd xmm7, xmm0
+ 0bcaffec  fld qword [rsp+0x8]
+ 0bcafff0  fsin
+ 0bcafff2  fstp qword [rsp]
+ 0bcafff5  movsd xmm5, [rsp]
+ 0bcafffa  mulsd xmm5, xmm5
+<span class="hll"> 0bcafffe  jmp 0x0bcaffd0        -&gt;LOOP
 </span> ---- TRACE 1 stop -&gt; loop
 </pre></div>
 </div>
