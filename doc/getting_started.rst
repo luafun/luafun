@@ -93,7 +93,7 @@ Using LuaRocks
 
 Use the rockspec_ file.
 
-.. _rockspec: https://raw.github.com/rtsisyk/luafun/master/luafun-scm-1.rockspec
+.. _rockspec: https://raw.github.com/rtsisyk/luafun/master/fun-scm-1.rockspec
 
 Using git
 `````````

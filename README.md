@@ -72,6 +72,7 @@ See Also
 --------
 
 * [Documentation]
+* [RockSpec]
 * lua-l@lists.lua.org
 * luajit@freelists.org
 * roman@tsisyk.com
@@ -83,6 +84,7 @@ See Also
  [Tarantool]: http://github.com/tarantool/tarantool
  [Getting Started]: http://rtsisyk.github.io/luafun/getting_started.html
  [Documentation]: http://rtsisyk.github.io/luafun
+ [RockSpec]: https://raw.github.com/rtsisyk/luafun/master/fun-scm-1.rockspec
 
 Please **"Like"** the project on GitHub to help it to survive! Thanks!
 
