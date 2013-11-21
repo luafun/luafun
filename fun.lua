@@ -950,7 +950,8 @@ local exports = {
     ----------------------------------------------------------------------------
     -- Operators
     ----------------------------------------------------------------------------
-    operator = operator
+    operator = operator,
+    op = operator -- an alias
 }
 
 -- a special syntax sugar to export all functions to the global table
