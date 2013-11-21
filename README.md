@@ -86,7 +86,7 @@ See Also
  [Documentation]: http://rtsisyk.github.io/luafun
  [RockSpec]: https://raw.github.com/rtsisyk/luafun/master/fun-scm-1.rockspec
 
-Please **"Like"** the project on GitHub to help it to survive! Thanks!
+Please **"Star"** the project on GitHub to help it to survive! Thanks!
 
 *****
 
