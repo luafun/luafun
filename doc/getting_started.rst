@@ -240,7 +240,7 @@ Further Actions
 - Checkout **examples** from
   `tests/ <https://github.com/rtsisyk/luafun/tree/master/tests>`_ directory
 - Read :doc:`under_the_hood` section
-- "Like" us the on GitHub_ to help the project to survive
+- "Star" us the on GitHub_ to help the project to survive
 - Make Great Software
 - Have fun
 
