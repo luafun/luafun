@@ -8,6 +8,8 @@ to use with the library high-order primitives.
 
 .. contents::
 
+.. note:: **op** can be used as a shortcut to **operator**.
+
 Comparison operators
 --------------------
 

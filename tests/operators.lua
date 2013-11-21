@@ -3,6 +3,11 @@
 -- This test just checks that all functions were defined correctly.
 --
 
+print(op == operator) -- an alias
+--[[test
+true
+--test]]
+
 --------------------------------------------------------------------------------
 -- Comparison operators
 --------------------------------------------------------------------------------
