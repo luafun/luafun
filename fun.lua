@@ -6,6 +6,8 @@
 --- Distributed under the MIT/X11 License. See COPYING.md for more details.
 ---
 
+local exports
+
 --------------------------------------------------------------------------------
 -- Tools
 --------------------------------------------------------------------------------
@@ -39,6 +41,27 @@ deepcopy = function(orig) -- used by cycle()
     return copy
 end
 
+local unpack = table.unpack or unpack
+
+local iterator_mt = {
+    __call = function(self, ...)
+        return self.gen(...)
+    end,
+    __index = function(self, key)
+        return function(...)
+            local args = {...}
+            args[#args+1] = self.gen
+            args[#args+1] = self.param
+            args[#args+1] = self.state
+            return exports[key](unpack(args))
+        end
+    end
+}
+
+local iterator = function(gen, param, state)
+    return setmetatable({gen=gen, param=param, state=state}, iterator_mt), param, state
+end
+
 --------------------------------------------------------------------------------
 -- Basic Functions
 --------------------------------------------------------------------------------
@@ -66,18 +89,20 @@ end
 local iter = function(obj, param, state)
     assert(obj ~= nil, "invalid iterator")
     if (type(obj) == "function") then
-        return obj, param, state
+        return iterator(obj, param, state)
     elseif (type(obj) == "table" or type(obj) == "userdata") then
-        if #obj > 0 then
-            return ipairs(obj)
+        if getmetatable(obj) == iterator_mt then
+            return obj, obj.param, obj.state
+        elseif #obj > 0 then
+            return iterator(ipairs(obj))
         else
-            return map_gen, obj, nil
+            return iterator(map_gen, obj, nil)
         end
     elseif (type(obj) == "string") then
         if #obj == 0 then
-            return nil_gen, nil, nil
+            return iterator(nil_gen, nil, nil)
         end
-        return string_gen, obj, 0
+        return iterator(string_gen, obj, 0)
     end
     error(string.format('object %s of type "%s" is not iterable',
           obj, type(obj)))
@@ -137,9 +162,9 @@ local range = function(start, stop, step)
     assert(step ~= 0, "step must not be zero")
 
     if (step > 0) then
-        return range_gen, {stop, step}, start - step
+        return iterator(range_gen, {stop, step}, start - step)
     elseif (step < 0) then
-        return range_rev_gen, {stop, step}, start - step
+        return iterator(range_rev_gen, {stop, step}, start - step)
     end
 end
 
@@ -157,23 +182,23 @@ end
 
 local duplicate = function(...)
     if select('#', ...) <= 1 then
-        return duplicate_gen, select(1, ...), 0
+        return iterator(duplicate_gen, select(1, ...), 0)
     else
-        return duplicate_table_gen, {...}, 0 
+        return iterator(duplicate_table_gen, {...}, 0)
     end
 end
 
 local tabulate = function(fun)
     assert(type(fun) == "function")
-    return duplicate_fun_gen, fun, 0
+    return iterator(duplicate_fun_gen, fun, 0)
 end
 
 local zeros = function()
-    return duplicate_gen, 0, 0
+    return iterator(duplicate_gen, 0, 0)
 end
 
 local ones = function()
-    return duplicate_gen, 1, 0
+    return iterator(duplicate_gen, 1, 0)
 end
 
 local rands_gen = function(param_x, _state_x)
@@ -186,7 +211,7 @@ end
 
 local rands = function(n, m)
     if n == nil and m == nil then
-        return rands_nil_gen, 0, 0
+        return iterator(rands_nil_gen, 0, 0)
     end
     assert(type(n) == "number", "invalid first arg to rands")
     if m == nil then
@@ -196,7 +221,7 @@ local rands = function(n, m)
         assert(type(m) == "number", "invalid second arg to rands")
     end
     assert(n < m, "empty interval")
-    return rands_gen, {n, m - 1}, 0
+    return iterator(rands_gen, {n, m - 1}, 0)
 end
 
 --------------------------------------------------------------------------------
@@ -241,9 +266,9 @@ local tail = function(gen, param, state)
     local gen_x, param_x, state_x = iter(gen, param, state)
     state_x = gen_x(param_x, state_x)
     if state_x == nil then
-        return nil_gen, nil, nil
+        return iterator(nil_gen, nil, nil)
     end
-    return gen_x, param_x, state_x
+    return iterator(gen_x, param_x, state_x)
 end
 
 local take_n_gen_x = function(i, state_x, ...)
@@ -265,7 +290,7 @@ end
 local take_n = function(n, gen, param, state)
     assert(n >= 0, "invalid first argument to take_n")
     local gen_x, param_x, state_x = iter(gen, param, state)
-    return take_n_gen, {n, gen, param}, {0, state}
+    return iterator(take_n_gen, {n, gen, param}, {0, state})
 end
 
 local take_while_gen_x = function(fun, state_x, ...)
@@ -283,13 +308,13 @@ end
 local take_while = function(fun, gen, param, state)
     assert(type(fun) == "function", "invalid first argument to take_while")
     local gen_x, param_x, state_x = iter(gen, param, state)
-    return take_while_gen, {fun, gen, param}, state
+    return iterator(take_while_gen, {fun, gen, param}, state)
 end
 
 local take = function(n_or_fun, gen, param, state)
     if type(n_or_fun) == "number" then
         return take_n(n_or_fun, gen, param, state)
-    else 
+    else
         return take_while(n_or_fun, gen, param, state)
     end
 end
@@ -300,10 +325,10 @@ local drop_n = function(n, gen, param, state)
     for i=1,n,1 do
         state_x = gen_x(param_x, state_x)
         if state_x == nil then
-            return nil_gen, nil, nil
+            return iterator(nil_gen, nil, nil)
         end
     end
-    return gen_x, param_x, state_x
+    return iterator(gen_x, param_x, state_x)
 end
 
 local drop_while_x = function(fun, state_x, ...)
@@ -322,15 +347,15 @@ local drop_while = function(fun, gen, param, state)
         state_x, cont = drop_while_x(fun, gen_x(param_x, state_x))
     until not cont
     if state_x == nil then
-        return nil_gen, nil, nil
+        return iterator(nil_gen, nil, nil)
     end
-    return gen_x, param_x, state_x_prev
+    return iterator(gen_x, param_x, state_x_prev)
 end
 
 local drop = function(n_or_fun, gen, param, state)
     if type(n_or_fun) == "number" then
         return drop_n(n_or_fun, gen, param, state)
-    else 
+    else
         return drop_while(n_or_fun, gen, param, state)
     end
 end
@@ -344,7 +369,7 @@ end
 -- Indexing
 --------------------------------------------------------------------------------
 
-local index = function(x, gen, param, state) 
+local index = function(x, gen, param, state)
     local i = 1
     for _k, r in iter(gen, param, state) do
         if r == x then
@@ -373,7 +398,7 @@ end
 
 local indexes = function(x, gen, param, state)
     local gen_x, param_x, state_x = iter(gen, param, state)
-    return indexes_gen, {x, gen_x, param_x}, {0, state_x}
+    return iterator(indexes_gen, {x, gen_x, param_x}, {0, state_x})
 end
 
 -- TODO: undocumented
@@ -429,7 +454,7 @@ end
 
 local filter = function(fun, gen, param, state)
     local gen_x, param_x, state_x = iter(gen, param, state)
-    return filter_gen, {fun, gen_x, param_x}, state_x
+    return iterator(filter_gen, {fun, gen_x, param_x}, state_x)
 end
 
 local grep = function(fun_or_regexp, gen, param, state)
@@ -632,7 +657,7 @@ end
 
 local map = function(fun, gen, param, state)
     local gen_x, param_x, state_x = iter(gen, param, state)
-    return map_gen, {gen_x, param_x, fun}, state_x
+    return iterator(map_gen, {gen_x, param_x, fun}, state_x)
 end
 
 local enumerate_gen_call = function(state, i, state_x, ...)
@@ -650,7 +675,7 @@ end
 
 local enumerate = function(gen, param, state)
     local gen_x, param_x, state_x = iter(gen, param, state)
-    return enumerate_gen, {gen_x, param_x}, {0, state_x}
+    return iterator(enumerate_gen, {gen_x, param_x}, {0, state_x})
 end
 
 local intersperse_call = function(i, state_x, ...)
@@ -673,7 +698,7 @@ end
 -- TODO: interperse must not add x to the tail
 local intersperse = function(x, gen, param, state)
     local gen_x, param_x, state_x = iter(gen, param, state)
-    return intersperse_gen, {x, gen_x, param_x}, {0, state_x}
+    return iterator(intersperse_gen, {x, gen_x, param_x}, {0, state_x})
 end
 
 --------------------------------------------------------------------------------
@@ -704,7 +729,7 @@ end
 local zip = function(...)
     local n = select('#', ...)
     if n == 0 then
-        return nil_gen, nil, nil
+        return iterator(nil_gen, nil, nil)
     end
     local param = { [2 * n] = 0 }
     local state = { [n] = 0 }
@@ -718,7 +743,7 @@ local zip = function(...)
         state[i] = state_x
     end
 
-    return zip_gen, param, state
+    return iterator(zip_gen, param, state)
 end
 
 local cycle_gen_call = function(param, state_x, ...)
@@ -736,7 +761,7 @@ end
 
 local cycle = function(gen, param, state)
     local gen_x, param_x, state_x = iter(gen, param, state)
-    return cycle_gen, {gen_x, param_x, state_x}, deepcopy(state_x)
+    return iterator(cycle_gen, {gen_x, param_x, state_x}, deepcopy(state_x))
 end
 
 -- call each other
@@ -765,7 +790,7 @@ end
 local chain = function(...)
     local n = select('#', ...)
     if n == 0 then
-        return nil_gen, nil, nil
+        return iterator(nil_gen, nil, nil)
     end
 
     local param = { [3 * n] = 0 }
@@ -778,7 +803,7 @@ local chain = function(...)
         param[3 * i] = state_x
     end
 
-    return chain_gen_r1, param, {1, param[3]}
+    return iterator(chain_gen_r1, param, {1, param[3]})
 end
 
 --------------------------------------------------------------------------------
@@ -851,7 +876,7 @@ operator = {
 -- module definitions
 --------------------------------------------------------------------------------
 
-local exports = {
+exports = {
     ----------------------------------------------------------------------------
     -- Basic
     ----------------------------------------------------------------------------
