@@ -24,8 +24,7 @@ local call_if_not_empty = function(fun, state_x, ...)
     return state_x, fun(...)
 end
 
-local deepcopy
-deepcopy = function(orig) -- used by cycle()
+local function deepcopy(orig) -- used by cycle()
     local orig_type = type(orig)
     local copy
     if orig_type == 'table' then
@@ -386,8 +385,6 @@ end
 -- Filtering
 --------------------------------------------------------------------------------
 
-local filter_gen = {}
-
 local filter1_gen = function(fun, gen_x, param_x, state_x, a)
     while true do
         if state_x == nil or fun(a) then break; end
@@ -398,9 +395,7 @@ end
 
 -- call each other
 local filterm_gen
-local filterm_gen_shrink
-
-filterm_gen_shrink = function(fun, gen_x, param_x, state_x)
+local filterm_gen_shrink = function(fun, gen_x, param_x, state_x)
     return filterm_gen(fun, gen_x, param_x, gen_x(param_x, state_x))
 end
 
@@ -680,8 +675,7 @@ end
 -- Compositions
 --------------------------------------------------------------------------------
 
-local zip_gen_r
-zip_gen_r = function(param, state, state_new, ...)
+local function zip_gen_r(param, state, state_new, ...)
     if #state_new == #param / 2 then
         return state_new, ...
     end
@@ -741,9 +735,7 @@ end
 
 -- call each other
 local chain_gen_r1
-local chain_gen_r2
-
-chain_gen_r2 = function(param, state, state_x, ...)
+local chain_gen_r2 = function(param, state, state_x, ...)
     if state_x == nil then
         local i = state[1]
         i = i + 1
