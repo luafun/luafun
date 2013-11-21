@@ -16,6 +16,8 @@ Let's see an example:
     > require "fun" ()
     > n = 100
     > reduce(operator.add, 0, map(function(x) return x^2 end, range(n)))
+    > -- or if you like method chaining syntax better
+    > range(n).map(function(x) return x^2 end).reduce(operator.add, 0)
     > -- calculate sum(x for x^2 in 1..n)
     328350
 
