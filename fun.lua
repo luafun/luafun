@@ -823,21 +823,32 @@ operator = {
     lor = function(a, b) return a or b end,
     lnot = function(a) return not a end,
     truth = function(a) return not not a end,
-
-    ----------------------------------------------------------------------------
-    -- Bit operators
-    ----------------------------------------------------------------------------
-    band = bit.band,
-    rol = bit.rol,
-    ror = bit.ror,
-    arshift = bit.arshift,
-    lshift = bit.lshift,
-    rshift = bit.rshift,
-    bswap = bit.bswap,
-    bor = bit.bor,
-    bnot = bit.bnot,
-    bxor = bit.bxor,
 }
+
+----------------------------------------------------------------------------
+  -- Bit operators
+----------------------------------------------------------------------------
+
+-- Enable bit ops iff a bitwise op library was found available.
+-- Defaults to LuaJit bit library if LuaJit was found.
+local hasBit, bit = jit or (pcall(require, 'bit'))
+
+if hasBit then
+
+  bit = bit or package.loaded['bit']
+
+  operator.band    = bit.band
+  operator.rol     = bit.rol
+  operator.ror     = bit.ror
+  operator.arshift = bit.arshift
+  operator.lshift  = bit.lshift
+  operator.rshift  = bit.rshift
+  operator.bswap   = bit.bswap
+  operator.bor     = bit.bor
+  operator.bnot    = bit.bnot
+  operator.bxor    = bit.bxor
+  
+end
 
 --------------------------------------------------------------------------------
 -- module definitions
