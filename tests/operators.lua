@@ -99,15 +99,6 @@ false
 -- Arithmetic operators
 --------------------------------------------------------------------------------
 
-print(operator.abs(-1.0))
-print(operator.abs(0.0))
-print(operator.abs(1.0))
---[[test
-1
-0
-1
---test]]
-
 print(operator.add(-1.0, 1.0))
 print(operator.add(0, 0))
 print(operator.add(12, 2))
@@ -229,28 +220,6 @@ print(operator.sub(2, 2))
 0
 --test]]
 
-print(operator.min(0, 1))
-print(operator.min(1, 2))
-print(operator.min(2, 1))
-print(operator.min(-1, 1))
---[[test
-0
-1
-1
--1
---test]]
-
-print(operator.max(0, 1))
-print(operator.max(1, 2))
-print(operator.max(2, 1))
-print(operator.max(-1, 1))
---[[test
-1
-2
-2
-1
---test]]
-
 --------------------------------------------------------------------------------
 -- String operators
 --------------------------------------------------------------------------------
@@ -348,34 +317,6 @@ false
 true
 true
 false
-true
-true
---test]]
-
-----------------------------------------------------------------------------
--- Logical operators
-----------------------------------------------------------------------------
-
-local bit = require("bit")
-print(operator.band == bit.band)
-print(operator.rol == bit.rol)
-print(operator.ror == bit.ror)
-print(operator.arshift == bit.arshift)
-print(operator.lshift == bit.lshift)
-print(operator.rshift == bit.rshift)
-print(operator.bswap == bit.bswap)
-print(operator.bor == bit.bor)
-print(operator.bnot == bit.bnot)
-print(operator.bxor == bit.bxor)
---[[test
-true
-true
-true
-true
-true
-true
-true
-true
 true
 true
 --test]]

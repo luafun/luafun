@@ -44,13 +44,7 @@ Arithmetic operators
 --------------------
 
 .. seealso:: `Lua Arithmetic Operators 
-              <http://www.lua.org/manual/5.2/manual.html#3.4.1>`_ and
-             `Lua Mathematical Functions
-              <http://www.lua.org/manual/5.2/manual.html#6.6>`_
-
-.. function:: abs(a)
-
-   :returns: math.abs(**a**)
+              <http://www.lua.org/manual/5.2/manual.html#3.4.1>`_
 
 .. function:: add(a, b)
 
@@ -137,14 +131,6 @@ Arithmetic operators
 
    :returns: **a** - **b**
 
-.. function:: min(a, b)
-
-   :returns: math.min(**a**, **b**)
-
-.. function:: max(a, b)
-
-   :returns: math.max(**a**, **b**)
-
 String operators
 ----------------
 
@@ -202,70 +188,3 @@ Logical operators
     > print(operator.truth({}))
     true
 
-Bitwise operators
------------------
-
-.. seealso:: `LuaJIT bit module <http://bitop.luajit.org/api.html>`_.
-
-.. function:: band(a, b)
-
-   :returns: bit.band(**a**, **b**)
-
-.. function:: rol(a, n)
-
-   :returns: bit.brol(**a**, **n**)
-
-   Performs the bitwise left rotation.
-
-.. function:: ror(a, n)
-
-   :returns: bit.bror(**a**, **n**)
-
-   Performs the bitwise right rotation.
-
-.. function:: arshift(a, n)
-
-   :returns: bit.arshift(**a**, **n**)
-
-    Performs arithmetic right-shift of **a** by the **n** bit. Examples:
-
-   .. code-block:: lua
-
-    operator.arshift(256, 8) == 1
-    operator.arshift(-256, 8) == -1
-    operator.arshift(0x87654321, 12) == 0xfff87654
-
-.. function:: lshift(a, n)
-
-   :returns: bit.lshift(**a**, **n**)
-
-    Performs logical left-shift of **a** by the **n** bit.
-
-.. function:: rshift(a, n)
-
-   :returns: bit.rshift(**a**, **n**)
-
-    Performs logical right-shift of **a** by the **n** bit.
-
-.. function:: bswap(a)
-
-   :returns: bit.bswap(**a**)
-
-   Return a byte order swapped integer. Examples:
-
-   .. code-block:: lua
-
-    bit.bswap(0x12345678) == 0x78563412
-    bit.bswap(0x78563412) == 0x12345678
-
-.. function:: bor(a, b)
-
-   :returns: bit.bor(**a**, **b**)
-
-.. function:: bnot(a)
-
-   :returns: bit.bnot(**a**)
-
-.. function:: bxor(a, b)
-
-   :returns: bit.bxor(**a**, **b**)

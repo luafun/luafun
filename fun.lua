@@ -791,7 +791,6 @@ operator = {
     ----------------------------------------------------------------------------
     -- Arithmetic operators
     ----------------------------------------------------------------------------
-    abs = math.abs,
     add = function(a, b) return a + b end,
     div = function(a, b) return a / b end,
     floordiv = function(a, b) return math.floor(a/b) end,
@@ -803,11 +802,9 @@ operator = {
     mul = function(a, b) return a * b end,
     neq = function(a) return -a end,
     unm = function(a) return -a end, -- an alias
-    pow = math.pow,
+    pow = function(a, b) return a ^ b end,
     sub = function(a, b) return a - b end,
     truediv = function(a, b) return a / b end,
-    min = math.min,
-    max = math.max,
 
     ----------------------------------------------------------------------------
     -- String operators
@@ -823,20 +820,6 @@ operator = {
     lor = function(a, b) return a or b end,
     lnot = function(a) return not a end,
     truth = function(a) return not not a end,
-
-    ----------------------------------------------------------------------------
-    -- Bit operators
-    ----------------------------------------------------------------------------
-    band = bit.band,
-    rol = bit.rol,
-    ror = bit.ror,
-    arshift = bit.arshift,
-    lshift = bit.lshift,
-    rshift = bit.rshift,
-    bswap = bit.bswap,
-    bor = bit.bor,
-    bnot = bit.bnot,
-    bxor = bit.bxor,
 }
 
 --------------------------------------------------------------------------------
