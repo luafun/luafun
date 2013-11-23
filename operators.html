@@ -97,7 +97,6 @@ to use with the library high-order primitives.</p>
 <li><a class="reference internal" href="#arithmetic-operators" id="id3">Arithmetic operators</a></li>
 <li><a class="reference internal" href="#string-operators" id="id4">String operators</a></li>
 <li><a class="reference internal" href="#logical-operators" id="id5">Logical operators</a></li>
-<li><a class="reference internal" href="#bitwise-operators" id="id6">Bitwise operators</a></li>
 </ul>
 </li>
 </ul>
@@ -195,22 +194,8 @@ to use with the library high-order primitives.</p>
 <h2><a class="toc-backref" href="#id3">Arithmetic operators</a><a class="headerlink" href="#arithmetic-operators" title="Permalink to this headline">¶</a></h2>
 <div class="admonition-see-also admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference external" href="http://www.lua.org/manual/5.2/manual.html#3.4.1">Lua Arithmetic Operators</a> and
-<a class="reference external" href="http://www.lua.org/manual/5.2/manual.html#6.6">Lua Mathematical Functions</a></p>
+<p class="last"><a class="reference external" href="http://www.lua.org/manual/5.2/manual.html#3.4.1">Lua Arithmetic Operators</a></p>
 </div>
-<dl class="function">
-<dt id="fun.operator.abs">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">abs</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#fun.operator.abs" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">math.abs(<strong>a</strong>)</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="function">
 <dt id="fun.operator.add">
 <tt class="descclassname">fun.operator.</tt><tt class="descname">add</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#fun.operator.add" title="Permalink to this definition">¶</a></dt>
@@ -306,10 +291,24 @@ Examples:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">math.mod(<strong>a</strong>, <strong>b</strong>)</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>a</strong> % <strong>b</strong></td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Result has same sign as <strong>divisor</strong>. Modulo in Lua is defined as
+<tt class="docutils literal"><span class="pre">a</span> <span class="pre">%</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">a</span> <span class="pre">-</span> <span class="pre">math.floor(a/b)*b</span></tt>.</p>
+</div>
+<p>Examples:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">operator</span><span class="p">.</span><span class="n">mod</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="mi">0</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">operator</span><span class="p">.</span><span class="n">mod</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="mi">2</span>
+<span class="hll"><span class="nb">print</span><span class="p">(</span><span class="n">operator</span><span class="p">.</span><span class="n">mod</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span><span class="hll"><span class="mi">2</span> <span class="c1">-- == -1 in C, Java, JavaScript and but not in Lua, Python, Haskell!</span>
+</span></pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -352,32 +351,6 @@ Examples:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>a</strong> - <strong>b</strong></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.min">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">min</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#fun.operator.min" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">math.min(<strong>a</strong>, <strong>b</strong>)</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.max">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">max</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#fun.operator.max" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">math.max(<strong>a</strong>, <strong>b</strong>)</td>
 </tr>
 </tbody>
 </table>
@@ -493,158 +466,6 @@ Examples:</p>
 <span class="kc">true</span>
 </pre></div>
 </div>
-</dd></dl>
-
-</div>
-<div class="section" id="bitwise-operators">
-<h2><a class="toc-backref" href="#id6">Bitwise operators</a><a class="headerlink" href="#bitwise-operators" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-see-also admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference external" href="http://bitop.luajit.org/api.html">LuaJIT bit module</a>.</p>
-</div>
-<dl class="function">
-<dt id="fun.operator.band">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">band</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#fun.operator.band" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bit.band(<strong>a</strong>, <strong>b</strong>)</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.rol">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">rol</tt><big>(</big><em>a</em>, <em>n</em><big>)</big><a class="headerlink" href="#fun.operator.rol" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bit.brol(<strong>a</strong>, <strong>n</strong>)</td>
-</tr>
-</tbody>
-</table>
-<p>Performs the bitwise left rotation.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.ror">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">ror</tt><big>(</big><em>a</em>, <em>n</em><big>)</big><a class="headerlink" href="#fun.operator.ror" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bit.bror(<strong>a</strong>, <strong>n</strong>)</td>
-</tr>
-</tbody>
-</table>
-<p>Performs the bitwise right rotation.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.arshift">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">arshift</tt><big>(</big><em>a</em>, <em>n</em><big>)</big><a class="headerlink" href="#fun.operator.arshift" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bit.arshift(<strong>a</strong>, <strong>n</strong>)<p>Performs arithmetic right-shift of <strong>a</strong> by the <strong>n</strong> bit. Examples:</p>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">operator</span><span class="p">.</span><span class="n">arshift</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-<span class="n">operator</span><span class="p">.</span><span class="n">arshift</span><span class="p">(</span><span class="o">-</span><span class="mi">256</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
-<span class="n">operator</span><span class="p">.</span><span class="n">arshift</span><span class="p">(</span><span class="mh">0x87654321</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0xfff87654</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.lshift">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">lshift</tt><big>(</big><em>a</em>, <em>n</em><big>)</big><a class="headerlink" href="#fun.operator.lshift" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bit.lshift(<strong>a</strong>, <strong>n</strong>)<p>Performs logical left-shift of <strong>a</strong> by the <strong>n</strong> bit.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.rshift">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">rshift</tt><big>(</big><em>a</em>, <em>n</em><big>)</big><a class="headerlink" href="#fun.operator.rshift" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bit.rshift(<strong>a</strong>, <strong>n</strong>)<p>Performs logical right-shift of <strong>a</strong> by the <strong>n</strong> bit.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.bswap">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">bswap</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#fun.operator.bswap" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bit.bswap(<strong>a</strong>)</td>
-</tr>
-</tbody>
-</table>
-<p>Return a byte order swapped integer. Examples:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">bit</span><span class="p">.</span><span class="n">bswap</span><span class="p">(</span><span class="mh">0x12345678</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x78563412</span>
-<span class="n">bit</span><span class="p">.</span><span class="n">bswap</span><span class="p">(</span><span class="mh">0x78563412</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x12345678</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.bor">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">bor</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#fun.operator.bor" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bit.bor(<strong>a</strong>, <strong>b</strong>)</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.bnot">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">bnot</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#fun.operator.bnot" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bit.bnot(<strong>a</strong>)</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fun.operator.bxor">
-<tt class="descclassname">fun.operator.</tt><tt class="descname">bxor</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#fun.operator.bxor" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bit.bxor(<strong>a</strong>, <strong>b</strong>)</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 </div>
