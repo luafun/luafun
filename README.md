@@ -54,8 +54,8 @@ Status
 
 LuaJIT 2.1 alpha is recommended. The library designed in mind of fact that
 [LuaJIT traces tail-, up- and down-recursion][LuaJIT-Recursion] and has a lot of
-[byte code optimizations][LuaJIT-Optimizations]. Reference Lua may not work and
-is not supported.
+[byte code optimizations][LuaJIT-Optimizations]. Lua 5.1-5.3 are also
+supported.
 
 Please check out [documentation][Documentation] for more information.
 

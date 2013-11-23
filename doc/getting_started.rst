@@ -9,14 +9,19 @@ LuaJIT.
 Prerequisites
 -------------
 
-You need LuaJIT_ to use this library. **LuaJIT 2.1 alpha** is high^W **Highly**
-recommended. Reference Lua may not work and is not supported.
+The library is designed for LuaJIT_. **LuaJIT 2.1 alpha** is high^W **Highly**
+recommended for performance reasons. Lua 5.1--5.3 are also supported.
 
-The library is expected to work on all platforms that supported by LuaJIT.
+The library is platform-independent and expected to work on all platforms that
+supported by Lua(JIT). It can be also used in any Lua(JIT) based applications,
+e.g. Tarantool_ or OpenResty_.
+
 You might need diff_ tool to run test system and sphinx_ to regenerate the
 documentation from source files.
 
 .. _LuaJIT: http://luajit.org/
+.. _Tarantool: http://tarantool.org/
+.. _OpenResty: http://openresty.org/
 .. _diff: http://en.wikipedia.org/wiki/Diff
 .. _sphinx: http://sphinx-doc.org/
 
