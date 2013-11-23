@@ -1,6 +1,6 @@
 #!/usr/bin/env luajit
 
-package.path = "../"..package.path
+package.path = "../?.lua;"..package.path
 require "fun" ()
 function dump(gen, init, state) each(print, gen, init, state) end
 
