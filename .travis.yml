@@ -2,13 +2,17 @@ language: c
 
 install:
   - sudo apt-get update > /dev/null
-  - sudo apt-get -q install luajit
+  - sudo apt-get -q install luajit lua5.1 lua5.2
 
 script:
+  - cd tests
   - LUAJIT=`echo /usr/bin/luajit* | cut -f 1 -d ' '`
   - ${LUAJIT} -v
-  - cd tests
-  - ${LUAJIT} ./runtest *.lua
+  - ${LUAJIT} runtest *.lua
+  - lua5.1 -v
+  - lua5.1 runtest *.lua
+  - lua5.2 -v
+  - lua5.2 runtest *.lua
 
 notifications:
   email:

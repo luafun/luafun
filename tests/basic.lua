@@ -41,18 +41,24 @@ true true true
 -- Maps
 --
 
-for _it, k, v in iter({ a = 1, b = 2, c = 3}) do print(k, v) end
+local t = {}
+for _it, k, v in iter({ a = 1, b = 2, c = 3}) do t[#t + 1] = k end
+table.sort(t)
+for _it, v in iter(t) do print(v) end
 --[[test
-b 2
-a 1
-c 3
+a
+b
+c
 --test]]
 
-for _it, k, v in iter(iter(iter({ a = 1, b = 2, c = 3}))) do print(k, v) end
+local t = {}
+for _it, k, v in iter(iter(iter({ a = 1, b = 2, c = 3}))) do t[#t + 1] = k end
+table.sort(t)
+for _it, v in iter(t) do print(v) end
 --[[test
-b 2
-a 1
-c 3
+a
+b
+c
 --test]]
 
 for _it, k, v in iter({}) do print(k, v) end
@@ -163,18 +169,22 @@ each(print, iter({}))
 --[[test
 --test]]
 
-each(print, { a = 1, b = 2, c = 3})
+local keys, vals = {}, {}
+each(function(k, v)
+    keys[#keys + 1] = k
+    vals[#vals + 1] = v
+end, { a = 1, b = 2, c = 3})
+table.sort(keys)
+table.sort(vals)
+each(print, keys)
+each(print, vals)
 --[[test
-b 2
-a 1
-c 3
---test]]
-
-each(print, iter({ a = 1, b = 2, c = 3}))
---[[test
-b 2
-a 1
-c 3
+a
+b
+c
+1
+2
+3
 --test]]
 
 each(print, "abc")

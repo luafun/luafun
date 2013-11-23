@@ -1,4 +1,4 @@
-#!/usr/bin/env luajit
+#!/usr/bin/env lua
 
 package.path = "../?.lua;"..package.path
 require "fun" ()
@@ -7,7 +7,12 @@ function dump(gen, init, state) each(print, gen, init, state) end
 function file_print(file, ...)
     local n, i = select("#",...)
     for i=1,n do
-        file:write(tostring(select(i,...)))
+        local x = select(i, ...)
+        if type(x) == "number" and math.floor(x) == math.ceil(x) then
+            -- A special hack for Lua 5.3: remove .0 for integer
+            x = string.match(select(i,...), '^-?%d+')
+        end
+        file:write(tostring(x))
         if i~=n then
             file:write(' ')
         end
@@ -48,7 +53,7 @@ function process(test_name)
 
     local r = os.execute(string.format('diff -U4 "%s" "%s" 2>&1',
         test_name, new_name))
-    if r == 0 then
+    if r then
         os.remove(new_name)
         return true
     else

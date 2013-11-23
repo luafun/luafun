@@ -68,15 +68,12 @@ dump(range(0, -10, -2))
 -8
 --test]]
 
-dump(range(1.2, 2.6, 0.2))
+dump(range(1.2, 1.6, 0.1))
 --[[test
 1.2
+1.3
 1.4
-1.6
-1.8
-2
-2.2
-2.4
+1.5
 --test]]
 
 -- Invalid step
@@ -160,43 +157,26 @@ dump(take(5, ones()))
 -- rands
 --------------------------------------------------------------------------------
 
-math.randomseed(0)
-dump(take(5, rands()))
+print(all(function(x) return x >= 0 and x < 1 end, take(5, rands())))
 --[[test
-0.79420629243124
-0.69885246563716
-0.5901037417281
-0.7532286166836
-0.080971251199854
+true
 --test]]
 
-math.randomseed(0)
 dump(take(5, rands(0)))
 --[[test
 error: empty interval
 --test]]
 
-math.randomseed(0)
-dump(take(5, rands(10)))
+print(all(function(x) return math.floor(x) == x end, take(5, rands(10))))
 --[[test
-7
-6
-5
-7
-0
+true
 --test]]
 
-math.randomseed(0)
-dump(take(5, rands(1024)))
+print(all(function(x) return math.floor(x) == x end, take(5, rands(1024))))
 --[[test
-813
-715
-604
-771
-82
+true
 --test]]
 
-math.randomseed(0)
 dump(take(5, rands(0, 1)))
 --[[test
 0
@@ -206,7 +186,6 @@ dump(take(5, rands(0, 1)))
 0
 --test]]
 
-math.randomseed(0)
 dump(take(5, rands(5, 6)))
 --[[test
 5
@@ -216,27 +195,7 @@ dump(take(5, rands(5, 6)))
 5
 --test]]
 
-math.randomseed(0)
-dump(take(20, rands(10, 20)))
+print(all(function(x) return x >= 10 and x < 20 end, take(20, rands(10, 20))))
 --[[test
-17
-16
-15
-17
-10
-16
-13
-17
-14
-15
-11
-10
-19
-17
-11
-19
-12
-13
-14
-16
+true
 --test]]

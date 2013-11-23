@@ -181,24 +181,24 @@ print(operator.mul(-1, -1))
 --test]]
 
 print(operator.neq(1))
-print(operator.neq(0))
-print(operator.neq(-0))
+print(operator.neq(0) == 0)
+print(operator.neq(-0) == 0)
 print(operator.neq(-1))
 --[[test
 -1
--0
-0
+true
+true
 1
 --test]]
 
 print(operator.unm(1))
-print(operator.unm(0))
-print(operator.unm(-0))
+print(operator.unm(0) == 0)
+print(operator.unm(-0) == 0)
 print(operator.unm(-1))
 --[[test
 -1
--0
-0
+true
+true
 1
 --test]]
 

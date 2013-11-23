@@ -164,9 +164,9 @@ print(sum(range(1, 5)))
 10
 --test]]
 
-print(sum(range(1, 5, 0.1)))
+print(sum(range(1, 5, 0.5)))
 --[[test
-123
+22
 --test]]
 
 print(sum(range(0)))
@@ -183,9 +183,9 @@ print(product(range(1, 5)))
 24
 --test]]
 
-print(product(range(1, 5, 0.1)))
+print(product(range(1, 5, 0.5)))
 --[[test
-8.3813087526769e+17
+1417.5
 --test]]
 
 print(product(range(0)))
