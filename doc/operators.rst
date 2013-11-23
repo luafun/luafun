@@ -113,7 +113,22 @@ Arithmetic operators
 
 .. function:: mod(a, b)
 
-   :returns: math.mod(**a**, **b**)
+   :returns: **a** % **b**
+
+   .. note:: Result has same sign as **divisor**. Modulo in Lua is defined as
+             ``a % b == a - math.floor(a/b)*b``.
+
+   Examples:
+
+   .. code-block:: lua
+    :emphasize-lines: 5-6
+
+    > print(operator.mod(10, 2))
+    0
+    > print(operator.mod(10, 3))
+    2
+    print(operator.mod(-10, 3))
+    2 -- == -1 in C, Java, JavaScript and but not in Lua, Python, Haskell!
 
 .. function:: neq(a)
 

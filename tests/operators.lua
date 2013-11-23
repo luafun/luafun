@@ -168,7 +168,7 @@ print(operator.mod(-10, 3))
 --[[test
 0
 1
--1
+2
 --test]]
 
 print(operator.mul(10, 0.1))

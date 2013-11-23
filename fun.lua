@@ -798,7 +798,7 @@ operator = {
         local q = a / b
         if a >= 0 then return math.floor(q) else return math.ceil(q) end
     end,
-    mod = math.mod,
+    mod = function(a, b) return a % b end,
     mul = function(a, b) return a * b end,
     neq = function(a) return -a end,
     unm = function(a) return -a end, -- an alias
