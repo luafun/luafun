@@ -76,6 +76,49 @@ Folds
    .. note:: This function has ``O(n)`` complexity for all iterators except
              basic array and string iterators.
 
+.. function:: totable(gen, param, state)
+
+   :returns: a new table (array) from iterated values.
+
+   The function reduces the iterator from left to right using ``table.insert``.
+
+   Examples:
+
+   .. code-block:: lua
+
+    > local tab = totable("abcdef")
+    > print(type(tab), #tab)
+    table 6
+    > each(print, tab)
+    a
+    b
+    c
+    d
+    e
+    f
+
+.. function:: tomap(gen, param, state)
+
+   :returns: a new table (map) from iterated values.
+
+   The function reduces the iterator from left to right using
+   ``tab[val1] = val2`` expression.
+
+   Examples:
+
+   .. code-block:: lua
+
+    > local tab = tomap(zip({range(1, 7)}, 'abcdef'))
+    > print(type(tab), #tab)
+    table 6
+    > each(print, iter(tab))
+    a
+    b
+    c
+    d
+    e
+    f
+
 Predicates
 ----------
 

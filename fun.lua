@@ -616,6 +616,32 @@ local max_by = function(cmp, gen, param, state)
     return m
 end
 
+local totable = function(gen, param, state)
+    local gen_x, param_x, state_x = iter(gen, param, state)
+    local tab = {}
+    while true do
+        state_x, val = gen_x(param_x, state_x)
+        if state_x == nil then
+            break
+        end
+        table.insert(tab, val)
+    end
+    return tab
+end
+
+local tomap = function(gen, param, state)
+    local gen_x, param_x, state_x = iter(gen, param, state)
+    local tab = {}
+    while true do
+        state_x, key, val = gen_x(param_x, state_x)
+        if state_x == nil then
+            break
+        end
+        tab[key] = val
+    end
+    return tab
+end
+
 --------------------------------------------------------------------------------
 -- Transformations
 --------------------------------------------------------------------------------
@@ -907,6 +933,8 @@ local exports = {
     maximum = max, -- an alias
     max_by = max_by,
     maximum_by = max_by, -- an alias
+    totable = totable,
+    tomap = tomap,
 
     ----------------------------------------------------------------------------
     -- Transformations
