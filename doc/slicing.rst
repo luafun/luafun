@@ -84,7 +84,7 @@ Basic
 
 .. function:: cdr(gen, param, state)
 
-   An alias for :func:`head`.
+   An alias for :func:`tail`.
 
 Subsequences
 ------------
