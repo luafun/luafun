@@ -4,6 +4,7 @@ Transformations
 .. module:: fun
 
 .. function:: map(fun, gen, param, state)
+              iterator:map(fun)
 
    :param fun: a function to apply
    :type  fun: (function(...) -> ...)
@@ -31,6 +32,7 @@ Transformations
     map 3
 
 .. function:: enumerate(gen, param, state)
+              iterator:enumerate()
 
    :returns: a new iterator
 
@@ -58,6 +60,7 @@ Transformations
     4 five e
 
 .. function:: intersperse(x, gen, param, state)
+              iterator:intersperse(x)
 
    :type x: any
    :returns: a new iterator

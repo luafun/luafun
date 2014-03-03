@@ -9,6 +9,7 @@ Basic
 -----
 
 .. function:: nth(n, gen, param, state)
+              iterator:nth(n)
 
    :param uint n: a sequential number (indexed starting from ``1``,
                   like Lua tables)
@@ -37,6 +38,7 @@ Basic
    ``O(1)`` complexity for these cases.
 
 .. function:: head(gen, param, state)
+              iterator:head()
 
    :returns: a first element of ``gen, param, state`` iterator
 
@@ -61,6 +63,7 @@ Basic
    An alias for :func:`head`.
 
 .. function:: tail(gen, param, state)
+              iterator:tail()
 
    :returns: ``gen, param, state`` iterator without a first element
 
@@ -90,6 +93,7 @@ Subsequences
 ------------
 
 .. function:: take_n(n, gen, param, state)
+              iterator:take_n(n)
 
    :param n: a number of elements to take
    :type  n: uint
@@ -114,6 +118,7 @@ Subsequences
     4 x
 
 .. function:: take_while(predicate, gen, param, state)
+              iterator:take_while(predicate)
 
    :type predicate: function(...) -> bool
    :returns: an iterator on the longest prefix of ``gen, param, state``
@@ -139,11 +144,13 @@ Subsequences
    .. seealso:: :func:`filter`
 
 .. function:: take(n_or_predicate, gen, param, state)
+              iterator:take(n_or_predicate)
 
    An alias for :func:`take_n` and :func:`take_while` that autodetects
    required function based on **n_or_predicate** type.
 
 .. function:: drop_n(n, gen, param, state)
+              iterator:drop_n(n)
 
    :param n: the number of elements to drop
    :type  n: uint
@@ -167,6 +174,7 @@ Subsequences
     4 e
 
 .. function:: drop_while(predicate, gen, param, state)
+              iterator:drop_while(predicate)
 
    :type predicate: function(...) -> bool
    :returns: ``gen, param, state`` after skipping the longest prefix
@@ -186,15 +194,17 @@ Subsequences
    .. seealso:: :func:`filter`
 
 .. function:: drop(n_or_predicate, gen, param, state)
+              iterator:drop(n_or_predicate)
 
    An alias for :func:`drop_n` and :func:`drop_while` that autodetects
    required function based on **n_or_predicate** type.
 
 
 .. function:: span(n_or_predicate, gen, param, state)
+              iterator:span(n_or_predicate)
 
    :type n_or_predicate: function(...) -> bool or uint
-   :returns: {gen1, param1, state1}, {gen2, param2, state2}
+   :returns: iterator, iterator
 
    Return an iterator pair where the first operates on the longest prefix
    (possibly empty) of ``gen, param, state`` iterator of elements that
@@ -204,8 +214,8 @@ Subsequences
 
    .. code-block:: lua
 
-       return {take(n_or_predicate, gen, param, state)},
-              {drop(n_or_predicate, gen, param, state)};
+       return take(n_or_predicate, gen, param, state),
+              drop(n_or_predicate, gen, param, state);
 
    Examples:
 

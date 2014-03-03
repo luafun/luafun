@@ -97,6 +97,7 @@ The section contains functions to create iterators from Lua objects.
    .. [#lua52_ipairs] http://www.lua.org/manual/5.2/manual.html#pdf-ipairs
 
 .. function:: each(fun, gen, param, state)
+              iterator:each(fun)
 
    :returns: none
 
@@ -130,9 +131,11 @@ The section contains functions to create iterators from Lua objects.
    .. seealso:: :func:`map`, :func:`reduce`
 
 .. function:: for_each(fun, gen, param, state)
+              iterator:for_each(fun)
 
     An alias for :func:`each`.
 
 .. function:: foreach(fun, gen, param, state)
+              iterator:foreach(fun)
 
     An alias for :func:`each`.

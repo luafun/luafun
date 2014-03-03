@@ -13,7 +13,7 @@ print(foldl(operator.add, 0, range(5)))
 --test]]
 
 print(foldl(function(acc, x, y) return acc + x * y; end, 0,
-    zip({range(1, 5)}, {4, 3, 2, 1})))
+    zip(range(1, 5), {4, 3, 2, 1})))
 --[[test
 20
 --test]]
@@ -97,12 +97,12 @@ print(is_prefix_of({"a"}, {}))
 false
 --test]]
 
-print(is_prefix_of({range(5)}, {range(6)}))
+print(is_prefix_of(range(5), range(6)))
 --[[test
 true
 --test]]
 
-print(is_prefix_of({range(6)}, {range(5)}))
+print(is_prefix_of(range(6), range(5)))
 --[[test
 false
 --test]]

@@ -21,7 +21,7 @@ Lua Fun source codes, logo and documentation are distributed under the
 `MIT License (MIT) <http://www.opensource.org/licenses/mit-license.php>`_ --
 same as LuaJIT.
 
-Copyright (c) 2013 Roman Tsisyk <roman@tsisyk.com>
+Copyright (c) 2013-2014 Roman Tsisyk <roman@tsisyk.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

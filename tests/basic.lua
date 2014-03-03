@@ -20,6 +20,20 @@ for _it, a in iter(iter(iter({1, 2, 3}))) do print(a) end
 3
 --test]]
 
+for _it, a in wrap(wrap(iter({1, 2, 3}))) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in wrap(wrap(ipairs({1, 2, 3}))) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
 for _it, a in iter({}) do print(a) end
 --[[test
 --test]]
@@ -28,10 +42,26 @@ for _it, a in iter(iter(iter({}))) do print(a) end
 --[[test
 --test]]
 
+for _it, a in wrap(wrap(iter({}))) do print(a) end
+--[[test
+--test]]
+
+for _it, a in wrap(wrap(ipairs({}))) do print(a) end
+--[[test
+--test]]
+
 -- Check that ``iter`` for arrays is equivalent to ``ipairs``
 local t = {1, 2, 3}
-gen1, param1, state1 = iter(t) 
+gen1, param1, state1 = iter(t):unwrap()
 gen2, param2, state2 = ipairs(t) 
+print(gen1 == gen2, param1 == param2, state1 == state2)
+--[[test
+true true true
+--test]]
+
+-- Test that ``wrap`` do nothing for wrapped iterators
+gen1, param1, state1 = iter({1, 2, 3})
+gen2, param2, state2 = wrap(gen1, param1, state1):unwrap()
 print(gen1 == gen2, param1 == param2, state1 == state2)
 --[[test
 true true true
@@ -261,7 +291,7 @@ d e f
 -- tomap
 --------------------------------------------------------------------------------
 
-local tab = tomap(zip({range(1, 7)}, 'abcdef'))
+local tab = tomap(zip(range(1, 7), 'abcdef'))
 print(type(tab), #tab)
 each(print, iter(tab))
 --[[test

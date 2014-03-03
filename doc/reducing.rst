@@ -16,6 +16,7 @@ Folds
 -----
 
 .. function:: foldl(accfun, initval, gen, param, state)
+              iterator:reduce(accfun, initval)
 
    :param accfun: an accumulating function
    :type  param: (function(prevval, ...) -> val)
@@ -43,14 +44,16 @@ Folds
     10
 
     > print(foldl(function(acc, x, y) return acc + x * y; end, 0,
-        zip({range(1, 5)}, {4, 3, 2, 1})))
+        zip(range(1, 5), {4, 3, 2, 1})))
     20
 
 .. function:: reduce(accfun, initval, gen, param, state)
+              iterator:reduce(accfun, initval)
 
    An alias to :func:`foldl`.
 
 .. function:: length(gen, param, state)
+              iterator:length()
 
    :returns: a number of elements in ``gen, param, state`` iterator.
 
@@ -122,7 +125,8 @@ Folds
 Predicates
 ----------
 
-.. function:: is_prefix_of({gen1, param1, state1}, {gen2, param2, state2})
+.. function:: is_prefix_of(iterator1, iterator2)
+              iterator1:is_prefix_of(iterator2)
 
    The function takes two iterators and returns ``true`` if the first iterator
    is a prefix of the second. 
@@ -134,10 +138,11 @@ Predicates
     > print(is_prefix_of({"a"}, {"a", "b", "c"}))
     true
 
-    > print(is_prefix_of({range(6)}, {range(5)}))
+    > print(is_prefix_of(range(6), range(5)))
     false
 
 .. function:: is_null(gen, param, state)
+              iterator:is_null()
 
    :returns: true when `gen, param, state`` iterator is empty or finished.
    :returns: false otherwise.
@@ -154,6 +159,7 @@ Predicates
     true
 
 .. function:: all(predicate, gen, param, state)
+              iterator:all(predicate)
 
    :param predicate: a predicate
 
@@ -174,6 +180,7 @@ Predicates
    An alias for :func:`every`.
 
 .. function:: any(predicate, gen, param, state)
+              iterator:any(predicate)
 
    :param predicate: a predicate
 
@@ -199,6 +206,7 @@ Special folds
 -------------
 
 .. function:: sum(gen, param, state)
+              iterator:sum()
 
    Sum up all iteration values. An optimized alias for::
 
@@ -214,6 +222,7 @@ Special folds
     10
 
 .. function:: product(gen, param, state)
+              iterator:product()
 
    Multiply all iteration values. An optimized alias for::
 
@@ -229,6 +238,7 @@ Special folds
     25
 
 .. function:: min(gen, param, state)
+              iterator:min()
 
    Return a maximum value from the iterator using :func:`operator.min` or ``<``
    for numbers and other types respectivly. The iterator must be
@@ -252,6 +262,7 @@ Special folds
    An alias for :func:`min`.
 
 .. function:: min_by(cmp, gen, param, state)
+              iterator:min_by(cmp)
 
    Return a minimum value from the iterator using the **cmp** as a ``<``
    operator. The iterator must be non-null, otherwise an error is raised.
@@ -269,6 +280,7 @@ Special folds
    An alias for :func:`min_by`.
 
 .. function:: max(gen, param, state)
+              iterator:max()
 
    Return a maximum value from the iterator using :func:`operator.max` or ``>``
    for numbers and other types respectivly.
@@ -293,6 +305,7 @@ Special folds
    An alias for :func:`max`.
 
 .. function:: max_by(cmp, gen, param, state)
+              iterator:max_by(cmp)
 
    Return a maximum value from the iterator using the **cmp** as a `>`
    operator. The iterator must be non-null, otherwise an error is raised.

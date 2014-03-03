@@ -6,6 +6,7 @@ Indexing
 This section contains functions to find elements by its values.
 
 .. function:: index(x, gen, param, state)
+              iterator:index(x)
 
    :param x: a value to find
    :returns: the position of the first element that equals to the **x**
@@ -25,14 +26,17 @@ This section contains functions to find elements by its values.
     2
 
 .. function:: index_of(x, gen, param, state)
+              iterator:index_of(x)
 
    An alias for :func:`index`.
 
 .. function:: elem_index(x, gen, param, state)
+              iterator:elem_index(x)
 
    An alias for :func:`index`.
 
 .. function:: indexes(x, gen, param, state)
+              iterator:indexes(x)
 
    :param x: a value to find
    :returns: an iterator which positions of elements that equal to the **x**
@@ -53,14 +57,17 @@ This section contains functions to find elements by its values.
    .. seealso:: :func:`filter`
 
 .. function:: indices(x, gen, param, state)
+              iterator:indices(x)
 
    An alias for :func:`indexes`.
 
 .. function:: elem_indexes(x, gen, param, state)
+              iterator:elem_indexes(x)
 
    An alias for :func:`indexes`.
 
 .. function:: elem_indices(x, gen, param, state)
+              iterator:elem_indices(x)
 
    An alias for :func:`indexes`.
 

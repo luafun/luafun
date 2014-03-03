@@ -38,8 +38,8 @@ function test3(a, b, c)
 end
 
 n = 50
-dump(filter(filter_fun, map(test3, zip({range(0, n, 1)},
-    {range(0, n, 2)}, {range(0, n, 3)}))))
+dump(filter(filter_fun, map(test3, zip(range(0, n, 1),
+     range(0, n, 2), range(0, n, 3)))))
 --[[test
 0 0 0
 16 48 32

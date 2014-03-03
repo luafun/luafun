@@ -13,15 +13,15 @@ dump(zip())
 --[[test
 --test]]
 
-dump(zip({range(0)}))
+dump(zip(range(0)))
 --[[test
 --test]]
 
-dump(zip({range(0)}, {range(0)}))
+dump(zip(range(0), range(0)))
 --[[test
 --test]]
 
-print(nth(10, zip({range(1, 100, 3)}, {range(1, 100, 5)}, {range(1, 100, 7)})))
+print(nth(10, zip(range(1, 100, 3), range(1, 100, 5), range(1, 100, 7))))
 --[[test
 28 46 64
 --test]]
@@ -80,7 +80,7 @@ dump(take(15, cycle(range(5))))
 4
 --test]]
 
-dump(take(15, cycle(zip({range(5)}, {"a", "b", "c", "d", "e"}))))
+dump(take(15, cycle(zip(range(5), {"a", "b", "c", "d", "e"}))))
 --[[test
 0 a
 1 b
@@ -103,13 +103,13 @@ dump(take(15, cycle(zip({range(5)}, {"a", "b", "c", "d", "e"}))))
 -- chain
 --------------------------------------------------------------------------------
 
-dump(chain({range(2)}))
+dump(chain(range(2)))
 --[[test
 0
 1
 --test]]
 
-dump(chain({range(2)}, {"a", "b", "c"}, {"one", "two", "three"}))
+dump(chain(range(2), {"a", "b", "c"}, {"one", "two", "three"}))
 --[[test
 0
 1
@@ -121,7 +121,7 @@ two
 three
 --test]]
 
-dump(take(15, cycle(chain({enumerate({"a", "b", "c"})},
+dump(take(15, cycle(chain(enumerate({"a", "b", "c"}),
     {"one", "two", "three"}))))
 --[[test
 0 a
@@ -141,11 +141,11 @@ three
 2 c
 --test]]
 
-dump(chain({range(0)}, {range(0)}, {range(0)}))
+dump(chain(range(0), range(0), range(0)))
 --[[test
 --test]]
 
-dump(chain({range(0)}, {range(1)}, {range(0)}))
+dump(chain(range(0), range(1), range(0)))
 --[[test
 0
 --test]]
