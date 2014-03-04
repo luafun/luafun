@@ -64,6 +64,11 @@ LuaJIT 2.1 alpha is recommended. The library designed in mind of fact that
 [byte code optimizations][LuaJIT-Optimizations]. Lua 5.1-5.3 are also
 supported.
 
+This is **master** (development) branch. API may be changed without any special
+notice. Please use **stable** branch for your production deployments.
+If you still want to use **master**, please don't forget to grep `git log`
+for *Incompatible API changes* message. Thanks!
+
 Please check out [documentation][Documentation] for more information.
 
 Misc
