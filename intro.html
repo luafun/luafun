@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,11 +10,10 @@
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -26,44 +23,10 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
     <link rel="next" title="Getting Started" href="getting_started.html" />
-    <link rel="prev" title="Lua Functional Library" href="index.html" />
- 
-    <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-45899190-1', 'rtsisyk.github.io');
-ga('send', 'pageview');
-
-(function (d, w, c) {
-    (w[c] = w[c] || []).push(function() {
-        try {
-            w.yaCounter23087647 = new Ya.Metrika({id:23087647,
-                    webvisor:true,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true});
-        } catch(e) { }
-    });
-
-    var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else { f(); }
-})(document, window, "yandex_metrika_callbacks");
-    </script>
-
+    <link rel="prev" title="Lua Functional Library" href="index.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
@@ -94,9 +57,19 @@ even Lisp. High-order functions such as <a class="reference internal" href="tran
 <a class="reference internal" href="reducing.html#fun.reduce" title="fun.reduce"><tt class="xref lua lua-func docutils literal"><span class="pre">reduce()</span></tt></a>, <a class="reference internal" href="compositions.html#fun.zip" title="fun.zip"><tt class="xref lua lua-func docutils literal"><span class="pre">zip()</span></tt></a> will help you to <strong>write simple and efficient
 functional code</strong>.</p>
 <p>Let&#8217;s see an example:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="hll"> <span class="nb">require</span> <span class="s2">&quot;</span><span class="s">fun&quot;</span> <span class="p">()</span>
+<div class="highlight-lua"><div class="highlight"><pre> <span class="c1">-- Functional style</span>
+<span class="hll"> <span class="nb">require</span> <span class="s2">&quot;</span><span class="s">fun&quot;</span> <span class="p">()</span>
 </span> <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="hll"> <span class="n">x</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">map</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="k">end</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">tabulate</span><span class="p">(</span><span class="nb">math.sin</span><span class="p">))))</span>
+</span> <span class="c1">-- calculate sum(sin(x)^2 for x in 0..n-1)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+ <span class="mf">50.011981355266</span>
+</pre></div>
+</div>
+<div class="highlight-lua"><div class="highlight"><pre> <span class="c1">-- Object-oriented style</span>
+<span class="hll"> <span class="kd">local</span> <span class="n">fun</span> <span class="o">=</span> <span class="nb">require</span> <span class="s2">&quot;</span><span class="s">fun&quot;</span>
+</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="hll"> <span class="n">x</span> <span class="o">=</span> <span class="n">fun</span><span class="p">.</span><span class="n">tabulate</span><span class="p">(</span><span class="nb">math.sin</span><span class="p">):</span><span class="n">take</span><span class="p">(</span><span class="n">n</span><span class="p">):</span><span class="n">map</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="k">end</span><span class="p">):</span><span class="n">sum</span><span class="p">()</span>
 </span> <span class="c1">-- calculate sum(sin(x)^2 for x in 0..n-1)</span>
  <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
  <span class="mf">50.011981355266</span>
@@ -143,11 +116,9 @@ containing just 10 CPU assembly instructions without CALL. Unbelievable!</p>
 
       </div>
 
-
     <div class="footer">
         &copy; Copyright 2013, Roman Tsisyk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
-
   </body>
 </html>

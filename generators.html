@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,11 +10,10 @@
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -26,45 +23,11 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
     <link rel="up" title="API Reference" href="reference.html" />
     <link rel="next" title="Slicing" href="slicing.html" />
-    <link rel="prev" title="Basic Functions" href="basic.html" />
- 
-    <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-45899190-1', 'rtsisyk.github.io');
-ga('send', 'pageview');
-
-(function (d, w, c) {
-    (w[c] = w[c] || []).push(function() {
-        try {
-            w.yaCounter23087647 = new Ya.Metrika({id:23087647,
-                    webvisor:true,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true});
-        } catch(e) { }
-    });
-
-    var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else { f(); }
-})(document, window, "yandex_metrika_callbacks");
-    </script>
-
+    <link rel="prev" title="Basic Functions" href="basic.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
@@ -93,7 +56,7 @@ Haskell, Python, Ruby, JavaScript and other languages.</p>
 <h2>Finite Generators<a class="headerlink" href="#finite-generators" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="fun.range">
-<tt class="descclassname">fun.</tt><tt class="descname">range</tt><big>(</big><span class="optional">[</span><em>start</em><span class="optional">]</span>, <em>stop</em><span class="optional">[</span>, <em>step</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#fun.range" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">range</tt><big>(</big><span class="optional">[</span><em>start</em><span class="optional">]</span><em>stop</em><span class="optional">[</span><em>step</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#fun.range" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -111,30 +74,41 @@ Haskell, Python, Ruby, JavaScript and other languages.</p>
 </tbody>
 </table>
 <p>The iterator to create arithmetic progressions. Iteration values are generated
-within the half-open interval <tt class="docutils literal"><span class="pre">[start,</span> <span class="pre">stop)</span></tt> (i.e. <em>stop</em> is not included).
-If the <em>step</em> argument is omitted, it defaults to <tt class="docutils literal"><span class="pre">1</span></tt>.  If the <em>start</em>
-argument is omitted, it defaults to <tt class="docutils literal"><span class="pre">0</span></tt>. If <em>step</em> is positive, the last
-element is the largest <tt class="docutils literal"><span class="pre">start</span> <span class="pre">+</span> <span class="pre">i</span> <span class="pre">*</span> <span class="pre">step</span></tt> less than <em>stop</em>; if <em>step</em> is
-negative, the last element is the smallest <tt class="docutils literal"><span class="pre">start</span> <span class="pre">+</span> <span class="pre">i</span> <span class="pre">*</span> <span class="pre">step</span></tt> greater than
-<em>stop</em>.  <em>step</em> must not be zero (or else an error is raised)</p>
+within closed interval <tt class="docutils literal"><span class="pre">[start,</span> <span class="pre">stop]</span></tt> (i.e. <em>stop</em> is included).
+If the <em>start</em> argument is omitted, it defaults to <tt class="docutils literal"><span class="pre">1</span></tt> (<em>stop</em> &gt; 0) or
+to <tt class="docutils literal"><span class="pre">-1</span></tt> (<em>stop</em> &lt; 0). If the <em>step</em> argument is omitted, it defaults to
+<tt class="docutils literal"><span class="pre">1</span></tt> (<em>start</em> &lt;= <em>stop</em>) or to <tt class="docutils literal"><span class="pre">-1</span></tt> (<em>start</em> &gt; <em>stop</em>).  If <em>step</em> is
+positive, the last element is the largest <tt class="docutils literal"><span class="pre">start</span> <span class="pre">+</span> <span class="pre">i</span> <span class="pre">*</span> <span class="pre">step</span></tt> less than or
+equal to <em>stop</em>; if <em>step</em> is negative, the last element is the smallest
+<tt class="docutils literal"><span class="pre">start</span> <span class="pre">+</span> <span class="pre">i</span> <span class="pre">*</span> <span class="pre">step</span></tt> greater than or equal to <em>stop</em>.
+<em>step</em> must not be zero (or else an error is raised).
+<tt class="docutils literal"><span class="pre">range(0)</span></tt> returns empty iterator.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
-<span class="mi">0</span>
 <span class="mi">1</span>
 <span class="mi">2</span>
 <span class="mi">3</span>
 <span class="mi">4</span>
+<span class="mi">5</span>
+<span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="o">-</span><span class="mi">1</span>
+<span class="o">-</span><span class="mi">2</span>
+<span class="o">-</span><span class="mi">3</span>
+<span class="o">-</span><span class="mi">4</span>
+<span class="o">-</span><span class="mi">5</span>
 <span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
 <span class="mi">1</span>
 <span class="mi">2</span>
 <span class="mi">3</span>
 <span class="mi">4</span>
 <span class="mi">5</span>
+<span class="mi">6</span>
 <span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
 <span class="mi">0</span>
 <span class="mi">5</span>
 <span class="mi">10</span>
 <span class="mi">15</span>
+<span class="mi">20</span>
 <span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
 <span class="mi">0</span>
 <span class="mi">3</span>
@@ -151,8 +125,10 @@ negative, the last element is the smallest <tt class="docutils literal"><span cl
 <span class="mf">1.4</span>
 <span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
 <span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
-<span class="mi">0</span>
+<span class="mi">1</span>
 <span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">1</span>
+<span class="mi">0</span>
 <span class="o">&gt;</span> <span class="k">for</span> <span class="n">_it</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">end</span>
 <span class="nb">error</span><span class="p">:</span> <span class="n">step</span> <span class="n">must</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">zero</span>
 </pre></div>
@@ -283,12 +259,13 @@ indefinitely.</p>
 </table>
 <p>The iterator that returns <tt class="docutils literal"><span class="pre">1</span></tt> indefinitely.</p>
 <p>Example:</p>
-<div class="highlight-python"><pre>&gt; each(print, take(5, ones()))
+<div class="highlight-python"><div class="highlight"><pre>&gt; each(print, take(5, ones()))
 1
 1
 1
 1
-1</pre>
+1
+</pre></div>
 </div>
 </dd></dl>
 
@@ -297,7 +274,7 @@ indefinitely.</p>
 <h2>Random sampling<a class="headerlink" href="#random-sampling" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="fun.rands">
-<tt class="descclassname">fun.</tt><tt class="descname">rands</tt><big>(</big><span class="optional">[</span><em>n</em><span class="optional">[</span>, <em>m</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#fun.rands" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">rands</tt><big>(</big><span class="optional">[</span><em>n</em><span class="optional">[</span><em>m</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#fun.rands" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -372,11 +349,9 @@ expected with some library functions.</p>
 
       </div>
 
-
     <div class="footer">
         &copy; Copyright 2013, Roman Tsisyk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
-
   </body>
 </html>

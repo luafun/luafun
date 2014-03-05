@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,11 +10,10 @@
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -26,45 +23,11 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
     <link rel="up" title="API Reference" href="reference.html" />
     <link rel="next" title="Compositions" href="compositions.html" />
-    <link rel="prev" title="Reducing" href="reducing.html" />
- 
-    <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-45899190-1', 'rtsisyk.github.io');
-ga('send', 'pageview');
-
-(function (d, w, c) {
-    (w[c] = w[c] || []).push(function() {
-        try {
-            w.yaCounter23087647 = new Ya.Metrika({id:23087647,
-                    webvisor:true,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true});
-        } catch(e) { }
-    });
-
-    var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else { f(); }
-})(document, window, "yandex_metrika_callbacks");
-    </script>
-
+    <link rel="prev" title="Reducing" href="reducing.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
@@ -89,7 +52,9 @@ ga('send', 'pageview');
 <span id="transformations"></span><h1>Transformations<a class="headerlink" href="#module-fun" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="fun.map">
-<tt class="descclassname">fun.</tt><tt class="descname">map</tt><big>(</big><em>fun</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.map" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">map</tt><big>(</big><em>fun</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.map" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:map">
+<tt class="descclassname">iterator:</tt><tt class="descname">map</tt><big>(</big><em>fun</em><big>)</big><a class="headerlink" href="#fun.iterator:map" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -109,24 +74,26 @@ ga('send', 'pageview');
 and no values are buffered.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">map</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
-<span class="mi">0</span>
 <span class="mi">2</span>
 <span class="mi">4</span>
 <span class="mi">6</span>
+<span class="mi">8</span>
 
 <span class="n">fun</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">return</span> <span class="s1">&#39;</span><span class="s">map&#39;</span><span class="p">,</span> <span class="o">...</span> <span class="k">end</span>
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">map</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
-<span class="n">map</span> <span class="mi">0</span>
 <span class="n">map</span> <span class="mi">1</span>
 <span class="n">map</span> <span class="mi">2</span>
 <span class="n">map</span> <span class="mi">3</span>
+<span class="n">map</span> <span class="mi">4</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.enumerate">
-<tt class="descclassname">fun.</tt><tt class="descname">enumerate</tt><big>(</big><em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.enumerate" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">enumerate</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.enumerate" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:enumerate">
+<tt class="descclassname">iterator:</tt><tt class="descname">enumerate</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.iterator:enumerate" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -136,30 +103,32 @@ and no values are buffered.</p>
 </tbody>
 </table>
 <p>Return a new iterator by enumerating all elements of the
-<tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> iterator. The mapping is performed on the fly
-and no values are buffered.</p>
+<tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> iterator starting from <tt class="docutils literal"><span class="pre">1</span></tt>. The mapping is performed
+on the fly and no values are buffered.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">enumerate</span><span class="p">({</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">d&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">e&quot;</span><span class="p">}))</span>
-<span class="mi">0</span> <span class="n">a</span>
-<span class="mi">1</span> <span class="n">b</span>
-<span class="mi">2</span> <span class="n">c</span>
-<span class="mi">3</span> <span class="n">d</span>
-<span class="mi">4</span> <span class="n">e</span>
+<span class="mi">1</span> <span class="n">a</span>
+<span class="mi">2</span> <span class="n">b</span>
+<span class="mi">3</span> <span class="n">c</span>
+<span class="mi">4</span> <span class="n">d</span>
+<span class="mi">5</span> <span class="n">e</span>
 
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">zip</span><span class="p">({</span><span class="s2">&quot;</span><span class="s">one&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">two&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">three&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">four&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">five&quot;</span><span class="p">},</span>
     <span class="p">{</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">d&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">e&quot;</span><span class="p">})))</span>
-<span class="mi">0</span> <span class="n">one</span> <span class="n">a</span>
-<span class="mi">1</span> <span class="n">two</span> <span class="n">b</span>
-<span class="mi">2</span> <span class="n">three</span> <span class="n">c</span>
-<span class="mi">3</span> <span class="n">four</span> <span class="n">d</span>
-<span class="mi">4</span> <span class="n">five</span> <span class="n">e</span>
+<span class="mi">1</span> <span class="n">one</span> <span class="n">a</span>
+<span class="mi">2</span> <span class="n">two</span> <span class="n">b</span>
+<span class="mi">3</span> <span class="n">three</span> <span class="n">c</span>
+<span class="mi">4</span> <span class="n">four</span> <span class="n">d</span>
+<span class="mi">5</span> <span class="n">five</span> <span class="n">e</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.intersperse">
-<tt class="descclassname">fun.</tt><tt class="descname">intersperse</tt><big>(</big><em>x</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.intersperse" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">intersperse</tt><big>(</big><em>x</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.intersperse" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:intersperse">
+<tt class="descclassname">iterator:</tt><tt class="descname">intersperse</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#fun.iterator:intersperse" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -204,11 +173,9 @@ number of elements.</p>
 
       </div>
 
-
     <div class="footer">
         &copy; Copyright 2013, Roman Tsisyk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
-
   </body>
 </html>

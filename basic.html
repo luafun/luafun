@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,11 +10,10 @@
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -26,45 +23,11 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
     <link rel="up" title="API Reference" href="reference.html" />
     <link rel="next" title="Generators" href="generators.html" />
-    <link rel="prev" title="API Reference" href="reference.html" />
- 
-    <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-45899190-1', 'rtsisyk.github.io');
-ga('send', 'pageview');
-
-(function (d, w, c) {
-    (w[c] = w[c] || []).push(function() {
-        try {
-            w.yaCounter23087647 = new Ya.Metrika({id:23087647,
-                    webvisor:true,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true});
-        } catch(e) { }
-    });
-
-    var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else { f(); }
-})(document, window, "yandex_metrika_callbacks");
-    </script>
-
+    <link rel="prev" title="API Reference" href="reference.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
@@ -96,7 +59,7 @@ ga('send', 'pageview');
 <dt>
 <tt class="descclassname">fun.</tt><tt class="descname">iter</tt><big>(</big><em>string</em><big>)</big></dt>
 <dt>
-<tt class="descclassname">fun.</tt><tt class="descname">iter</tt><big>(</big><em>gen</em>, <em>param</em>, <em>state</em><big>)</big></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">iter</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -189,7 +152,9 @@ function:</p>
 
 <dl class="function">
 <dt id="fun.each">
-<tt class="descclassname">fun.</tt><tt class="descname">each</tt><big>(</big><em>fun</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.each" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">each</tt><big>(</big><em>fun</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.each" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:each">
+<tt class="descclassname">iterator:</tt><tt class="descname">each</tt><big>(</big><em>fun</em><big>)</big><a class="headerlink" href="#fun.iterator:each" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -220,7 +185,7 @@ the code below:</p>
 <p>The function is used for its side effects. Implementation directly applies
 <em>fun</em> to all iteration values without returning a new iterator, in contrast
 to functions like <a class="reference internal" href="transformations.html#fun.map" title="fun.map"><tt class="xref lua lua-func docutils literal"><span class="pre">map()</span></tt></a>.</p>
-<div class="admonition-see-also admonition seealso">
+<div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="transformations.html#fun.map" title="fun.map"><tt class="xref lua lua-func docutils literal"><span class="pre">map()</span></tt></a>, <a class="reference internal" href="reducing.html#fun.reduce" title="fun.reduce"><tt class="xref lua lua-func docutils literal"><span class="pre">reduce()</span></tt></a></p>
 </div>
@@ -228,13 +193,17 @@ to functions like <a class="reference internal" href="transformations.html#fun.m
 
 <dl class="function">
 <dt id="fun.for_each">
-<tt class="descclassname">fun.</tt><tt class="descname">for_each</tt><big>(</big><em>fun</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.for_each" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">for_each</tt><big>(</big><em>fun</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.for_each" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:for_each">
+<tt class="descclassname">iterator:</tt><tt class="descname">for_each</tt><big>(</big><em>fun</em><big>)</big><a class="headerlink" href="#fun.iterator:for_each" title="Permalink to this definition">¶</a></dt>
 <dd><p>An alias for <a class="reference internal" href="#fun.each" title="fun.each"><tt class="xref lua lua-func docutils literal"><span class="pre">each()</span></tt></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.foreach">
-<tt class="descclassname">fun.</tt><tt class="descname">foreach</tt><big>(</big><em>fun</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.foreach" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">foreach</tt><big>(</big><em>fun</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.foreach" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:foreach">
+<tt class="descclassname">iterator:</tt><tt class="descname">foreach</tt><big>(</big><em>fun</em><big>)</big><a class="headerlink" href="#fun.iterator:foreach" title="Permalink to this definition">¶</a></dt>
 <dd><p>An alias for <a class="reference internal" href="#fun.each" title="fun.each"><tt class="xref lua lua-func docutils literal"><span class="pre">each()</span></tt></a>.</p>
 </dd></dl>
 
@@ -254,11 +223,9 @@ to functions like <a class="reference internal" href="transformations.html#fun.m
 
       </div>
 
-
     <div class="footer">
         &copy; Copyright 2013, Roman Tsisyk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
-
   </body>
 </html>

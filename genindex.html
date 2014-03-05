@@ -1,7 +1,4 @@
 
-
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -14,11 +11,10 @@
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -28,42 +24,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
-    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
- 
-    <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-45899190-1', 'rtsisyk.github.io');
-ga('send', 'pageview');
-
-(function (d, w, c) {
-    (w[c] = w[c] || []).push(function() {
-        try {
-            w.yaCounter23087647 = new Ya.Metrika({id:23087647,
-                    webvisor:true,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true});
-        } catch(e) { }
-    });
-
-    var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else { f(); }
-})(document, window, "yandex_metrika_callbacks");
-    </script>
-
+    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
@@ -243,7 +205,7 @@ ga('send', 'pageview');
   </dt>
 
       
-  <dt><a href="filtering.html#module-fun">fun (module)</a>, <a href="transformations.html#module-fun">[1]</a>, <a href="indexing.html#module-fun">[2]</a>, <a href="compositions.html#module-fun">[3]</a>, <a href="slicing.html#module-fun">[4]</a>, <a href="intro.html#module-fun">[5]</a>, <a href="generators.html#module-fun">[6]</a>, <a href="basic.html#module-fun">[7]</a>, <a href="reducing.html#module-fun">[8]</a>, <a href="under_the_hood.html#module-fun">[9]</a>
+  <dt><a href="filtering.html#module-fun">fun (module)</a>, <a href="transformations.html#module-fun">[1]</a>, <a href="indexing.html#module-fun">[2]</a>, <a href="slicing.html#module-fun">[3]</a>, <a href="intro.html#module-fun">[4]</a>, <a href="generators.html#module-fun">[5]</a>, <a href="basic.html#module-fun">[6]</a>, <a href="reducing.html#module-fun">[7]</a>, <a href="compositions.html#module-fun">[8]</a>, <a href="under_the_hood.html#module-fun">[9]</a>
   </dt>
 
       
@@ -306,8 +268,6 @@ ga('send', 'pageview');
   <dt><a href="operators.html#fun.operator.intdiv">intdiv() (in module fun.operator)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="transformations.html#fun.intersperse">intersperse() (in module fun)</a>
   </dt>
@@ -322,6 +282,176 @@ ga('send', 'pageview');
 
       
   <dt><a href="basic.html#fun.iter">iter() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="compositions.html#fun.iterator1:chain">iterator1:chain() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator1:is_prefix_of">iterator1:is_prefix_of() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="compositions.html#fun.iterator1:zip">iterator1:zip() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:all">iterator:all() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:any">iterator:any() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="compositions.html#fun.iterator:cycle">iterator:cycle() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="slicing.html#fun.iterator:drop">iterator:drop() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="slicing.html#fun.iterator:drop_n">iterator:drop_n() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="slicing.html#fun.iterator:drop_while">iterator:drop_while() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="basic.html#fun.iterator:each">iterator:each() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="indexing.html#fun.iterator:elem_index">iterator:elem_index() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="indexing.html#fun.iterator:elem_indexes">iterator:elem_indexes() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="indexing.html#fun.iterator:elem_indices">iterator:elem_indices() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="transformations.html#fun.iterator:enumerate">iterator:enumerate() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="filtering.html#fun.iterator:filter">iterator:filter() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="basic.html#fun.iterator:for_each">iterator:for_each() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="basic.html#fun.iterator:foreach">iterator:foreach() (in module fun)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="filtering.html#fun.iterator:grep">iterator:grep() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="slicing.html#fun.iterator:head">iterator:head() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="indexing.html#fun.iterator:index">iterator:index() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="indexing.html#fun.iterator:index_of">iterator:index_of() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="indexing.html#fun.iterator:indexes">iterator:indexes() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="indexing.html#fun.iterator:indices">iterator:indices() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="transformations.html#fun.iterator:intersperse">iterator:intersperse() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:is_null">iterator:is_null() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:length">iterator:length() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="transformations.html#fun.iterator:map">iterator:map() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:max">iterator:max() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:max_by">iterator:max_by() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:min">iterator:min() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:min_by">iterator:min_by() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="slicing.html#fun.iterator:nth">iterator:nth() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="filtering.html#fun.iterator:partition">iterator:partition() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:product">iterator:product() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:reduce">iterator:reduce() (in module fun)</a>, <a href="reducing.html#fun.iterator:reduce">[1]</a>
+  </dt>
+
+      
+  <dt><a href="filtering.html#fun.iterator:remove_if">iterator:remove_if() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="slicing.html#fun.iterator:span">iterator:span() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.iterator:sum">iterator:sum() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="slicing.html#fun.iterator:tail">iterator:tail() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="slicing.html#fun.iterator:take">iterator:take() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="slicing.html#fun.iterator:take_n">iterator:take_n() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="slicing.html#fun.iterator:take_while">iterator:take_while() (in module fun)</a>
   </dt>
 
   </dl></td>
@@ -546,10 +676,18 @@ ga('send', 'pageview');
   <dt><a href="slicing.html#fun.take_n">take_n() (in module fun)</a>
   </dt>
 
+      
+  <dt><a href="slicing.html#fun.take_while">take_while() (in module fun)</a>
+  </dt>
+
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="slicing.html#fun.take_while">take_while() (in module fun)</a>
+  <dt><a href="reducing.html#fun.tomap">tomap() (in module fun)</a>
+  </dt>
+
+      
+  <dt><a href="reducing.html#fun.totable">totable() (in module fun)</a>
   </dt>
 
       
@@ -610,11 +748,9 @@ ga('send', 'pageview');
 
       </div>
 
-
     <div class="footer">
         &copy; Copyright 2013, Roman Tsisyk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
-
   </body>
 </html>

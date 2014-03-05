@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,11 +10,10 @@
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -26,45 +23,11 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
     <link rel="up" title="API Reference" href="reference.html" />
     <link rel="next" title="Indexing" href="indexing.html" />
-    <link rel="prev" title="Generators" href="generators.html" />
- 
-    <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-45899190-1', 'rtsisyk.github.io');
-ga('send', 'pageview');
-
-(function (d, w, c) {
-    (w[c] = w[c] || []).push(function() {
-        try {
-            w.yaCounter23087647 = new Ya.Metrika({id:23087647,
-                    webvisor:true,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true});
-        } catch(e) { }
-    });
-
-    var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else { f(); }
-})(document, window, "yandex_metrika_callbacks");
-    </script>
-
+    <link rel="prev" title="Generators" href="generators.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
@@ -92,7 +55,9 @@ ga('send', 'pageview');
 <h2>Basic<a class="headerlink" href="#basic" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="fun.nth">
-<tt class="descclassname">fun.</tt><tt class="descname">nth</tt><big>(</big><em>n</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.nth" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">nth</tt><big>(</big><em>n</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.nth" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:nth">
+<tt class="descclassname">iterator:</tt><tt class="descname">nth</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#fun.iterator:nth" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -112,7 +77,7 @@ like Lua tables)</li>
 iterator. If the iterator does not have <strong>n</strong> items then <tt class="docutils literal"><span class="pre">nil</span></tt> is returned.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">nth</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
-<span class="mi">1</span>
+<span class="mi">2</span>
 
 <span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">nth</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
 <span class="kc">nil</span>
@@ -121,7 +86,7 @@ iterator. If the iterator does not have <strong>n</strong> items then <tt class=
 <span class="n">b</span>
 
 <span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">nth</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">enumerate</span><span class="p">({</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">d&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">e&quot;</span><span class="p">})))</span>
-<span class="mi">1</span> <span class="n">b</span>
+<span class="mi">2</span> <span class="n">b</span>
 </pre></div>
 </div>
 <p>This function is optimized for basic array and string iterators and has
@@ -130,7 +95,9 @@ iterator. If the iterator does not have <strong>n</strong> items then <tt class=
 
 <dl class="function">
 <dt id="fun.head">
-<tt class="descclassname">fun.</tt><tt class="descname">head</tt><big>(</big><em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.head" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">head</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.head" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:head">
+<tt class="descclassname">iterator:</tt><tt class="descname">head</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.iterator:head" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -149,20 +116,22 @@ If the iterator is empty then an error is raised.</p>
 <span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
 <span class="nb">error</span><span class="p">:</span> <span class="n">head</span><span class="p">:</span> <span class="n">iterator</span> <span class="n">is</span> <span class="n">empty</span>
 <span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">enumerate</span><span class="p">({</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">})))</span>
-<span class="mi">0</span> <span class="n">a</span>
+<span class="mi">1</span> <span class="n">a</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.car">
-<tt class="descclassname">fun.</tt><tt class="descname">car</tt><big>(</big><em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.car" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">car</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.car" title="Permalink to this definition">¶</a></dt>
 <dd><p>An alias for <a class="reference internal" href="#fun.head" title="fun.head"><tt class="xref lua lua-func docutils literal"><span class="pre">head()</span></tt></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.tail">
-<tt class="descclassname">fun.</tt><tt class="descname">tail</tt><big>(</big><em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.tail" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">tail</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.tail" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:tail">
+<tt class="descclassname">iterator:</tt><tt class="descname">tail</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.iterator:tail" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -182,16 +151,16 @@ If the iterator is empty then an empty iterator is returned.</p>
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">tail</span><span class="p">({}))</span>
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">tail</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">tail</span><span class="p">(</span><span class="n">enumerate</span><span class="p">({</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">})))</span>
-<span class="mi">1</span> <span class="n">b</span>
-<span class="mi">2</span> <span class="n">c</span>
+<span class="mi">2</span> <span class="n">b</span>
+<span class="mi">3</span> <span class="n">c</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.cdr">
-<tt class="descclassname">fun.</tt><tt class="descname">cdr</tt><big>(</big><em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.cdr" title="Permalink to this definition">¶</a></dt>
-<dd><p>An alias for <a class="reference internal" href="#fun.head" title="fun.head"><tt class="xref lua lua-func docutils literal"><span class="pre">head()</span></tt></a>.</p>
+<tt class="descclassname">fun.</tt><tt class="descname">cdr</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.cdr" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.tail" title="fun.tail"><tt class="xref lua lua-func docutils literal"><span class="pre">tail()</span></tt></a>.</p>
 </dd></dl>
 
 </div>
@@ -199,7 +168,9 @@ If the iterator is empty then an empty iterator is returned.</p>
 <h2>Subsequences<a class="headerlink" href="#subsequences" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="fun.take_n">
-<tt class="descclassname">fun.</tt><tt class="descname">take_n</tt><big>(</big><em>n</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.take_n" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">take_n</tt><big>(</big><em>n</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.take_n" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:take_n">
+<tt class="descclassname">iterator:</tt><tt class="descname">take_n</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#fun.iterator:take_n" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -216,25 +187,27 @@ If the iterator is empty then an empty iterator is returned.</p>
 </table>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take_n</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
-<span class="mi">0</span>
 <span class="mi">1</span>
 <span class="mi">2</span>
 <span class="mi">3</span>
 <span class="mi">4</span>
+<span class="mi">5</span>
 
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take_n</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">duplicate</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">x&#39;</span><span class="p">))))</span>
-<span class="mi">0</span> <span class="n">x</span>
 <span class="mi">1</span> <span class="n">x</span>
 <span class="mi">2</span> <span class="n">x</span>
 <span class="mi">3</span> <span class="n">x</span>
 <span class="mi">4</span> <span class="n">x</span>
+<span class="mi">5</span> <span class="n">x</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.take_while">
-<tt class="descclassname">fun.</tt><tt class="descname">take_while</tt><big>(</big><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.take_while" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">take_while</tt><big>(</big><em>predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.take_while" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:take_while">
+<tt class="descclassname">iterator:</tt><tt class="descname">take_while</tt><big>(</big><em>predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:take_while" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -246,20 +219,19 @@ elements that satisfy <strong>predicate</strong>.</td>
 </table>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take_while</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
-<span class="mi">0</span>
 <span class="mi">1</span>
 <span class="mi">2</span>
 <span class="mi">3</span>
 <span class="mi">4</span>
 
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take_while</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">return</span> <span class="n">i</span> <span class="o">~=</span><span class="n">a</span> <span class="k">end</span><span class="p">,</span>
-    <span class="n">enumerate</span><span class="p">({</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">})))</span>
-<span class="mi">0</span> <span class="mi">5</span>
-<span class="mi">1</span> <span class="mi">2</span>
-<span class="mi">2</span> <span class="mi">1</span>
+    <span class="n">enumerate</span><span class="p">({</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">})))</span>
+<span class="mi">1</span>       <span class="mi">5</span>
+<span class="mi">2</span>       <span class="mi">3</span>
+<span class="mi">3</span>       <span class="mi">4</span>
 </pre></div>
 </div>
-<div class="admonition-see-also admonition seealso">
+<div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="filtering.html#fun.filter" title="fun.filter"><tt class="xref lua lua-func docutils literal"><span class="pre">filter()</span></tt></a></p>
 </div>
@@ -267,14 +239,18 @@ elements that satisfy <strong>predicate</strong>.</td>
 
 <dl class="function">
 <dt id="fun.take">
-<tt class="descclassname">fun.</tt><tt class="descname">take</tt><big>(</big><em>n_or_predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.take" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">take</tt><big>(</big><em>n_or_predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.take" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:take">
+<tt class="descclassname">iterator:</tt><tt class="descname">take</tt><big>(</big><em>n_or_predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:take" title="Permalink to this definition">¶</a></dt>
 <dd><p>An alias for <a class="reference internal" href="#fun.take_n" title="fun.take_n"><tt class="xref lua lua-func docutils literal"><span class="pre">take_n()</span></tt></a> and <a class="reference internal" href="#fun.take_while" title="fun.take_while"><tt class="xref lua lua-func docutils literal"><span class="pre">take_while()</span></tt></a> that autodetects
 required function based on <strong>n_or_predicate</strong> type.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.drop_n">
-<tt class="descclassname">fun.</tt><tt class="descname">drop_n</tt><big>(</big><em>n</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.drop_n" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">drop_n</tt><big>(</big><em>n</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.drop_n" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:drop_n">
+<tt class="descclassname">iterator:</tt><tt class="descname">drop_n</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#fun.iterator:drop_n" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -291,24 +267,24 @@ elements</p>
 </tbody>
 </table>
 <p>Examples:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">drop_n</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
-<span class="mi">0</span>
-<span class="mi">1</span>
-<span class="mi">2</span>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">drop_n</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
 <span class="mi">3</span>
 <span class="mi">4</span>
+<span class="mi">5</span>
 
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">drop_n</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">enumerate</span><span class="p">({</span><span class="s1">&#39;</span><span class="s">a&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">b&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">c&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">d&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">e&#39;</span><span class="p">})))</span>
-<span class="mi">2</span> <span class="n">c</span>
-<span class="mi">3</span> <span class="n">d</span>
-<span class="mi">4</span> <span class="n">e</span>
+<span class="mi">3</span>       <span class="n">c</span>
+<span class="mi">4</span>       <span class="n">d</span>
+<span class="mi">5</span>       <span class="n">e</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.drop_while">
-<tt class="descclassname">fun.</tt><tt class="descname">drop_while</tt><big>(</big><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.drop_while" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">drop_while</tt><big>(</big><em>predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.drop_while" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:drop_while">
+<tt class="descclassname">iterator:</tt><tt class="descname">drop_while</tt><big>(</big><em>predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:drop_while" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -325,9 +301,10 @@ of  elements that satisfy <strong>predicate</strong>.</td>
 <span class="mi">7</span>
 <span class="mi">8</span>
 <span class="mi">9</span>
+<span class="mi">10</span>
 </pre></div>
 </div>
-<div class="admonition-see-also admonition seealso">
+<div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="filtering.html#fun.filter" title="fun.filter"><tt class="xref lua lua-func docutils literal"><span class="pre">filter()</span></tt></a></p>
 </div>
@@ -335,19 +312,23 @@ of  elements that satisfy <strong>predicate</strong>.</td>
 
 <dl class="function">
 <dt id="fun.drop">
-<tt class="descclassname">fun.</tt><tt class="descname">drop</tt><big>(</big><em>n_or_predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.drop" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">drop</tt><big>(</big><em>n_or_predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.drop" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:drop">
+<tt class="descclassname">iterator:</tt><tt class="descname">drop</tt><big>(</big><em>n_or_predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:drop" title="Permalink to this definition">¶</a></dt>
 <dd><p>An alias for <a class="reference internal" href="#fun.drop_n" title="fun.drop_n"><tt class="xref lua lua-func docutils literal"><span class="pre">drop_n()</span></tt></a> and <a class="reference internal" href="#fun.drop_while" title="fun.drop_while"><tt class="xref lua lua-func docutils literal"><span class="pre">drop_while()</span></tt></a> that autodetects
 required function based on <strong>n_or_predicate</strong> type.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.span">
-<tt class="descclassname">fun.</tt><tt class="descname">span</tt><big>(</big><em>n_or_predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.span" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">span</tt><big>(</big><em>n_or_predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.span" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:span">
+<tt class="descclassname">iterator:</tt><tt class="descname">span</tt><big>(</big><em>n_or_predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:span" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">{gen1, param1, state1}, {gen2, param2, state2}</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">iterator, iterator</td>
 </tr>
 </tbody>
 </table>
@@ -356,24 +337,23 @@ required function based on <strong>n_or_predicate</strong> type.</p>
 satisfy <strong>predicate</strong> and second operates the remainder of
 <tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> iterator.
 Equivalent to:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="k">return</span> <span class="p">{</span><span class="n">take</span><span class="p">(</span><span class="n">n_or_predicate</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)},</span>
-       <span class="p">{</span><span class="n">drop</span><span class="p">(</span><span class="n">n_or_predicate</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)};</span>
+<div class="highlight-lua"><div class="highlight"><pre><span class="k">return</span> <span class="n">take</span><span class="p">(</span><span class="n">n_or_predicate</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">),</span>
+       <span class="n">drop</span><span class="p">(</span><span class="n">n_or_predicate</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">zip</span><span class="p">(</span><span class="n">span</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
-<span class="mi">0</span> <span class="mi">5</span>
-<span class="mi">1</span> <span class="mi">6</span>
-<span class="mi">2</span> <span class="mi">7</span>
-<span class="mi">3</span> <span class="mi">8</span>
-<span class="mi">4</span> <span class="mi">9</span>
+<span class="mi">1</span>       <span class="mi">5</span>
+<span class="mi">2</span>       <span class="mi">6</span>
+<span class="mi">3</span>       <span class="mi">7</span>
+<span class="mi">4</span>       <span class="mi">8</span>
 
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">zip</span><span class="p">(</span><span class="n">span</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
-<span class="mi">0</span> <span class="mi">5</span>
-<span class="mi">1</span> <span class="mi">6</span>
-<span class="mi">2</span> <span class="mi">7</span>
-<span class="mi">3</span> <span class="mi">8</span>
-<span class="mi">4</span> <span class="mi">9</span>
+<span class="mi">1</span>       <span class="mi">6</span>
+<span class="mi">2</span>       <span class="mi">7</span>
+<span class="mi">3</span>       <span class="mi">8</span>
+<span class="mi">4</span>       <span class="mi">9</span>
+<span class="mi">5</span>       <span class="mi">10</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -381,7 +361,7 @@ Equivalent to:</p>
 <p class="last"><tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> must be pure functional to work properly
 with the function.</p>
 </div>
-<div class="admonition-see-also admonition seealso">
+<div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="filtering.html#fun.partition" title="fun.partition"><tt class="xref lua lua-func docutils literal"><span class="pre">partition()</span></tt></a></p>
 </div>
@@ -389,13 +369,13 @@ with the function.</p>
 
 <dl class="function">
 <dt id="fun.split">
-<tt class="descclassname">fun.</tt><tt class="descname">split</tt><big>(</big><em>n_or_predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.split" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">split</tt><big>(</big><em>n_or_predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.split" title="Permalink to this definition">¶</a></dt>
 <dd><p>An alias for <a class="reference internal" href="#fun.span" title="fun.span"><tt class="xref lua lua-func docutils literal"><span class="pre">span()</span></tt></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.split_at">
-<tt class="descclassname">fun.</tt><tt class="descname">split_at</tt><big>(</big><em>n</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.split_at" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">split_at</tt><big>(</big><em>n</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.split_at" title="Permalink to this definition">¶</a></dt>
 <dd><p>An alias for <a class="reference internal" href="#fun.span" title="fun.span"><tt class="xref lua lua-func docutils literal"><span class="pre">span()</span></tt></a>.</p>
 </dd></dl>
 
@@ -416,11 +396,9 @@ with the function.</p>
 
       </div>
 
-
     <div class="footer">
         &copy; Copyright 2013, Roman Tsisyk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
-
   </body>
 </html>

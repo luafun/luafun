@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,11 +10,10 @@
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -26,44 +23,10 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
     <link rel="next" title="API Reference" href="reference.html" />
-    <link rel="prev" title="Introduction" href="intro.html" />
- 
-    <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-45899190-1', 'rtsisyk.github.io');
-ga('send', 'pageview');
-
-(function (d, w, c) {
-    (w[c] = w[c] || []).push(function() {
-        try {
-            w.yaCounter23087647 = new Ya.Metrika({id:23087647,
-                    webvisor:true,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true});
-        } catch(e) { }
-    });
-
-    var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else { f(); }
-})(document, window, "yandex_metrika_callbacks");
-    </script>
-
+    <link rel="prev" title="Introduction" href="intro.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
@@ -225,9 +188,9 @@ All tests have passed!
 <span class="hll"> &gt; <span class="nv">fun</span> <span class="o">=</span> require <span class="s1">&#39;fun&#39;</span>
 </span> &gt;
  &gt; <span class="k">for </span>_k, a in fun.range<span class="o">(</span>3<span class="o">)</span> <span class="k">do </span>print<span class="o">(</span>a<span class="o">)</span> end
- 0
  1
  2
+ 3
 </pre></div>
 </div>
 <p>If you see an error message like <tt class="docutils literal"><span class="pre">stdin:1:</span> <span class="pre">module</span> <span class="pre">'fun'</span> <span class="pre">not</span> <span class="pre">found:</span></tt> then
@@ -245,16 +208,16 @@ all library functions to the global table:</p>
 <p><strong>Lua Fun</strong> also provides a special <strong>shortcut</strong> to autoimport all functions:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="hll"> &gt; require <span class="s1">&#39;fun&#39;</span><span class="o">()</span> -- to import all lua.* functions to globals
 </span> &gt; each<span class="o">(</span>print, range<span class="o">(</span>5<span class="o">))</span>
- 0
  1
  2
  3
  4
+ 5
 </pre></div>
 </div>
 <p>Now you can use <strong>Lua Fun</strong>:</p>
 <div class="highlight-bash"><div class="highlight"><pre>&gt; print<span class="o">(</span>sum<span class="o">(</span>filter<span class="o">(</span><span class="k">function</span><span class="o">(</span>x<span class="o">)</span> <span class="k">return </span>x % <span class="nv">16</span> <span class="o">==</span> 0 end, range<span class="o">(</span>10000<span class="o">))))</span>
-3120000
+3130000
 
 &gt; each<span class="o">(</span>print, take<span class="o">(</span>5, tabulate<span class="o">(</span>math.sin<span class="o">)))</span>
 0
@@ -265,11 +228,11 @@ all library functions to the global table:</p>
 
 &gt; each<span class="o">(</span>print, enumerate<span class="o">(</span>zip<span class="o">({</span><span class="s2">&quot;one&quot;</span>, <span class="s2">&quot;two&quot;</span>, <span class="s2">&quot;three&quot;</span>, <span class="s2">&quot;four&quot;</span>, <span class="s2">&quot;five&quot;</span><span class="o">}</span>,
     <span class="o">{</span><span class="s2">&quot;a&quot;</span>, <span class="s2">&quot;b&quot;</span>, <span class="s2">&quot;c&quot;</span>, <span class="s2">&quot;d&quot;</span>, <span class="s2">&quot;e&quot;</span><span class="o">})))</span>
-0 one a
-1 two b
-2 three c
-3 four d
-4 five e
+1       one     a
+2       two     b
+3       three   c
+4       four    d
+5       five    e
 
 &gt; <span class="nv">lines_to_grep</span> <span class="o">=</span> <span class="o">{</span>
     <span class="o">[[</span>Emily<span class="o">]]</span>,
@@ -336,11 +299,9 @@ one
 
       </div>
 
-
     <div class="footer">
         &copy; Copyright 2013, Roman Tsisyk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
-
   </body>
 </html>

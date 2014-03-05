@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,11 +10,10 @@
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -26,45 +23,11 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
     <link rel="up" title="API Reference" href="reference.html" />
     <link rel="next" title="Reducing" href="reducing.html" />
-    <link rel="prev" title="Indexing" href="indexing.html" />
- 
-    <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-45899190-1', 'rtsisyk.github.io');
-ga('send', 'pageview');
-
-(function (d, w, c) {
-    (w[c] = w[c] || []).push(function() {
-        try {
-            w.yaCounter23087647 = new Ya.Metrika({id:23087647,
-                    webvisor:true,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true});
-        } catch(e) { }
-    });
-
-    var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else { f(); }
-})(document, window, "yandex_metrika_callbacks");
-    </script>
-
+    <link rel="prev" title="Indexing" href="indexing.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
@@ -90,7 +53,9 @@ ga('send', 'pageview');
 <p>This section contains functions to filter values during iteration.</p>
 <dl class="function">
 <dt id="fun.filter">
-<tt class="descclassname">fun.</tt><tt class="descname">filter</tt><big>(</big><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.filter" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">filter</tt><big>(</big><em>predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.filter" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:filter">
+<tt class="descclassname">iterator:</tt><tt class="descname">filter</tt><big>(</big><em>predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:filter" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -105,18 +70,17 @@ ga('send', 'pageview');
 <p>Return a new iterator of those elements that satisfy the <strong>predicate</strong>.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">filter</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
-<span class="mi">0</span>
 <span class="mi">3</span>
 <span class="mi">6</span>
 <span class="mi">9</span>
 
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">filter</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span>
     <span class="n">enumerate</span><span class="p">(</span><span class="n">duplicate</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">x&#39;</span><span class="p">)))))</span>
-<span class="mi">0</span> <span class="n">x</span>
-<span class="mi">3</span> <span class="n">x</span>
-<span class="mi">6</span> <span class="n">x</span>
-<span class="mi">9</span> <span class="n">x</span>
-<span class="mi">12</span> <span class="n">x</span>
+<span class="mi">3</span>       <span class="n">x</span>
+<span class="mi">6</span>       <span class="n">x</span>
+<span class="mi">9</span>       <span class="n">x</span>
+<span class="mi">12</span>      <span class="n">x</span>
+<span class="mi">15</span>      <span class="n">x</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -124,7 +88,7 @@ ga('send', 'pageview');
 <p class="last">Multireturn iterators are supported but can cause performance
 regressions.</p>
 </div>
-<div class="admonition-see-also admonition seealso">
+<div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="slicing.html#fun.take_while" title="fun.take_while"><tt class="xref lua lua-func docutils literal"><span class="pre">take_while()</span></tt></a> and <a class="reference internal" href="slicing.html#fun.drop_while" title="fun.drop_while"><tt class="xref lua lua-func docutils literal"><span class="pre">drop_while()</span></tt></a>.</p>
 </div>
@@ -132,13 +96,17 @@ regressions.</p>
 
 <dl class="function">
 <dt id="fun.remove_if">
-<tt class="descclassname">fun.</tt><tt class="descname">remove_if</tt><big>(</big><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.remove_if" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">remove_if</tt><big>(</big><em>predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.remove_if" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:remove_if">
+<tt class="descclassname">iterator:</tt><tt class="descname">remove_if</tt><big>(</big><em>predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:remove_if" title="Permalink to this definition">¶</a></dt>
 <dd><p>An alias for <a class="reference internal" href="#fun.filter" title="fun.filter"><tt class="xref lua lua-func docutils literal"><span class="pre">filter()</span></tt></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.grep">
-<tt class="descclassname">fun.</tt><tt class="descname">grep</tt><big>(</big><em>regexp_or_predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.grep" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">grep</tt><big>(</big><em>regexp_or_predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.grep" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:grep">
+<tt class="descclassname">iterator:</tt><tt class="descname">grep</tt><big>(</big><em>regexp_or_predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:grep" title="Permalink to this definition">¶</a></dt>
 <dd><p>If <strong>regexp_or_predicate</strong> is string then the parameter is used as a regular
 expression to build filtering predicate. Otherwise the function is just an
 alias for <a class="reference internal" href="#fun.filter" title="fun.filter"><tt class="xref lua lua-func docutils literal"><span class="pre">filter()</span></tt></a>.</p>
@@ -175,7 +143,6 @@ alias for <a class="reference internal" href="#fun.filter" title="fun.filter"><t
 <span class="cm">--test]]</span>
 
 <span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">grep</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
-<span class="mi">0</span>
 <span class="mi">3</span>
 <span class="mi">6</span>
 <span class="mi">9</span>
@@ -185,7 +152,9 @@ alias for <a class="reference internal" href="#fun.filter" title="fun.filter"><t
 
 <dl class="function">
 <dt id="fun.partition">
-<tt class="descclassname">fun.</tt><tt class="descname">partition</tt><big>(</big><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><big>)</big><a class="headerlink" href="#fun.partition" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fun.</tt><tt class="descname">partition</tt><big>(</big><em>predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.partition" title="Permalink to this definition">¶</a></dt>
+<dt id="fun.iterator:partition">
+<tt class="descclassname">iterator:</tt><tt class="descname">partition</tt><big>(</big><em>predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:partition" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -202,20 +171,17 @@ alias for <a class="reference internal" href="#fun.filter" title="fun.filter"><t
 </table>
 <p>The function returns two iterators where elements do and do not satisfy the
 prediucate. Equivalent to:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="k">return</span> <span class="p">{</span><span class="n">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">gen</span><span class="s1">&#39;</span><span class="s">, param&#39;</span><span class="p">,</span> <span class="n">state</span><span class="s1">&#39;</span><span class="s">)},</span>
-<span class="p">{</span><span class="n">filter</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">return</span> <span class="ow">not</span> <span class="n">predicate</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">end</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)};</span>
+<div class="highlight-lua"><div class="highlight"><pre><span class="k">return</span> <span class="n">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">gen</span><span class="s1">&#39;</span><span class="s">, param&#39;</span><span class="p">,</span> <span class="n">state</span><span class="s1">&#39;</span><span class="s">),</span>
+<span class="n">filter</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">return</span> <span class="ow">not</span> <span class="n">predicate</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">end</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The function make a clone of the source iterator. Iterators especially
 returned in tables to work with <a class="reference internal" href="compositions.html#fun.zip" title="fun.zip"><tt class="xref lua lua-func docutils literal"><span class="pre">zip()</span></tt></a> and other functions.</p>
 <p>Examples:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">zip</span><span class="p">(</span><span class="n">partition</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
-<span class="cm">--[[test</span>
-<span class="cm">0 1</span>
-<span class="cm">3 2</span>
-<span class="cm">6 4</span>
-<span class="cm">9 5</span>
-<span class="cm">--test]]</span>
+<div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="n">each</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="n">zip</span><span class="p">(</span><span class="n">partition</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
+<span class="mi">3</span>       <span class="mi">1</span>
+<span class="mi">6</span>       <span class="mi">2</span>
+<span class="mi">9</span>       <span class="mi">4</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -223,7 +189,7 @@ returned in tables to work with <a class="reference internal" href="compositions
 <p class="last"><tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> must be pure functional to work properly
 with the function.</p>
 </div>
-<div class="admonition-see-also admonition seealso">
+<div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="slicing.html#fun.span" title="fun.span"><tt class="xref lua lua-func docutils literal"><span class="pre">span()</span></tt></a></p>
 </div>
@@ -245,11 +211,9 @@ with the function.</p>
 
       </div>
 
-
     <div class="footer">
         &copy; Copyright 2013, Roman Tsisyk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
-
   </body>
 </html>
