@@ -32,7 +32,7 @@ Basic
     b
 
     > print(nth(2, enumerate({"a", "b", "c", "d", "e"})))
-    1 b
+    2 b
 
    This function is optimized for basic array and string iterators and has
    ``O(1)`` complexity for these cases.
@@ -56,7 +56,7 @@ Basic
     > print(head(range(0)))
     error: head: iterator is empty
     > print(head(enumerate({"a", "b"})))
-    0 a
+    1 a
 
 .. function:: car(gen, param, state)
 
@@ -82,8 +82,8 @@ Basic
     > each(print, tail({}))
     > each(print, tail(range(0)))
     > each(print, tail(enumerate({"a", "b", "c"})))
-    1 b
-    2 c
+    2 b
+    3 c
 
 .. function:: cdr(gen, param, state)
 
@@ -111,11 +111,11 @@ Subsequences
     5
 
     > each(print, take_n(5, enumerate(duplicate('x'))))
-    0 x
     1 x
     2 x
     3 x
     4 x
+    5 x
 
 .. function:: take_while(predicate, gen, param, state)
               iterator:take_while(predicate)
@@ -135,10 +135,10 @@ Subsequences
     4
 
     > each(print, take_while(function(i, a) return i ~=a end,
-        enumerate({5, 2, 1, 3, 4})))
-    0 5
-    1 2
-    2 1
+        enumerate({5, 3, 4, 4, 2})))
+    1       5
+    2       3
+    3       4
 
    .. seealso:: :func:`filter`
 
@@ -166,9 +166,9 @@ Subsequences
     5
 
     > each(print, drop_n(2, enumerate({'a', 'b', 'c', 'd', 'e'})))
-    2 c
-    3 d
-    4 e
+    3       c
+    4       d
+    5       e
 
 .. function:: drop_while(predicate, gen, param, state)
               iterator:drop_while(predicate)

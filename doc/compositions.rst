@@ -111,7 +111,7 @@ Compositions
 
    .. code-block:: lua
 
-    each(print, chain(range(2), {"a", "b", "c"}, {"one", "two", "three"}))
+    > each(print, chain(range(2), {"a", "b", "c"}, {"one", "two", "three"}))
     1
     2
     a
@@ -121,21 +121,20 @@ Compositions
     two
     three
 
-    each(print, take(15, cycle(chain(enumerate({"a", "b", "c"}),
+    > each(print, take(15, cycle(chain(enumerate({"a", "b", "c"}),
         {"one", "two", "three"}))))
-    0 a
-    1 b
-    2 c
+    1       a
+    2       b
+    3       c
     one
     two
     three
-    0 a
-    1 b
-    2 c
+    1       a
+    2       b
+    3       c
     one
     two
     three
-    0 a
-    1 b
-    2 c
-
+    1       a
+    2       b
+    3       c

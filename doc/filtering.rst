@@ -24,11 +24,11 @@ This section contains functions to filter values during iteration.
 
     > each(print, take(5, filter(function(i, x) return i % 3 == 0 end,
         enumerate(duplicate('x')))))
-    0 x
-    3 x
-    6 x
-    9 x
-    12 x
+    3       x
+    6       x
+    9       x
+    12      x
+    15      x
 
    .. note:: Multireturn iterators are supported but can cause performance 
              regressions.

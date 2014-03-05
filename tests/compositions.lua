@@ -126,21 +126,21 @@ three
 dump(take(15, cycle(chain(enumerate({"a", "b", "c"}),
     {"one", "two", "three"}))))
 --[[test
-0 a
-1 b
-2 c
+1 a
+2 b
+3 c
 one
 two
 three
-0 a
-1 b
-2 c
+1 a
+2 b
+3 c
 one
 two
 three
-0 a
-1 b
-2 c
+1 a
+2 b
+3 c
 --test]]
 
 dump(chain(range(0), range(0), range(0)))

@@ -19,11 +19,11 @@ map 4
 
 dump(map(fun, enumerate({"a", "b", "c", "d", "e"})))
 --[[test
-map 0 a
-map 1 b
-map 2 c
-map 3 d
-map 4 e
+map 1 a
+map 2 b
+map 3 c
+map 4 d
+map 5 e
 --test]]
 
 dump(map(function(x) return 2 * x end, range(4)))
@@ -44,30 +44,30 @@ fun = nil
 
 dump(enumerate({"a", "b", "c", "d", "e"}))
 --[[test
-0 a
-1 b
-2 c
-3 d
-4 e
+1 a
+2 b
+3 c
+4 d
+5 e
 --test]]
 
 dump(enumerate(enumerate(enumerate({"a", "b", "c", "d", "e"}))))
 --[[test
-0 0 0 a
-1 1 1 b
-2 2 2 c
-3 3 3 d
-4 4 4 e
+1 1 1 a
+2 2 2 b
+3 3 3 c
+4 4 4 d
+5 5 5 e
 --test]]
 
 dump(enumerate(zip({"one", "two", "three", "four", "five"},
     {"a", "b", "c", "d", "e"})))
 --[[test
-0 one a
-1 two b
-2 three c
-3 four d
-4 five e
+1 one a
+2 two b
+3 three c
+4 four d
+5 five e
 --test]]
 
 --------------------------------------------------------------------------------

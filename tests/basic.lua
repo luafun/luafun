@@ -321,7 +321,8 @@ local tab = tomap(enumerate("abcdef"))
 print(type(tab), #tab)
 each(print, tab)
 --[[test
-table 5
+table 6
+a
 b
 c
 d

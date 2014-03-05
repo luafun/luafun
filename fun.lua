@@ -823,7 +823,7 @@ local enumerate_gen = function(param, state)
 end
 
 local enumerate = function(gen, param, state)
-    return wrap(enumerate_gen, {gen, param}, {0, state})
+    return wrap(enumerate_gen, {gen, param}, {1, state})
 end
 methods.enumerate = method0(enumerate)
 exports.enumerate = export0(enumerate)

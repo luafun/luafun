@@ -24,7 +24,7 @@ print(index("b", {"a", "b", "c", "d", "e"}))
 
 print(index(1, enumerate({"a", "b", "c", "d", "e"})))
 --[[test
-2
+1
 --test]]
 
 print(index("b", "abcdef"))
@@ -64,7 +64,7 @@ dump(indexes("f", {}))
 
 dump(indexes(1, enumerate({"a", "b", "c", "d", "e"})))
 --[[test
-2
+1
 --test]]
 
 print(indices == indexes) -- an alias

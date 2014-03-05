@@ -17,11 +17,11 @@ dump(filter(function(x) return x % 3 == 0 end, range(0)))
 dump(take(5, filter(function(i, x) return i % 3 == 0 end,
     enumerate(duplicate('x')))))
 --[[test
-0 x
 3 x
 6 x
 9 x
 12 x
+15 x
 --test]]
 
 function filter_fun(a, b, c)

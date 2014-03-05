@@ -197,11 +197,11 @@ Now you can use **Lua Fun**:
 
     > each(print, enumerate(zip({"one", "two", "three", "four", "five"},
         {"a", "b", "c", "d", "e"})))
-    0 one a
-    1 two b
-    2 three c
-    3 four d
-    4 five e
+    1       one     a
+    2       two     b
+    3       three   c
+    4       four    d
+    5       five    e
 
     > lines_to_grep = {
         [[Emily]],

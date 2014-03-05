@@ -24,7 +24,7 @@ b
 
 print(nth(2, enumerate({"a", "b", "c", "d", "e"})))
 --[[test
-1 b
+2 b
 --test]]
 
 print(nth(2, "abcdef"))
@@ -53,7 +53,7 @@ error: head: iterator is empty
 
 print(head(enumerate({"a", "b"})))
 --[[test
-0 a
+1 a
 --test]]
 
 print(car == head) -- an alias
@@ -83,7 +83,7 @@ dump(tail(range(0)))
 
 dump(tail(enumerate({"a", "b"})))
 --[[test
-1 b
+2 b
 --test]]
 
 print(cdr == tail) -- an alias
@@ -120,11 +120,11 @@ dump(take_n(5, duplicate(48)))
 
 dump(take_n(5, enumerate(duplicate('x'))))
 --[[test
-0 x
 1 x
 2 x
 3 x
 4 x
+5 x
 --test]]
 
 --------------------------------------------------------------------------------
@@ -149,9 +149,7 @@ dump(take_while(function(x) return x > 100 end, range(10)))
 
 dump(take_while(function(i, a) return i ~=a end, enumerate({5, 2, 1, 3, 4})))
 --[[test
-0 5
-1 2
-2 1
+1 5
 --test]]
 
 --------------------------------------------------------------------------------
@@ -203,9 +201,9 @@ dump(drop_n(5, range(0)))
 
 dump(drop_n(2, enumerate({'a', 'b', 'c', 'd', 'e'})))
 --[[test
-2 c
-3 d
-4 e
+3 c
+4 d
+5 e
 --test]]
 
 --------------------------------------------------------------------------------
@@ -242,8 +240,10 @@ dump(drop_while(function(x) return x > 100 end, range(10)))
 
 dump(drop_while(function(i, a) return i ~=a end, enumerate({5, 2, 1, 3, 4})))
 --[[test
-3 3
-4 4
+2 2
+3 1
+4 3
+5 4
 --test]]
 
 dump(drop_while(function(i, a) return i ~=a end,
