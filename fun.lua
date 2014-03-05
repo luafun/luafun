@@ -503,6 +503,7 @@ end
 
 local all = function(fun, gen, param, state)
     local gen_x, param_x, state_x = iter(gen, param, state)
+    local r
     repeat
         state_x, r = call_if_not_empty(fun, gen_x(param_x, state_x))
     until state_x == nil or not r
@@ -618,7 +619,7 @@ end
 
 local totable = function(gen, param, state)
     local gen_x, param_x, state_x = iter(gen, param, state)
-    local tab = {}
+    local tab, key, val = {}
     while true do
         state_x, val = gen_x(param_x, state_x)
         if state_x == nil then
@@ -631,7 +632,7 @@ end
 
 local tomap = function(gen, param, state)
     local gen_x, param_x, state_x = iter(gen, param, state)
-    local tab = {}
+    local tab, key, val = {}
     while true do
         state_x, key, val = gen_x(param_x, state_x)
         if state_x == nil then
