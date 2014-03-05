@@ -16,7 +16,7 @@ functional code**.
 Let's see an example:
 
 .. code-block:: lua
-   :emphasize-lines: 1, 3
+   :emphasize-lines: 2, 4
 
     -- Functional style
     require "fun" ()
@@ -26,6 +26,8 @@ Let's see an example:
     print(x)
     50.011981355266
 
+.. code-block:: lua
+   :emphasize-lines: 2, 4
 
     -- Object-oriented style
     local fun = require "fun"
