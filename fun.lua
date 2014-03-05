@@ -632,6 +632,7 @@ methods.is_prefix_of = is_prefix_of
 exports.is_prefix_of = is_prefix_of
 
 local all = function(fun, gen_x, param_x, state_x)
+    local r
     repeat
         state_x, r = call_if_not_empty(fun, gen_x(param_x, state_x))
     until state_x == nil or not r
@@ -767,7 +768,7 @@ methods.maximum_by = methods.maximum_by
 exports.maximum_by = exports.maximum_by
 
 local totable = function(gen_x, param_x, state_x)
-    local tab = {}
+    local tab, val = {}
     while true do
         state_x, val = gen_x(param_x, state_x)
         if state_x == nil then
@@ -781,7 +782,7 @@ methods.totable = method0(totable)
 exports.totable = export0(totable)
 
 local tomap = function(gen_x, param_x, state_x)
-    local tab = {}
+    local tab, key, val = {}
     while true do
         state_x, key, val = gen_x(param_x, state_x)
         if state_x == nil then
