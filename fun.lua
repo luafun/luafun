@@ -634,7 +634,7 @@ exports.is_prefix_of = is_prefix_of
 local all = function(fun, gen_x, param_x, state_x)
     local r
     repeat
-            state_x, r = call_if_not_empty(fun, gen_x(param_x, state_x))
+        state_x, r = call_if_not_empty(fun, gen_x(param_x, state_x))
     until state_x == nil or not r
     return state_x == nil
 end
