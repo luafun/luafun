@@ -20,6 +20,19 @@ function file_print(file, ...)
     file:write('\n')
 end
 
+local globals = {}
+setmetatable(_G, {
+    __newindex = function(t,k,v)
+        local info = debug.getinfo(2, "S")
+        if info.short_src == '../fun.lua' then
+            local name = debug.getinfo(2, "n").name
+            local line = info.linedefined
+            globals[k..name..line] = {k, name, line}
+        end
+        rawset(t, k, v)
+    end
+})
+
 function process(test_name)
     io.write("Testing ", test_name, "\n")
     local new_name = test_name..".new"
@@ -74,14 +87,24 @@ for i=1,#arg,1 do
     end
 end
 
-if #failed == 0 then
-    io.write("All tests have passed!", "\n")
-    os.exit(0)
-else
+if #failed > 0 then
     io.write("\n")
     io.write("Failed tests:", "\n")
     for _k,test_name in ipairs(failed) do
         io.write("   ", test_name, "\n")
     end
     io.write("\n", "Please review *.new files and update tests", "\n")
+end
+
+if next(globals) then
+    io.write("\n")
+    io.write("Some global variables have been declared by mistake:", "\n")
+    for k, pollution in pairs(globals) do
+        local var, func, line = pollution[1], pollution[2], pollution[3]
+        io.write(line.." : function "..func.."() = var '"..var.."'", "\n")
+    end
+    io.write("\n", "Please declare them with the local statement", "\n")    
+elseif #failed == 0 then
+    io.write("All tests have passed!", "\n")
+    os.exit(0)
 end
