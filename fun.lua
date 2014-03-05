@@ -183,7 +183,7 @@ exports.foreach = exports.each
 local range_gen = function(param, state)
     local stop, step = param[1], param[2]
     local state = state + step
-    if state >= stop then
+    if state > stop then
         return nil
     end
     return state, state
@@ -192,7 +192,7 @@ end
 local range_rev_gen = function(param, state)
     local stop, step = param[1], param[2]
     local state = state + step
-    if state <= stop then
+    if state < stop then
         return nil
     end
     return state, state
@@ -200,11 +200,14 @@ end
 
 local range = function(start, stop, step)
     if step == nil then
-        step = 1
         if stop == nil then
+            if start == 0 then
+                return nil_gen, nil, nil
+            end
             stop = start
-            start = 0
+            start = stop > 0 and 1 or -1
         end
+        step = start <= stop and 1 or -1
     end
 
     assert(type(start) == "number", "start must be a number")

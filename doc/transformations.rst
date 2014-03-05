@@ -19,17 +19,17 @@ Transformations
    .. code-block:: lua
 
     > each(print, map(function(x) return 2 * x end, range(4)))
-    0
     2
     4
     6
+    8
 
     fun = function(...) return 'map', ... end
     > each(print, map(fun, range(4)))
-    map 0
     map 1
     map 2
     map 3
+    map 4
 
 .. function:: enumerate(gen, param, state)
               iterator:enumerate()

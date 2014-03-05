@@ -3,69 +3,155 @@
 --------------------------------------------------------------------------------
 
 dump(range(0))
+print('--')
+for i=1,0 do print(i) end
 --[[test
+--
+--test]]
+
+dump(range(0, 0))
+print('--')
+for i=0,0 do print(i) end
+--[[test
+0
+--
+0
 --test]]
 
 dump(range(5))
+print('--')
+for i=1,5 do print(i) end
 --[[test
-0
 1
 2
 3
 4
+5
+--
+1
+2
+3
+4
+5
 --test]]
 
 dump(range(0, 5))
+print('--')
+for i=0,5 do print(i) end
 --[[test
 0
 1
 2
 3
 4
+5
+--
+0
+1
+2
+3
+4
+5
 --test]]
 
 dump(range(0, 5, 1))
+print('--')
+for i=0,5,1 do print(i) end
 --[[test
 0
 1
 2
 3
 4
+5
+--
+0
+1
+2
+3
+4
+5
 --test]]
 
 dump(range(0, 10, 2))
+print('--')
+for i=0,10,2 do print(i) end
 --[[test
 0
 2
 4
 6
 8
+10
+--
+0
+2
+4
+6
+8
+10
 --test]]
 
 dump(range(-5))
+print('--')
+for i=-1,-5,-1 do print(i) end
 --[[test
+-1
+-2
+-3
+-4
+-5
+--
+-1
+-2
+-3
+-4
+-5
 --test]]
 
 dump(range(0, -5, 1))
+print('--')
+for i=0,-5,1 do print(i) end
 --[[test
+--
 --test]]
 
 dump(range(0, -5, -1))
+print('--')
+for i=0,-5,-1 do print(i) end
 --[[test
 0
 -1
 -2
 -3
 -4
+-5
+--
+0
+-1
+-2
+-3
+-4
+-5
 --test]]
 
 dump(range(0, -10, -2))
+print('--')
+for i=0,-10,-2 do print(i) end
 --[[test
 0
 -2
 -4
 -6
 -8
+-10
+--
+0
+-2
+-4
+-6
+-8
+-10
 --test]]
 
 dump(range(1.2, 1.6, 0.1))

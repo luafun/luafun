@@ -4,7 +4,7 @@
 
 print(nth(2, range(5)))
 --[[test
-1
+2
 --test]]
 
 print(nth(10, range(5)))
@@ -133,7 +133,6 @@ dump(take_n(5, enumerate(duplicate('x'))))
 
 dump(take_while(function(x) return x < 5 end, range(10)))
 --[[test
-0
 1
 2
 3
@@ -161,7 +160,6 @@ dump(take_while(function(i, a) return i ~=a end, enumerate({5, 2, 1, 3, 4})))
 
 dump(take(function(x) return x < 5 end, range(10)))
 --[[test
-0
 1
 2
 3
@@ -183,20 +181,20 @@ dump(take(5, duplicate(48)))
 
 dump(drop_n(5, range(10)))
 --[[test
-5
 6
 7
 8
 9
+10
 --test]]
 
 dump(drop_n(0, range(5)))
 --[[test
-0
 1
 2
 3
 4
+5
 --test]]
 
 dump(drop_n(5, range(0)))
@@ -221,6 +219,7 @@ dump(drop_while(function(x) return x < 5 end, range(10)))
 7
 8
 9
+10
 --test]]
 
 dump(drop_while(function(x) return x < 5 end, range(0)))
@@ -229,7 +228,6 @@ dump(drop_while(function(x) return x < 5 end, range(0)))
 
 dump(drop_while(function(x) return x > 100 end, range(10)))
 --[[test
-0
 1
 2
 3
@@ -239,6 +237,7 @@ dump(drop_while(function(x) return x > 100 end, range(10)))
 7
 8
 9
+10
 --test]]
 
 dump(drop_while(function(i, a) return i ~=a end, enumerate({5, 2, 1, 3, 4})))
@@ -261,11 +260,11 @@ dump(drop_while(function(i, a) return i ~=a end,
 
 dump(drop(5, range(10)))
 --[[test
-5
 6
 7
 8
 9
+10
 --test]]
 
 dump(drop(function(x) return x < 5 end, range(10)))
@@ -275,6 +274,7 @@ dump(drop(function(x) return x < 5 end, range(10)))
 7
 8
 9
+10
 --test]]
 
 
@@ -284,20 +284,19 @@ dump(drop(function(x) return x < 5 end, range(10)))
 
 dump(zip(span(function(x) return x < 5 end, range(10))))
 --[[test
-0 5
-1 6
-2 7
-3 8
-4 9
+1 5
+2 6
+3 7
+4 8
 --test]]
 
 dump(zip(span(5, range(10))))
 --[[test
-0 5
 1 6
 2 7
 3 8
 4 9
+5 10
 --test]]
 
 dump(zip(span(function(x) return x < 5 end, range(0))))
@@ -306,6 +305,7 @@ dump(zip(span(function(x) return x < 5 end, range(0))))
 
 dump(zip(span(function(x) return x < 5 end, range(5))))
 --[[test
+1 5
 --test]]
 
 print(split == span) -- an alias

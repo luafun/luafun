@@ -38,10 +38,10 @@ Folds
    .. code-block:: lua
 
     > print(foldl(function(acc, x) return acc + x end, 0, range(5)))
-    10
+    15
 
     > print(foldl(operator.add, 0, range(5)))
-    10
+    15
 
     > print(foldl(function(acc, x, y) return acc + x * y; end, 0,
         zip(range(1, 5), {4, 3, 2, 1})))
@@ -111,9 +111,9 @@ Folds
 
    .. code-block:: lua
 
-    > local tab = tomap(zip({range(1, 7)}, 'abcdef'))
+    > local tab = tomap(zip(range(1, 7), 'abcdef'))
     > print(type(tab), #tab)
-    table 6
+    table   6
     > each(print, iter(tab))
     a
     b
@@ -219,7 +219,7 @@ Special folds
    .. code-block:: lua
 
     > print(sum(range(5)))
-    10
+    15
 
 .. function:: product(gen, param, state)
               iterator:product()
@@ -235,7 +235,7 @@ Special folds
    .. code-block:: lua
 
     > print(product(range(1, 5)))
-    25
+    120
 
 .. function:: min(gen, param, state)
               iterator:min()

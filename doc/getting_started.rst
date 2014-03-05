@@ -147,9 +147,9 @@ Try to run LuaJIT in the same directory where ``fun.lua`` file is located:
     > fun = require 'fun'
     >
     > for _k, a in fun.range(3) do print(a) end
-    0
     1
     2
+    3
 
 If you see an error message like ``stdin:1: module 'fun' not found:`` then
 you need to configure you Package Path (``package.path``). Please consult
@@ -175,18 +175,18 @@ all library functions to the global table:
 
     > require 'fun'() -- to import all lua.* functions to globals
     > each(print, range(5))
-    0
     1
     2
     3
     4
+    5
 
 Now you can use **Lua Fun**:
 
 .. code-block:: bash
 
     > print(sum(filter(function(x) return x % 16 == 0 end, range(10000))))
-    3120000
+    3130000
 
     > each(print, take(5, tabulate(math.sin)))
     0

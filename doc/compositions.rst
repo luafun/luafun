@@ -28,18 +28,18 @@ Compositions
     > each(print, zip())
 
     > each(print, zip(range(5), {'a', 'b', 'c'}, rands()))
-    0       a       0.57514179487402
-    1       b       0.79693061238668
-    2       c       0.45174307459403
+    1       a       0.57514179487402
+    2       b       0.79693061238668
+    3       c       0.45174307459403
 
     > each(print, zip(partition(function(x) return x > 7 end, range(1, 15, 1))))
-    8 1
-    9 2
-    10 3
-    11 4
-    12 5
-    13 6
-    14 7
+    8       1
+    9       2
+    10      3
+    11      4
+    12      5
+    13      6
+    14      7
 
 .. function:: cycle(gen, param, state)
               iterator:cycle()
@@ -62,38 +62,38 @@ Compositions
    .. code-block:: lua
 
     > each(print, take(15, cycle(range(5))))
-    0
     1
     2
     3
     4
-    0
+    5
     1
     2
     3
     4
-    0
+    5
     1
     2
     3
     4
+    5
 
     > each(print, take(15, cycle(zip(range(5), {"a", "b", "c", "d", "e"}))))
-    0 a
-    1 b
-    2 c
-    3 d
-    4 e
-    0 a
-    1 b
-    2 c
-    3 d
-    4 e
-    0 a
-    1 b
-    2 c
-    3 d
-    4 e
+    1       a
+    2       b
+    3       c
+    4       d
+    5       e
+    1       a
+    2       b
+    3       c
+    4       d
+    5       e
+    1       a
+    2       b
+    3       c
+    4       d
+    5       e
 
 .. function:: chain(...)
               iterator1:chain(iterator2, iterator3, ...)
@@ -112,8 +112,8 @@ Compositions
    .. code-block:: lua
 
     each(print, chain(range(2), {"a", "b", "c"}, {"one", "two", "three"}))
-    0
     1
+    2
     a
     b
     c

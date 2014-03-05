@@ -4,7 +4,7 @@
 
 print(index(2, range(5)))
 --[[test
-3
+2
 --test]]
 
 print(index(10, range(5)))

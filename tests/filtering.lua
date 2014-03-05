@@ -4,7 +4,6 @@
 
 dump(filter(function(x) return x % 3 == 0 end, range(10)))
 --[[test
-0
 3
 6
 9
@@ -97,8 +96,7 @@ Emma
 
 dump(zip(partition(function(i, x) return i % 3 == 0 end, range(10))))
 --[[test
-0 1
-3 2
-6 4
-9 5
+3 1
+6 2
+9 4
 --test]]

@@ -250,11 +250,11 @@ print(type(tab), #tab)
 each(print, tab)
 --[[test
 table 5
-0
 1
 2
 3
 4
+5
 --test]]
 
 local tab = totable(range(0))

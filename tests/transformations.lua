@@ -11,10 +11,10 @@ dump(map(fun, range(0)))
 
 dump(map(fun, range(4)))
 --[[test
-map 0
 map 1
 map 2
 map 3
+map 4
 --test]]
 
 dump(map(fun, enumerate({"a", "b", "c", "d", "e"})))
@@ -28,10 +28,10 @@ map 4 e
 
 dump(map(function(x) return 2 * x end, range(4)))
 --[[test
-0
 2
 4
 6
+8
 --test]]
 
 fun = nil

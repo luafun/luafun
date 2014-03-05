@@ -21,34 +21,45 @@ Finite Generators
    :returns: an iterator
 
    The iterator to create arithmetic progressions. Iteration values are generated
-   within the half-open interval ``[start, stop)`` (i.e. *stop* is not included).
-   If the *step* argument is omitted, it defaults to ``1``.  If the *start*
-   argument is omitted, it defaults to ``0``. If *step* is positive, the last
-   element is the largest ``start + i * step`` less than *stop*; if *step* is
-   negative, the last element is the smallest ``start + i * step`` greater than
-   *stop*.  *step* must not be zero (or else an error is raised)
+   within closed interval ``[start, stop]`` (i.e. *stop* is included).
+   If the *start* argument is omitted, it defaults to ``1`` (*stop* > 0) or
+   to ``-1`` (*stop* < 0). If the *step* argument is omitted, it defaults to
+   ``1`` (*start* <= *stop*) or to ``-1`` (*start* > *stop*).  If *step* is
+   positive, the last element is the largest ``start + i * step`` less than or
+   equal to *stop*; if *step* is negative, the last element is the smallest
+   ``start + i * step`` greater than or equal to *stop*.
+   *step* must not be zero (or else an error is raised).
+   ``range(0)`` returns empty iterator.
 
    Examples:
 
    .. code-block:: lua
 
     > for _it, v in range(5) do print(v) end
-    0
     1
     2
     3
     4
+    5
+    > for _it, v in range(-5) do print(v) end
+    -1
+    -2
+    -3
+    -4
+    -5
     > for _it, v in range(1, 6) do print(v) end
     1
     2
     3
     4
     5
+    6
     > for _it, v in range(0, 20, 5) do print(v) end
     0
     5
     10
     15
+    20
     > for _it, v in range(0, 10, 3) do print(v) end
     0
     3
@@ -65,8 +76,10 @@ Finite Generators
     1.4
     > for _it, v in range(0) do print(v) end
     > for _it, v in range(1) do print(v) end
-    0
+    1
     > for _it, v in range(1, 0) do print(v) end
+    1
+    0
     > for _it, v in range(0, 10, 0) do print(v) end
     error: step must not be zero
 

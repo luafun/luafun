@@ -23,7 +23,7 @@ Basic
    .. code-block:: lua
 
     > print(nth(2, range(5)))
-    1
+    2
 
     > print(nth(10, range(5)))
     nil
@@ -104,11 +104,11 @@ Subsequences
    .. code-block:: lua
 
     > each(print, take_n(5, range(10)))
-    0
     1
     2
     3
     4
+    5
 
     > each(print, take_n(5, enumerate(duplicate('x'))))
     0 x
@@ -129,7 +129,6 @@ Subsequences
    .. code-block:: lua
 
     > each(print, take_while(function(x) return x < 5 end, range(10)))
-    0
     1
     2
     3
@@ -161,12 +160,10 @@ Subsequences
 
    .. code-block:: lua
 
-    > each(print, drop_n(0, range(5)))
-    0
-    1
-    2
+    > each(print, drop_n(2, range(5)))
     3
     4
+    5
 
     > each(print, drop_n(2, enumerate({'a', 'b', 'c', 'd', 'e'})))
     2 c
@@ -190,6 +187,7 @@ Subsequences
     7
     8
     9
+    10
 
    .. seealso:: :func:`filter`
 
@@ -222,18 +220,17 @@ Subsequences
    .. code-block:: lua
 
     > each(print, zip(span(function(x) return x < 5 end, range(10))))
-    0 5
-    1 6
-    2 7
-    3 8
-    4 9
+    1       5
+    2       6
+    3       7
+    4       8
 
     > each(print, zip(span(5, range(10))))
-    0 5
-    1 6
-    2 7
-    3 8
-    4 9
+    1       6
+    2       7
+    3       8
+    4       9
+    5       10
 
    .. note:: ``gen, param, state`` must be pure functional to work properly
              with the function.

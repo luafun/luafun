@@ -18,7 +18,6 @@ This section contains functions to filter values during iteration.
    .. code-block:: lua
 
     > each(print, filter(function(x) return x % 3 == 0 end, range(10)))
-    0
     3
     6
     9
@@ -86,7 +85,6 @@ This section contains functions to filter values during iteration.
     --test]]
 
     > each(print, grep(function(x) return x % 3 == 0 end, range(10)))
-    0
     3
     6
     9
@@ -112,13 +110,10 @@ This section contains functions to filter values during iteration.
 
    .. code-block:: lua
 
-    each(print, zip(partition(function(i, x) return i % 3 == 0 end, range(10))))
-    --[[test
-    0 1
-    3 2
-    6 4
-    9 5
-    --test]]
+    > each(print, zip(partition(function(i, x) return i % 3 == 0 end, range(10))))
+    3       1
+    6       2
+    9       4
 
    .. note:: ``gen, param, state`` must be pure functional to work properly
              with the function.

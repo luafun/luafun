@@ -4,12 +4,12 @@
 
 print(foldl(function(acc, x) return acc + x end, 0, range(5)))
 --[[test
-10
+15
 --test]]
 
 print(foldl(operator.add, 0, range(5)))
 --[[test
-10
+15
 --test]]
 
 print(foldl(function(acc, x, y) return acc + x * y; end, 0,
@@ -66,11 +66,11 @@ print(is_null(gen, init, state))
 dump(gen, init, state)
 --[[test
 false
-0
 1
 2
 3
 4
+5
 --test]]
 
 --------------------------------------------------------------------------------
@@ -161,12 +161,12 @@ true
 
 print(sum(range(1, 5)))
 --[[test
-10
+15
 --test]]
 
 print(sum(range(1, 5, 0.5)))
 --[[test
-22
+27
 --test]]
 
 print(sum(range(0)))
@@ -180,12 +180,12 @@ print(sum(range(0)))
 
 print(product(range(1, 5)))
 --[[test
-24
+120
 --test]]
 
 print(product(range(1, 5, 0.5)))
 --[[test
-1417.5
+7087.5
 --test]]
 
 print(product(range(0)))
@@ -228,7 +228,7 @@ function min_cmp(a, b) if -a < -b then return a else return b end end
 
 print(min_by(min_cmp, range(1, 10, 1)))
 --[[test
-9
+10
 --test]]
 
 print(min_by(min_cmp, {}))
@@ -247,7 +247,7 @@ true
 
 print(max(range(1, 10, 1)))
 --[[test
-9
+10
 --test]]
 
 print(max({"f", "d", "c", "d", "e"}))
