@@ -1041,7 +1041,7 @@ setmetatable(exports, {
 
                 if (override) then
                     _G[k] = v
-                    print('WARNING: ' .. msg .. ' Overriden.')
+                    print('WARNING: ' .. msg .. ' Overwritten.')
                 else
                     print('NOTICE: ' .. msg .. ' Skipped.')
                 end
