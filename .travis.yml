@@ -1,19 +1,32 @@
-language: c
+sudo: required
+services:
+  - docker
 
-install:
-  - sudo apt-get update > /dev/null
-  - sudo apt-get -q install luajit lua5.1 lua5.2
+env:
+    matrix:
+      - OS=el DIST=6 PACK=rpm
+      - OS=el DIST=7 PACK=rpm
+      - OS=fedora DIST=22 PACK=rpm
+      - OS=fedora DIST=23 PACK=rpm
+      - OS=ubuntu DIST=trusty PACK=deb
+      - OS=ubuntu DIST=precise PACK=deb
+      - OS=ubuntu DIST=vivid PACK=deb
+      - OS=debian DIST=jessie PACK=deb
+      - OS=debian DIST=wheezy PACK=deb
+      - OS=debian DIST=stretch PACK=deb
+      - PACK=none
 
 script:
-  - cd tests
-  - LUAJIT=`echo /usr/bin/luajit* | cut -f 1 -d ' '`
-  - ${LUAJIT} -v
-  - ${LUAJIT} runtest *.lua
-  - lua5.1 -v
-  - lua5.1 runtest *.lua
-  - lua5.2 -v
-  - lua5.2 runtest *.lua
+  - git clone https://github.com/tarantool/build.git
+  - ./build/pack/travis.sh
+#  - cd tests
+#  - LUAJIT=`echo /usr/bin/luajit* | cut -f 1 -d ' '`
+#  - ${LUAJIT} -v
+#  - ${LUAJIT} runtest *.lua
+#  - lua5.1 -v
+#  - lua5.1 runtest *.lua
+#  - lua5.2 -v
+#  - lua5.2 runtest *.lua
 
 notifications:
-  email:
-    - roman@tsisyk.com
+  email: true
