@@ -296,7 +296,7 @@ local nth = function(n, gen_x, param_x, state_x)
     if gen_x == ipairs then
         return param_x[n]
     elseif gen_x == string_gen then
-        if n < #param_x then
+        if n <= #param_x then
             return string.sub(param_x, n, n)
         else
             return nil

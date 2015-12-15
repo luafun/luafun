@@ -27,9 +27,29 @@ print(nth(2, enumerate({"a", "b", "c", "d", "e"})))
 2 b
 --test]]
 
+print(nth(1, "abcdef"))
+--[[test
+a
+--test]]
+
 print(nth(2, "abcdef"))
 --[[test
 b
+--test]]
+
+print(nth(6, "abcdef"))
+--[[test
+f
+--test]]
+
+print(nth(0, "abcdef"))
+--[[test
+error: invalid first argument to nth
+--test]]
+
+print(nth(7, "abcdef"))
+--[[test
+nil
 --test]]
 
 --------------------------------------------------------------------------------
