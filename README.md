@@ -85,6 +85,7 @@ See Also
 
 * [Documentation]
 * [RockSpec]
+* [RPM/DEB packages](https://packagecloud.io/rtsisyk/master)
 * lua-l@lists.lua.org
 * luajit@freelists.org
 * roman@tsisyk.com
