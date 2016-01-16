@@ -1,0 +1,8 @@
+lua-fun/
+tmp/
+trash
+files
+lua_versions
+*.install
+*.substvars
+*.log

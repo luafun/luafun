@@ -1,0 +1,5 @@
+lua-fun (0.1.2-1) unstable; urgency=medium
+
+  * Initial release.
+
+ -- Roman Tsisyk <roman@tarantool.org>  Sat, 16 Jan 2016 16:20:30 +0300
