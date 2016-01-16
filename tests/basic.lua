@@ -276,6 +276,7 @@ e
 f
 --test]]
 
+local unpack = rawget(table, "unpack") or unpack
 local tab = totable({ 'a', {'b', 'c'}, {'d', 'e', 'f'}})
 print(type(tab), #tab)
 each(print, tab[1])

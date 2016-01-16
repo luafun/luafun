@@ -4,6 +4,9 @@ package.path = "../?.lua;"..package.path
 require "fun" ()
 function dump(gen, init, state) each(print, gen, init, state) end
 
+local unpack = rawget(table, "unpack") or unpack
+local loadstring = rawget(_G, "loadstring") or load
+
 function file_print(file, ...)
     local n, i = select("#",...)
     for i=1,n do
