@@ -150,9 +150,7 @@ String operators
 ----------------
 
 .. seealso:: `Lua Concatenation Operator
-              <http://www.lua.org/manual/5.2/manual.html#3.4.5>`_ ,
-             `Lua Length Operator
-              <http://www.lua.org/manual/5.2/manual.html#3.4.6>`_
+              <http://www.lua.org/manual/5.2/manual.html#3.4.5>`_
 
 .. function:: concat(a, b)
 
