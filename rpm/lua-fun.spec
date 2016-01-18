@@ -4,7 +4,7 @@
 %global ljpkgdir %{_datadir}/lua/5.1
 
 Name: lua-fun
-Version: 0.1.2
+Version: 0.1.3
 Release: 1%{?dist}
 Summary: Functional programming library for Lua
 Group: Development/Libraries
@@ -72,5 +72,5 @@ lua ./runtest *.lua
 %license COPYING.md
 
 %changelog
-* Sat Jan 9 2016 Roman Tsisyk <roman@tsisyk.com> - 0.1.2-1
+* Mon Jan 18 2016 Roman Tsisyk <roman@tarantool.org> - 0.1.3-1
 - Initial version.
