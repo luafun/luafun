@@ -44,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Lua Functional'
-copyright = u'2013, Roman Tsisyk'
+copyright = u'2013-2016, Roman Tsisyk'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
