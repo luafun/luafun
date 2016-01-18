@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Reducing &mdash; Lua Functional 0.1-alpha documentation</title>
+    <title>Reducing &mdash; Lua Functional 0.1.3 documentation</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1-alpha',
+        VERSION:     '0.1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,17 +24,17 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
-    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
+    <link rel="top" title="Lua Functional 0.1.3 documentation" href="index.html" />
     <link rel="up" title="API Reference" href="reference.html" />
     <link rel="next" title="Transformations" href="transformations.html" />
     <link rel="prev" title="Filtering" href="filtering.html" /> 
   </head>
-  <body>
-      <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
-          <span>Lua Functional 0.1-alpha documentation</span></a></h1>
+  <body role="document">
+      <div class="header" role="banner"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Lua Functional 0.1.3 documentation</span></a></h1>
         <h2 class="heading"><span>Reducing</span></h2>
       </div>
-      <div class="topnav">
+      <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
         «&#160;&#160;<a href="filtering.html">Filtering</a>
@@ -73,9 +73,9 @@ the module causes an infinite loop.</p>
 <h2><a class="toc-backref" href="#id2">Folds</a><a class="headerlink" href="#folds" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="fun.foldl">
-<tt class="descclassname">fun.</tt><tt class="descname">foldl</tt><big>(</big><em>accfun</em><em>initval</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.foldl" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:reduce">
-<tt class="descclassname">iterator:</tt><tt class="descname">reduce</tt><big>(</big><em>accfun</em><em>initval</em><big>)</big><a class="headerlink" href="#fun.iterator:reduce" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">foldl</code><span class="sig-paren">(</span><em>accfun</em>, <em>initval</em>, <em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.foldl" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:reduce(accfun, initval)</code></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -115,27 +115,27 @@ return val
 
 <dl class="function">
 <dt id="fun.reduce">
-<tt class="descclassname">fun.</tt><tt class="descname">reduce</tt><big>(</big><em>accfun</em><em>initval</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.reduce" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">reduce</code><span class="sig-paren">(</span><em>accfun</em>, <em>initval</em>, <em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.reduce" title="Permalink to this definition">¶</a></dt>
 <dt>
-<tt class="descclassname">iterator:</tt><tt class="descname">reduce</tt><big>(</big><em>accfun</em><em>initval</em><big>)</big></dt>
-<dd><p>An alias to <a class="reference internal" href="#fun.foldl" title="fun.foldl"><tt class="xref lua lua-func docutils literal"><span class="pre">foldl()</span></tt></a>.</p>
+<code class="descname">iterator:reduce(accfun, initval)</code></dt>
+<dd><p>An alias to <a class="reference internal" href="#fun.foldl" title="fun.foldl"><code class="xref py py-func docutils literal"><span class="pre">foldl()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.length">
-<tt class="descclassname">fun.</tt><tt class="descname">length</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.length" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:length">
-<tt class="descclassname">iterator:</tt><tt class="descname">length</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.iterator:length" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">length</code><span class="sig-paren">(</span><em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.length" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:length()</code></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a number of elements in <tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> iterator.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a number of elements in <code class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></code> iterator.</td>
 </tr>
 </tbody>
 </table>
-<p>Return a number of elements in <tt class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></tt> iterator.
-This function is equivalent to <tt class="docutils literal"><span class="pre">#obj</span></tt> for basic array and string iterators.</p>
+<p>Return a number of elements in <code class="docutils literal"><span class="pre">gen,</span> <span class="pre">param,</span> <span class="pre">state</span></code> iterator.
+This function is equivalent to <code class="docutils literal"><span class="pre">#obj</span></code> for basic array and string iterators.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">length</span><span class="p">({</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">d&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">e&quot;</span><span class="p">}))</span>
 <span class="mi">5</span>
@@ -154,14 +154,14 @@ result an infinite loop.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This function has <tt class="docutils literal"><span class="pre">O(n)</span></tt> complexity for all iterators except
+<p class="last">This function has <code class="docutils literal"><span class="pre">O(n)</span></code> complexity for all iterators except
 basic array and string iterators.</p>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.totable">
-<tt class="descclassname">fun.</tt><tt class="descname">totable</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.totable" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">totable</code><span class="sig-paren">(</span><em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.totable" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -170,7 +170,7 @@ basic array and string iterators.</p>
 </tr>
 </tbody>
 </table>
-<p>The function reduces the iterator from left to right using <tt class="docutils literal"><span class="pre">table.insert</span></tt>.</p>
+<p>The function reduces the iterator from left to right using <code class="docutils literal"><span class="pre">table.insert</span></code>.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="kd">local</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">totable</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">abcdef&quot;</span><span class="p">)</span>
 <span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">tab</span><span class="p">),</span> <span class="o">#</span><span class="n">tab</span><span class="p">)</span>
@@ -188,7 +188,7 @@ basic array and string iterators.</p>
 
 <dl class="function">
 <dt id="fun.tomap">
-<tt class="descclassname">fun.</tt><tt class="descname">tomap</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.tomap" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">tomap</code><span class="sig-paren">(</span><em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.tomap" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -198,7 +198,7 @@ basic array and string iterators.</p>
 </tbody>
 </table>
 <p>The function reduces the iterator from left to right using
-<tt class="docutils literal"><span class="pre">tab[val1]</span> <span class="pre">=</span> <span class="pre">val2</span></tt> expression.</p>
+<code class="docutils literal"><span class="pre">tab[val1]</span> <span class="pre">=</span> <span class="pre">val2</span></code> expression.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="kd">local</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">tomap</span><span class="p">(</span><span class="n">zip</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="s1">&#39;</span><span class="s">abcdef&#39;</span><span class="p">))</span>
 <span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">tab</span><span class="p">),</span> <span class="o">#</span><span class="n">tab</span><span class="p">)</span>
@@ -219,10 +219,10 @@ basic array and string iterators.</p>
 <h2><a class="toc-backref" href="#id3">Predicates</a><a class="headerlink" href="#predicates" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="fun.is_prefix_of">
-<tt class="descclassname">fun.</tt><tt class="descname">is_prefix_of</tt><big>(</big><em>iterator1</em><em>iterator2</em><big>)</big><a class="headerlink" href="#fun.is_prefix_of" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator1:is_prefix_of">
-<tt class="descclassname">iterator1:</tt><tt class="descname">is_prefix_of</tt><big>(</big><em>iterator2</em><big>)</big><a class="headerlink" href="#fun.iterator1:is_prefix_of" title="Permalink to this definition">¶</a></dt>
-<dd><p>The function takes two iterators and returns <tt class="docutils literal"><span class="pre">true</span></tt> if the first iterator
+<code class="descclassname">fun.</code><code class="descname">is_prefix_of</code><span class="sig-paren">(</span><em>iterator1</em>, <em>iterator2</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.is_prefix_of" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator1:is_prefix_of(iterator2)</code></dt>
+<dd><p>The function takes two iterators and returns <code class="docutils literal"><span class="pre">true</span></code> if the first iterator
 is a prefix of the second.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">is_prefix_of</span><span class="p">({</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;</span><span class="s">a&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">b&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">c&quot;</span><span class="p">}))</span>
@@ -236,9 +236,9 @@ is a prefix of the second.</p>
 
 <dl class="function">
 <dt id="fun.is_null">
-<tt class="descclassname">fun.</tt><tt class="descname">is_null</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.is_null" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:is_null">
-<tt class="descclassname">iterator:</tt><tt class="descname">is_null</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.iterator:is_null" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">is_null</code><span class="sig-paren">(</span><em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.is_null" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:is_null()</code></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -264,17 +264,14 @@ true
 
 <dl class="function">
 <dt id="fun.all">
-<tt class="descclassname">fun.</tt><tt class="descname">all</tt><big>(</big><em>predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.all" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:all">
-<tt class="descclassname">iterator:</tt><tt class="descname">all</tt><big>(</big><em>predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:all" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">all</code><span class="sig-paren">(</span><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.all" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:all(predicate)</code></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>predicate</strong> &#8211; a predicate</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>predicate</strong> &#8211; a predicate</td>
 </tr>
 </tbody>
 </table>
@@ -291,27 +288,24 @@ true
 
 <dl class="function">
 <dt id="fun.every">
-<tt class="descclassname">fun.</tt><tt class="descname">every</tt><big>(</big><em>predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.every" title="Permalink to this definition">¶</a></dt>
-<dd><p>An alias for <a class="reference internal" href="#fun.every" title="fun.every"><tt class="xref lua lua-func docutils literal"><span class="pre">every()</span></tt></a>.</p>
+<code class="descclassname">fun.</code><code class="descname">every</code><span class="sig-paren">(</span><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.every" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.every" title="fun.every"><code class="xref py py-func docutils literal"><span class="pre">every()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.any">
-<tt class="descclassname">fun.</tt><tt class="descname">any</tt><big>(</big><em>predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.any" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:any">
-<tt class="descclassname">iterator:</tt><tt class="descname">any</tt><big>(</big><em>predicate</em><big>)</big><a class="headerlink" href="#fun.iterator:any" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">any</code><span class="sig-paren">(</span><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.any" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:any(predicate)</code></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>predicate</strong> &#8211; a predicate</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>predicate</strong> &#8211; a predicate</td>
 </tr>
 </tbody>
 </table>
-<p>Returns <tt class="docutils literal"><span class="pre">true</span></tt> if at least one return values of iterator satisfy the
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if at least one return values of iterator satisfy the
 <strong>predicate</strong>. The iteration stops on the first such value. Therefore,
 infinity iterators that have at least one satisfying value might work.</p>
 <p>Examples:</p>
@@ -326,8 +320,8 @@ infinity iterators that have at least one satisfying value might work.</p>
 
 <dl class="function">
 <dt id="fun.some">
-<tt class="descclassname">fun.</tt><tt class="descname">some</tt><big>(</big><em>predicate</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.some" title="Permalink to this definition">¶</a></dt>
-<dd><p>An alias for <a class="reference internal" href="#fun.any" title="fun.any"><tt class="xref lua lua-func docutils literal"><span class="pre">any()</span></tt></a>.</p>
+<code class="descclassname">fun.</code><code class="descname">some</code><span class="sig-paren">(</span><em>predicate</em>, <em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.some" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.any" title="fun.any"><code class="xref py py-func docutils literal"><span class="pre">any()</span></code></a>.</p>
 </dd></dl>
 
 </div>
@@ -335,14 +329,14 @@ infinity iterators that have at least one satisfying value might work.</p>
 <h2><a class="toc-backref" href="#id4">Special folds</a><a class="headerlink" href="#special-folds" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="fun.sum">
-<tt class="descclassname">fun.</tt><tt class="descname">sum</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.sum" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:sum">
-<tt class="descclassname">iterator:</tt><tt class="descname">sum</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.iterator:sum" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">sum</code><span class="sig-paren">(</span><em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.sum" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:sum()</code></dt>
 <dd><p>Sum up all iteration values. An optimized alias for:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">foldl</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For an empty iterator <tt class="docutils literal"><span class="pre">0</span></tt> is returned.</p>
+<p>For an empty iterator <code class="docutils literal"><span class="pre">0</span></code> is returned.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
 <span class="mi">15</span>
@@ -352,14 +346,14 @@ infinity iterators that have at least one satisfying value might work.</p>
 
 <dl class="function">
 <dt id="fun.product">
-<tt class="descclassname">fun.</tt><tt class="descname">product</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.product" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:product">
-<tt class="descclassname">iterator:</tt><tt class="descname">product</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.iterator:product" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">product</code><span class="sig-paren">(</span><em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.product" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:product()</code></dt>
 <dd><p>Multiply all iteration values. An optimized alias for:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">foldl</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For an empty iterator <tt class="docutils literal"><span class="pre">1</span></tt> is returned.</p>
+<p>For an empty iterator <code class="docutils literal"><span class="pre">1</span></code> is returned.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
 <span class="mi">120</span>
@@ -369,10 +363,10 @@ infinity iterators that have at least one satisfying value might work.</p>
 
 <dl class="function">
 <dt id="fun.min">
-<tt class="descclassname">fun.</tt><tt class="descname">min</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.min" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:min">
-<tt class="descclassname">iterator:</tt><tt class="descname">min</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.iterator:min" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a maximum value from the iterator using <tt class="xref lua lua-func docutils literal"><span class="pre">operator.min()</span></tt> or <tt class="docutils literal"><span class="pre">&lt;</span></tt>
+<code class="descclassname">fun.</code><code class="descname">min</code><span class="sig-paren">(</span><em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.min" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:min()</code></dt>
+<dd><p>Return a maximum value from the iterator using <code class="xref py py-func docutils literal"><span class="pre">operator.min()</span></code> or <code class="docutils literal"><span class="pre">&lt;</span></code>
 for numbers and other types respectivly. The iterator must be
 non-null, otherwise an error is raised.</p>
 <p>Examples:</p>
@@ -390,16 +384,16 @@ non-null, otherwise an error is raised.</p>
 
 <dl class="function">
 <dt id="fun.minimum">
-<tt class="descclassname">fun.</tt><tt class="descname">minimum</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.minimum" title="Permalink to this definition">¶</a></dt>
-<dd><p>An alias for <a class="reference internal" href="#fun.min" title="fun.min"><tt class="xref lua lua-func docutils literal"><span class="pre">min()</span></tt></a>.</p>
+<code class="descclassname">fun.</code><code class="descname">minimum</code><span class="sig-paren">(</span><em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.minimum" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.min" title="fun.min"><code class="xref py py-func docutils literal"><span class="pre">min()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.min_by">
-<tt class="descclassname">fun.</tt><tt class="descname">min_by</tt><big>(</big><em>cmp</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.min_by" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:min_by">
-<tt class="descclassname">iterator:</tt><tt class="descname">min_by</tt><big>(</big><em>cmp</em><big>)</big><a class="headerlink" href="#fun.iterator:min_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a minimum value from the iterator using the <strong>cmp</strong> as a <tt class="docutils literal"><span class="pre">&lt;</span></tt>
+<code class="descclassname">fun.</code><code class="descname">min_by</code><span class="sig-paren">(</span><em>cmp</em>, <em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.min_by" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:min_by(cmp)</code></dt>
+<dd><p>Return a minimum value from the iterator using the <strong>cmp</strong> as a <code class="docutils literal"><span class="pre">&lt;</span></code>
 operator. The iterator must be non-null, otherwise an error is raised.</p>
 <p>Examples:</p>
 <div class="highlight-lua"><div class="highlight"><pre><span class="o">&gt;</span> <span class="k">function</span> <span class="nf">min_cmp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">if</span> <span class="o">-</span><span class="n">a</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">b</span> <span class="k">then</span> <span class="k">return</span> <span class="n">a</span> <span class="k">else</span> <span class="k">return</span> <span class="n">b</span> <span class="k">end</span> <span class="k">end</span>
@@ -411,16 +405,16 @@ operator. The iterator must be non-null, otherwise an error is raised.</p>
 
 <dl class="function">
 <dt id="fun.minimum_by">
-<tt class="descclassname">fun.</tt><tt class="descname">minimum_by</tt><big>(</big><em>cmp</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.minimum_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>An alias for <a class="reference internal" href="#fun.min_by" title="fun.min_by"><tt class="xref lua lua-func docutils literal"><span class="pre">min_by()</span></tt></a>.</p>
+<code class="descclassname">fun.</code><code class="descname">minimum_by</code><span class="sig-paren">(</span><em>cmp</em>, <em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.minimum_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.min_by" title="fun.min_by"><code class="xref py py-func docutils literal"><span class="pre">min_by()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.max">
-<tt class="descclassname">fun.</tt><tt class="descname">max</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.max" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:max">
-<tt class="descclassname">iterator:</tt><tt class="descname">max</tt><big>(</big><big>)</big><a class="headerlink" href="#fun.iterator:max" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a maximum value from the iterator using <tt class="xref lua lua-func docutils literal"><span class="pre">operator.max()</span></tt> or <tt class="docutils literal"><span class="pre">&gt;</span></tt>
+<code class="descclassname">fun.</code><code class="descname">max</code><span class="sig-paren">(</span><em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.max" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:max()</code></dt>
+<dd><p>Return a maximum value from the iterator using <code class="xref py py-func docutils literal"><span class="pre">operator.max()</span></code> or <code class="docutils literal"><span class="pre">&gt;</span></code>
 for numbers and other types respectivly.</p>
 <p>The iterator must be non-null, otherwise an error is raised.</p>
 <p>Examples:</p>
@@ -438,15 +432,15 @@ for numbers and other types respectivly.</p>
 
 <dl class="function">
 <dt id="fun.maximum">
-<tt class="descclassname">fun.</tt><tt class="descname">maximum</tt><big>(</big><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.maximum" title="Permalink to this definition">¶</a></dt>
-<dd><p>An alias for <a class="reference internal" href="#fun.max" title="fun.max"><tt class="xref lua lua-func docutils literal"><span class="pre">max()</span></tt></a>.</p>
+<code class="descclassname">fun.</code><code class="descname">maximum</code><span class="sig-paren">(</span><em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.maximum" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.max" title="fun.max"><code class="xref py py-func docutils literal"><span class="pre">max()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="fun.max_by">
-<tt class="descclassname">fun.</tt><tt class="descname">max_by</tt><big>(</big><em>cmp</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.max_by" title="Permalink to this definition">¶</a></dt>
-<dt id="fun.iterator:max_by">
-<tt class="descclassname">iterator:</tt><tt class="descname">max_by</tt><big>(</big><em>cmp</em><big>)</big><a class="headerlink" href="#fun.iterator:max_by" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fun.</code><code class="descname">max_by</code><span class="sig-paren">(</span><em>cmp</em>, <em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.max_by" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">iterator:max_by(cmp)</code></dt>
 <dd><p>Return a maximum value from the iterator using the <strong>cmp</strong> as a <cite>&gt;</cite>
 operator. The iterator must be non-null, otherwise an error is raised.</p>
 <p>Examples:</p>
@@ -459,8 +453,8 @@ operator. The iterator must be non-null, otherwise an error is raised.</p>
 
 <dl class="function">
 <dt id="fun.maximum_by">
-<tt class="descclassname">fun.</tt><tt class="descname">maximum_by</tt><big>(</big><em>cmp</em><em>gen</em><em>param</em><em>state</em><big>)</big><a class="headerlink" href="#fun.maximum_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>An alias for <a class="reference internal" href="#fun.max_by" title="fun.max_by"><tt class="xref lua lua-func docutils literal"><span class="pre">max_by()</span></tt></a>.</p>
+<code class="descclassname">fun.</code><code class="descname">maximum_by</code><span class="sig-paren">(</span><em>cmp</em>, <em>gen</em>, <em>param</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#fun.maximum_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#fun.max_by" title="fun.max_by"><code class="xref py py-func docutils literal"><span class="pre">max_by()</span></code></a>.</p>
 </dd></dl>
 
 </div>
@@ -468,7 +462,7 @@ operator. The iterator must be non-null, otherwise an error is raised.</p>
 
 
       </div>
-      <div class="bottomnav">
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
         «&#160;&#160;<a href="filtering.html">Filtering</a>
@@ -480,9 +474,9 @@ operator. The iterator must be non-null, otherwise an error is raised.</p>
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Roman Tsisyk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016, Roman Tsisyk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>

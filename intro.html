@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &mdash; Lua Functional 0.1-alpha documentation</title>
+    <title>Introduction &mdash; Lua Functional 0.1.3 documentation</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1-alpha',
+        VERSION:     '0.1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,16 +24,16 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
-    <link rel="top" title="Lua Functional 0.1-alpha documentation" href="index.html" />
+    <link rel="top" title="Lua Functional 0.1.3 documentation" href="index.html" />
     <link rel="next" title="Getting Started" href="getting_started.html" />
     <link rel="prev" title="Lua Functional Library" href="index.html" /> 
   </head>
-  <body>
-      <div class="header"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
-          <span>Lua Functional 0.1-alpha documentation</span></a></h1>
+  <body role="document">
+      <div class="header" role="banner"><img class="rightlogo" src="_static/logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Lua Functional 0.1.3 documentation</span></a></h1>
         <h2 class="heading"><span>Introduction</span></h2>
       </div>
-      <div class="topnav">
+      <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
         «&#160;&#160;<a href="index.html">Lua Functional Library</a>
@@ -53,8 +53,8 @@
 designed for <a class="reference external" href="http://luajit.org/luajit.html">LuaJIT tracing just-in-time compiler</a>.</p>
 <p>The library provides a set of more than 50 programming primitives typically
 found in languages like Standard ML, Haskell, Erlang, JavaScript, Python and
-even Lisp. High-order functions such as <a class="reference internal" href="transformations.html#fun.map" title="fun.map"><tt class="xref lua lua-func docutils literal"><span class="pre">map()</span></tt></a>, <a class="reference internal" href="filtering.html#fun.filter" title="fun.filter"><tt class="xref lua lua-func docutils literal"><span class="pre">filter()</span></tt></a>,
-<a class="reference internal" href="reducing.html#fun.reduce" title="fun.reduce"><tt class="xref lua lua-func docutils literal"><span class="pre">reduce()</span></tt></a>, <a class="reference internal" href="compositions.html#fun.zip" title="fun.zip"><tt class="xref lua lua-func docutils literal"><span class="pre">zip()</span></tt></a> will help you to <strong>write simple and efficient
+even Lisp. High-order functions such as <a class="reference internal" href="transformations.html#fun.map" title="fun.map"><code class="xref py py-func docutils literal"><span class="pre">map()</span></code></a>, <a class="reference internal" href="filtering.html#fun.filter" title="fun.filter"><code class="xref py py-func docutils literal"><span class="pre">filter()</span></code></a>,
+<a class="reference internal" href="reducing.html#fun.reduce" title="fun.reduce"><code class="xref py py-func docutils literal"><span class="pre">reduce()</span></code></a>, <a class="reference internal" href="compositions.html#fun.zip" title="fun.zip"><code class="xref py py-func docutils literal"><span class="pre">zip()</span></code></a> will help you to <strong>write simple and efficient
 functional code</strong>.</p>
 <p>Let&#8217;s see an example:</p>
 <div class="highlight-lua"><div class="highlight"><pre> <span class="c1">-- Functional style</span>
@@ -79,7 +79,7 @@ functional code</strong>.</p>
 to achieve transcendental performance on nested functional expressions.
 Functional compositions and high-order functions can be translated into
 <strong>efficient machine code</strong>. Can you believe it? Just try to run the example above
-with <tt class="docutils literal"><span class="pre">luajit</span> <span class="pre">-jdump</span></tt> and see what happens:</p>
+with <code class="docutils literal"><span class="pre">luajit</span> <span class="pre">-jdump</span></code> and see what happens:</p>
 <div class="highlight-none"><div class="highlight"><pre> -- skip some initilization code --
 <span class="hll"> -&gt;LOOP:
 </span> 0bcaffd0  movsd [rsp+0x8], xmm7
@@ -104,7 +104,7 @@ containing just 10 CPU assembly instructions without CALL. Unbelievable!</p>
 
 
       </div>
-      <div class="bottomnav">
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
         «&#160;&#160;<a href="index.html">Lua Functional Library</a>
@@ -116,9 +116,9 @@ containing just 10 CPU assembly instructions without CALL. Unbelievable!</p>
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Roman Tsisyk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2016, Roman Tsisyk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>
