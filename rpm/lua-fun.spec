@@ -21,24 +21,24 @@ Summary: Functional programming library for LuaJIT
 Requires: luajit >= 2.0
 
 %description -n lua-fun
-Lua Fun is a high-performance functional programming library designed for
-LuaJIT tracing just-in-time compiler.
+Lua Fun is a high-performance functional programming library for Lua
+designed with LuaJIT's trace compiler in mind.
 
-The library provides a set of more than 50 programming primitives typically
+Lua Fun provides a set of more than 50 programming primitives typically
 found in languages like Standard ML, Haskell, Erlang, JavaScript, Python and
-even Lisp. High-order functions such as map, filter, reduce, zip will help
-you to write simple and efficient functional code.
+even Lisp. High-order functions such as map, filter, reduce, zip, etc.,
+make it easy to write simple and efficient functional code.
 
 This package provides a module for Lua %{luaver}.
 
 %description -n luajit-fun
-Lua Fun is a high-performance functional programming library designed for
-LuaJIT tracing just-in-time compiler.
+Lua Fun is a high-performance functional programming library for Lua
+designed with LuaJIT's trace compiler in mind.
 
-The library provides a set of more than 50 programming primitives typically
+Lua Fun provides a set of more than 50 programming primitives typically
 found in languages like Standard ML, Haskell, Erlang, JavaScript, Python and
-even Lisp. High-order functions such as map, filter, reduce, zip will help
-you to write simple and efficient functional code.
+even Lisp. High-order functions such as map, filter, reduce, zip, etc.,
+make it easy to write simple and efficient functional code.
 
 This package provides a module for LuaJIT.
 

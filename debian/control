@@ -14,7 +14,7 @@ Depends: ${misc:Depends}
 Provides: ${lua:Provides}
 XB-Lua-Versions: ${lua:Versions}
 Description: High-performance functional programming library for Lua
- The library provides a set of more than 50 programming primitives typically
+ Lua Fun provides a set of more than 50 programming primitives typically
  found in languages like Standard ML, Haskell, Erlang, JavaScript, Python and
- even Lisp. High-order functions such as map, filter, reduce, zip will help
- you to write simple and efficient functional code.
+ even Lisp. High-order functions such as map, filter, reduce, zip, etc.,
+ make it easy to write simple and efficient functional code.

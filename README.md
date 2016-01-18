@@ -3,13 +3,13 @@ Lua Functional
 
 <img src="/doc/logo.png" align="right" width="174px" height="144px" />
 
-**Lua Fun** is a high-performance functional programming library designed for
-[LuaJIT tracing just-in-time compiler][LuaJIT].
+**Lua Fun** is a high-performance functional programming library for [Lua]
+designed with [LuaJIT's trace compiler][LuaJIT] in mind.
 
-The library provides a set of more than 50 programming primitives typically
+Lua Fun provides a set of more than 50 programming primitives typically
 found in languages like Standard ML, Haskell, Erlang, JavaScript, Python and
-even Lisp. High-order functions such as ``map``, ``filter``, ``reduce``, ``zip``
-will help you to **write simple and efficient functional code**.
+even Lisp. High-order functions such as ``map``, ``filter``, ``reduce``,
+``zip``, etc., make it easy to **write simple and efficient functional code**.
 
 Let's see an example:
 
@@ -90,6 +90,7 @@ See Also
 * luajit@freelists.org
 * roman@tsisyk.com
 
+ [Lua]: http://www.lua.org/
  [LuaJIT]: http://luajit.org/luajit.html
  [LuaJIT-Recursion]: http://lambda-the-ultimate.org/node/3851#comment-57679
  [LuaJIT-Optimizations]: http://wiki.luajit.org/Optimizations
@@ -104,6 +105,3 @@ Please **"Star"** the project on GitHub to help it to survive! Thanks!
 *****
 
 **Lua Fun**. Simple, Efficient and Functional. In Lua. With JIT.
-
-<img src="https://d2weczhvl823v0.cloudfront.net/rtsisyk/luafun/trend.png"
-width="1px" height="1px" />
