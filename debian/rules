@@ -1,4 +1,12 @@
 #!/usr/bin/make -f
 
+VERSION  := $(shell dpkg-parsechangelog|grep ^Version|awk '{print $$2}')
+UVERSION := $(shell echo $(VERSION)|sed 's/-[[:digit:]]\+$$//')
+
 %:
 	dh $@ --buildsystem=lua --with lua
+
+tarball: clean
+		tar --exclude=.git --exclude=debian --exclude rpm \
+			--transform='s,^\.,luafun-$(UVERSION),S' \
+			-czf ../luafun-$(UVERSION).orig.tar.gz .
