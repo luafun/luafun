@@ -87,6 +87,8 @@ local string_gen = function(param, state)
     return state, r
 end
 
+local ipairs_gen = ipairs({}) -- get the generating function from ipairs
+
 local pairs_gen = pairs({ a = 0 }) -- get the generating function from pairs
 local map_gen = function(tab, key)
     local value
@@ -296,7 +298,7 @@ exports.rands = rands
 local nth = function(n, gen_x, param_x, state_x)
     assert(n > 0, "invalid first argument to nth")
     -- An optimization for arrays and strings
-    if gen_x == ipairs then
+    if gen_x == ipairs_gen then
         return param_x[n]
     elseif gen_x == string_gen then
         if n <= #param_x then
@@ -596,7 +598,7 @@ methods.reduce = methods.foldl
 exports.reduce = exports.foldl
 
 local length = function(gen, param, state)
-    if gen == ipairs or gen == string_gen then
+    if gen == ipairs_gen or gen == string_gen then
         return #param
     end
     local len = 0
