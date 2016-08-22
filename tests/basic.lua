@@ -13,6 +13,13 @@ for _it, a in iter({1, 2, 3}) do print(a) end
 3
 --test]]
 
+for _it, a in reverse_iter({1, 2, 3}) do print(a) end
+--[[test
+  3
+  2
+  1
+  --test]]
+
 for _it, a in iter(iter(iter({1, 2, 3}))) do print(a) end
 --[[test
 1

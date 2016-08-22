@@ -96,6 +96,21 @@ The section contains functions to create iterators from Lua objects.
    .. [#luajit_lua52compat] http://luajit.org/extensions.html
    .. [#lua52_ipairs] http://www.lua.org/manual/5.2/manual.html#pdf-ipairs
 
+.. function:: reverse_iter(array)
+
+   :returns: ``gen, param, state`` -- :ref:`iterator triplet <iterator_triplet>`
+
+   Like ``iter(array)`` but traverse array in reverse direction.
+
+   Example:
+
+   .. code-block:: lua
+
+    > for _it, a in reverse_iter({1, 2, 3}) do print(a) end
+    3
+    2
+    1
+
 .. function:: each(fun, gen, param, state)
               iterator:each(fun)
 

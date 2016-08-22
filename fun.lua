@@ -133,6 +133,19 @@ local iter = function(obj, param, state)
 end
 exports.iter = iter
 
+local reverse_tab_gen = function(tab, i)
+  if i < 1 then
+    return nil
+  else
+    return i-1, tab[i]
+  end
+end
+local reverse_iter = function(tab)
+  assert(type(tab) == "table")
+  return wrap(reverse_tab_gen, tab, #tab)
+end
+exports.reverse_iter = reverse_iter
+
 local method0 = function(fun)
     return function(self)
         return fun(self.gen, self.param, self.state)
