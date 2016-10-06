@@ -1,23 +1,39 @@
 sudo: false
-#services:
-#  - docker
-#
-#env:
-#    matrix:
-#      - OS=el DIST=6 PACK=rpm
-#      - OS=el DIST=7 PACK=rpm
-#      - OS=fedora DIST=22 PACK=rpm
-#      - OS=fedora DIST=23 PACK=rpm
-#      - OS=ubuntu DIST=trusty PACK=deb
-#      - OS=ubuntu DIST=precise PACK=deb
-#      - OS=ubuntu DIST=vivid PACK=deb
-#      - OS=debian DIST=jessie PACK=deb
-#      - OS=debian DIST=wheezy PACK=deb
-#      - OS=debian DIST=stretch PACK=deb
-#      - PACK=none
-# script:
-#  - git clone https://github.com/tarantool/build.git
-#  - ./build/pack/travis.sh
+language: python
+services:
+  - docker
+
+env:
+    global:
+      - PRODUCT=lua-fun
+    matrix:
+      - OS=el DIST=7
+      - OS=fedora DIST=23
+      - OS=fedora DIST=24
+      - OS=ubuntu DIST=xenial
+      - OS=ubuntu DIST=yakkety
+      - OS=debian DIST=stretch
+
+before_deploy:
+- git clone https://github.com/packpack/packpack.git packpack
+- pip install -r packpack/requirements.txt
+- python ./packpack/packpack
+
+deploy:
+  provider: packagecloud
+  repository: master
+  username: rtsisyk
+  token: ${PACKAGECLOUD_TOKEN}
+  dist: ${OS}/${DIST}
+  package_glob: packpack/root/${OS}/${DIST}/results/*.{deb,rpm}
+  skip_cleanup: true
+  on:
+    branch: master
+    condition: -n ${OS}
+
+cache:
+  directories:
+  - $HOME/lua-5.3.2
 
 addons:
   apt:
@@ -29,14 +45,11 @@ addons:
 # Ubuntu Precise on Travis doesn't have lua5.3 package
 install:
   - |
-    [ -e ${HOME}/lua-5.3.2/src/lua ] || (\
+    [ -n ${OS} ][ -e ${HOME}/lua-5.3.2/src/lua ] || (\
         wget http://www.lua.org/ftp/lua-5.3.2.tar.gz -c && \
         tar xzf lua-5.3.2.tar.gz -C ${HOME} && \
         make -j -C ${HOME}/lua-5.3.2 linux \
     )
-cache:
-  directories:
-  - $HOME/lua-5.3.2
 
 script:
   - cd tests
@@ -50,6 +63,7 @@ script:
   - LUA53=${HOME}/lua-5.3.2/src/lua
   - ${LUA53} -v
   - ${LUA53} runtest *.lua
+  - cd ..
 
 notifications:
   email: true
