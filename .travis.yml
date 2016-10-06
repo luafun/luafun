@@ -1,5 +1,5 @@
 sudo: false
-language: python
+language: C
 services:
   - docker
 
@@ -15,21 +15,26 @@ env:
       - OS=debian DIST=stretch
 
 before_deploy:
-- git clone https://github.com/packpack/packpack.git packpack
-- pip install -r packpack/requirements.txt
-- python ./packpack/packpack
+ - git clone https://github.com/packpack/packpack.git packpack
+ - pip install -r ./packpack/requirements.txt
+ - python ./packpack/packpack #!/usr/bin/env python is broken on Travis CI
 
 deploy:
   provider: packagecloud
-  repository: master
-  username: rtsisyk
+  username: ${PACKAGECLOUD_USER}
+  repository: ${PACKAGECLOUD_REPO}
   token: ${PACKAGECLOUD_TOKEN}
   dist: ${OS}/${DIST}
   package_glob: packpack/root/${OS}/${DIST}/results/*.{deb,rpm}
   skip_cleanup: true
   on:
     branch: master
-    condition: -n ${OS}
+    condition: -n "${OS}" && -n "${DIST}" && -n "${PACKAGECLOUD_TOKEN}"
+
+after_deploy:
+ # Prune old packages from PackageCloud, keep only the last two
+ - python ./packpack/tools/packagecloud prune ${PACKAGECLOUD_USER}/${PACKAGECLOUD_REPO} deb ${OS} ${DIST} --keep 2
+ - python ./packpack/tools/packagecloud prune ${PACKAGECLOUD_USER}/${PACKAGECLOUD_REPO} rpm ${OS} ${DIST} --keep 2
 
 cache:
   directories:
@@ -45,7 +50,7 @@ addons:
 # Ubuntu Precise on Travis doesn't have lua5.3 package
 install:
   - |
-    [ -n ${OS} ][ -e ${HOME}/lua-5.3.2/src/lua ] || (\
+    [ -e ${HOME}/lua-5.3.2/src/lua ] || (\
         wget http://www.lua.org/ftp/lua-5.3.2.tar.gz -c && \
         tar xzf lua-5.3.2.tar.gz -C ${HOME} && \
         make -j -C ${HOME}/lua-5.3.2 linux \
