@@ -32,6 +32,7 @@ deploy:
 
 after_deploy:
  # Prune old packages from PackageCloud, keep only the last two
+ - pip install -r ./packpack/tools/requirements.txt
  - python ./packpack/tools/packagecloud prune ${PACKAGECLOUD_USER}/${PACKAGECLOUD_REPO} deb ${OS} ${DIST} --keep 2
  - python ./packpack/tools/packagecloud prune ${PACKAGECLOUD_USER}/${PACKAGECLOUD_REPO} rpm ${OS} ${DIST} --keep 2
 
