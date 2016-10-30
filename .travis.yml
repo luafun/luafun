@@ -16,8 +16,7 @@ env:
 
 before_deploy:
  - git clone https://github.com/packpack/packpack.git packpack
- - pip install -r ./packpack/requirements.txt
- - python ./packpack/packpack #!/usr/bin/env python is broken on Travis CI
+ - ./packpack/packpack
 
 deploy:
   provider: packagecloud
@@ -25,7 +24,7 @@ deploy:
   repository: ${PACKAGECLOUD_REPO}
   token: ${PACKAGECLOUD_TOKEN}
   dist: ${OS}/${DIST}
-  package_glob: packpack/root/${OS}/${DIST}/results/*.{deb,rpm}
+  package_glob: build/*.{deb,rpm}
   skip_cleanup: true
   on:
     branch: master
