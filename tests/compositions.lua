@@ -143,6 +143,22 @@ three
 3 c
 --test]]
 
+local tab = {}
+local keys = {}
+for _it, k, v in chain({ a = 11, b = 12, c = 13}, { d = 21, e = 22 }) do
+    tab[k] = v
+    table.insert(keys, k)
+end
+table.sort(keys)
+for _, key in ipairs(keys) do print(key, tab[key]) end
+--[[test
+a 11
+b 12
+c 13
+d 21
+e 22
+--test]]
+
 dump(chain(range(0), range(0), range(0)))
 --[[test
 error: invalid iterator
