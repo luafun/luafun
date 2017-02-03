@@ -177,7 +177,7 @@ Predicates
 
 .. function:: every(predicate, gen, param, state)
 
-   An alias for :func:`every`.
+   An alias for :func:`all`.
 
 .. function:: any(predicate, gen, param, state)
               iterator:any(predicate)
