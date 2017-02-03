@@ -240,7 +240,7 @@ Special folds
 .. function:: min(gen, param, state)
               iterator:min()
 
-   Return a maximum value from the iterator using :func:`operator.min` or ``<``
+   Return a minimum value from the iterator using :func:`operator.min` or ``<``
    for numbers and other types respectivly. The iterator must be
    non-null, otherwise an error is raised.
 
