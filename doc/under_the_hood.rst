@@ -71,7 +71,7 @@ According to Lua reference manual [#lua_for]_ the code above is equivalent to::
         local gen, param, state = ipairs({'a', 'b', 'c'})
         while true do
             -- Next iteration
-            local state, var_1, ···, var_n = f(param, state)
+            local state, var_1, ···, var_n = gen(param, state)
             if state == nil then break end
             -- Assign values to our variables
             _it = state
