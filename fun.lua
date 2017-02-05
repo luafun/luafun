@@ -1,7 +1,7 @@
 ---
 --- Lua Fun - a high-performance functional programming library for LuaJIT
 ---
---- Copyright (c) 2013-2016 Roman Tsisyk <roman@tsisyk.com>
+--- Copyright (c) 2013-2017 Roman Tsisyk <roman@tsisyk.com>
 ---
 --- Distributed under the MIT/X11 License. See COPYING.md for more details.
 ---

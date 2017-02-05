@@ -4,7 +4,7 @@ Upstream-Contact: Roman Tsisyk <roman@tsisyk.com>
 Source: https://github.com/rtsisyk/luafun
 
 Files: *
-Copyright: 2013 Roman Tsisyk <roman@tsisyk.com>
+Copyright: 2013-2017 Roman Tsisyk <roman@tsisyk.com>
 Comment: In the Lua community this license is better known as "MIT".
   Unfortunately other variants of this license are also known as "MIT".
   To obtain a machine intepretable copyright file Debian prefers to name this
