@@ -19,7 +19,7 @@ without using it inside a ``for`` loop? Try to do that on any Lua
 implementation:
 
 .. _iterator_triplet:
-.. code-block:: lua
+.. code-block:: bash
 
     > =ipairs({'a', 'b', 'c'})
     function: builtin#6     table: 0x40f80e38       0
