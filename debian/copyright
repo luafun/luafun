@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: luafun
 Upstream-Contact: Roman Tsisyk <roman@tsisyk.com>
-Source: https://github.com/rtsisyk/luafun
+Source: https://github.com/luafun/luafun
 
 Files: *
 Copyright: 2013-2017 Roman Tsisyk <roman@tsisyk.com>

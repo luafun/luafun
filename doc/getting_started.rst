@@ -98,7 +98,7 @@ Using LuaRocks
 
 Use the rockspec_ file.
 
-.. _rockspec: https://raw.github.com/rtsisyk/luafun/master/fun-scm-1.rockspec
+.. _rockspec: https://raw.github.com/luafun/luafun/master/fun-scm-1.rockspec
 
 Using git
 `````````
@@ -106,7 +106,7 @@ Using git
 
 .. code-block:: bash
 
-    git clone git://github.com/rtsisyk/luafun.git
+    git clone git://github.com/luafun/luafun.git
     $ cd luafun
 
 2. Run tests (optional):
@@ -127,11 +127,11 @@ Using git
 Using wget
 ``````````
 
-Just download https://raw.github.com/rtsisyk/luafun/master/fun.lua file:
+Just download https://raw.github.com/luafun/luafun/master/fun.lua file:
 
 .. code-block:: bash
 
-    $ wget https://raw.github.com/rtsisyk/luafun/master/fun.lua
+    $ wget https://raw.github.com/luafun/luafun/master/fun.lua
 
 Using the Library
 -----------------
@@ -243,7 +243,7 @@ Further Actions
 - Take a look on :doc:`reference`.
 - Use :ref:`genindex` to find functions by its names.
 - Checkout **examples** from
-  `tests/ <https://github.com/rtsisyk/luafun/tree/master/tests>`_ directory
+  `tests/ <https://github.com/luafun/luafun/tree/master/tests>`_ directory
 - Read :doc:`under_the_hood` section
 - "Star" us the on GitHub_ to help the project to survive
 - Make Great Software
@@ -251,4 +251,4 @@ Further Actions
 
 **Lua Fun**. Simple, Efficient and Functional. In Lua. With JIT.
 
-.. _GitHub: http://github.com/rtsisyk/luafun
+.. _GitHub: http://github.com/luafun/luafun

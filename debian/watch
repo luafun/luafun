@@ -3,4 +3,4 @@
 # https://wiki.debian.org/debian/watch#GitHub
 version=3
 opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/luafun-$1\.tar\.gz/ \
-  https://github.com/rtsisyk/luafun/tags .*/v?(\d\S*)\.tar\.gz
+  https://github.com/luafun/luafun/tags .*/v?(\d\S*)\.tar\.gz

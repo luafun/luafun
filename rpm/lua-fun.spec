@@ -9,8 +9,8 @@ Release: 1%{?dist}
 Summary: Functional programming library for Lua
 Group: Development/Libraries
 License: MIT
-URL: https://github.com/rtsisyk/luafun
-Source0: https://github.com/rtsisyk/luafun/archive/%{version}/luafun-%{version}.tar.gz
+URL: https://github.com/luafun/luafun
+Source0: https://github.com/luafun/luafun/archive/%{version}/luafun-%{version}.tar.gz
 BuildArch: noarch
 BuildRequires: luajit >= 2.0
 BuildRequires: lua >= 5.1

@@ -9,7 +9,7 @@ Filling Issues
 
 Please file bugs reports and feature requests using [GitHub Issues].
 
-[GitHub Issues]: https://github.com/rtsisyk/luafun/issues
+[GitHub Issues]: https://github.com/luafun/luafun/issues
 
 Making Changes
 --------------
@@ -17,4 +17,4 @@ Making Changes
 If you want to contribute code, please fork the project on [GitHub], make
 changes in branch and send a pull request.
 
-[GitHub]: https://github.com/rtsisyk/luafun
+[GitHub]: https://github.com/luafun/luafun

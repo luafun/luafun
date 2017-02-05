@@ -2,12 +2,12 @@ package = "fun"
 version = "scm-1"
 
 source = {
-    url = "git://github.com/rtsisyk/luafun.git",
+    url = "git://github.com/luafun/luafun.git",
 }
 
 description = {
     summary = "High-performance functional programming library for Lua",
-    homepage = "https://rtsisyk.github.io/luafun",
+    homepage = "https://luafun.github.io/",
     license = "MIT/X11",
     maintainer = "Roman Tsisyk <roman@tarantool.org>",
     detailed = [[

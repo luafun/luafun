@@ -4,9 +4,9 @@ Priority: optional
 Maintainer: Roman Tsisyk <roman@tarantool.org>
 Build-Depends: debhelper (>= 9), dh-lua (>= 19)
 Standards-Version: 3.9.6
-Homepage: https://github.com/rtsisyk/luafun
-Vcs-Git: git://github.com/rtsisyk/msgpuck.git
-Vcs-Browser: https://github.com/rtsisyk/luafun
+Homepage: https://github.com/luafun/luafun
+Vcs-Git: git://github.com/luafun/luafun.git
+Vcs-Browser: https://github.com/luafun/luafun
 
 Package: lua-fun
 Architecture: all
