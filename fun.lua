@@ -1032,6 +1032,31 @@ methods.operator = operator
 exports.op = operator
 methods.op = operator
 
+----------------------------------------------------------------------------
+  -- Bit operators
+----------------------------------------------------------------------------
+
+-- Enable bit ops iff a bitwise op library was found available.
+-- Defaults to LuaJit bit library if LuaJit was found.
+local hasBit, bit = jit or (pcall(require, 'bit'))
+
+if hasBit then
+
+  bit = bit or package.loaded['bit']
+
+  operator.band    = bit.band
+  operator.rol     = bit.rol
+  operator.ror     = bit.ror
+  operator.arshift = bit.arshift
+  operator.lshift  = bit.lshift
+  operator.rshift  = bit.rshift
+  operator.bswap   = bit.bswap
+  operator.bor     = bit.bor
+  operator.bnot    = bit.bnot
+  operator.bxor    = bit.bxor
+  
+end
+
 --------------------------------------------------------------------------------
 -- module definitions
 --------------------------------------------------------------------------------
