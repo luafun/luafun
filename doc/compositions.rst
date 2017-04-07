@@ -138,3 +138,45 @@ Compositions
     1       a
     2       b
     3       c
+
+.. function:: chain_from(gen, param, state)
+              iterator:chain_from()
+
+   :returns: a consecutive iterator for the chained contents of the subiterators
+
+   Turns an iterator over iterators into a chained iterator over all their
+   elements. It returns elements from the first iterator until it is
+   exhausted, then proceeds to the next iterator, until all of the iterators
+   are exhausted. Used for treating consecutive iterators as a single
+   iterator.
+
+   This is similar to :func:`chain` but retrieves the next subiterator only as
+   needed. Therefore, it is not required that the number of subiterators is
+   small or even finite.
+
+   Examples:
+
+   .. code-block:: lua
+
+    > each(print, chain_from({"abc", {"one", "two", "three"}}))
+    a
+    b
+    c
+    one
+    two
+    three
+
+    > each(print, chain_from(map(range, range(3))))
+    1
+    1
+    2
+    1
+    2
+    3
+
+    > each(print, take(5, chain_from(cycle({{"one", "two"}}))))
+    one
+    two
+    one
+    two
+    one

@@ -38,6 +38,9 @@ local function deepcopy(orig) -- used by cycle()
         for orig_key, orig_value in next, orig, nil do
             copy[deepcopy(orig_key)] = deepcopy(orig_value)
         end
+        -- NOTE: this is needed for `chain_from` where `state` can contain
+        -- generators, i.e. callable tables:
+        setmetatable(copy, getmetatable(orig))
     else
         copy = orig
     end
@@ -978,6 +981,36 @@ local chain = function(...)
 end
 methods.chain = chain
 exports.chain = chain
+
+local chain_from_gen_r1
+local chain_from_gen_r2 = function(param, state, state_y, ...)
+    if state_y == nil then
+        local          gen_x, param_x, state_x = param[1], param[2], state[1]
+        local state_x, gen_y, param_y, state_y = gen_x(param_x, state_x)
+        if state_x == nil then
+            return nil
+        end
+        return chain_from_gen_r1(param, {state_x, iter(gen_y, param_y, state_y)})
+    end
+    return {state[1], state[2], state[3], state_y}, ...
+end
+
+chain_from_gen_r1 = function(param, state)
+    local gen_y, param_y, state_y = state[2], state[3], state[4]
+    return chain_from_gen_r2(param, state, gen_y(param_y, state_y))
+end
+
+local chain_from = function(gen_x, param_x, state_x)
+    local          gen_x, param_x, state_x = iter(gen_x, param_x, state_x)
+    local state_x, gen_y, param_y, state_y =      gen_x(param_x, state_x)
+    if state_x == nil then
+        return wrap(nil_gen, nil, nil)
+    end
+    local t = {state_x, iter(gen_y, param_y, state_y)}
+    return wrap(chain_from_gen_r1, {gen_x, param_x}, t)
+end
+methods.chain_from = chain_from
+exports.chain_from = chain_from
 
 --------------------------------------------------------------------------------
 -- Operators
