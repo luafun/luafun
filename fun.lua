@@ -1012,6 +1012,12 @@ end
 methods.chain_from = chain_from
 exports.chain_from = chain_from
 
+local bind = function(fun, gen, param, state)
+    return chain_from(map(fun, gen, param, state))
+end
+methods.bind = method1(bind)
+exports.bind = export1(bind)
+
 --------------------------------------------------------------------------------
 -- Operators
 --------------------------------------------------------------------------------

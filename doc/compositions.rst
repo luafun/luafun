@@ -180,3 +180,66 @@ Compositions
     one
     two
     one
+
+.. function:: bind(fun, gen, param, state)
+              iterator:bind(fun)
+
+   :param fun: is called for every element in the iterator
+   :type  fun: (function(...) -> iterator)
+   :returns: a new iterator
+
+   Return a new iterator by applying the **fun** to each element of
+   ``gen, param, state`` iterator and chaining the iterators returned by
+   **fun**. The mapping is performed on the fly and no values are buffered.
+
+   The function is equivalent to:
+
+   .. code-block:: lua
+
+    chain_from(map(fun, iter, gen, state))
+
+   It corresponds to the bind (``>>=``) operator of monads. In Haskell
+   notation its type would be written as: ``bind: (A -> [B]) -> [A] -> [B]``.
+
+   Examples:
+
+   .. code-block:: lua
+
+    > each(print, enumerate("abc"):bind(function(i, v) return
+        range(i):map(function(j) return
+          i, v, j
+        end)
+      end))
+    1 a 1
+    2 b 1
+    2 b 2
+    3 c 1
+    3 c 2
+    3 c 3
+
+    > each(print, iter{1,3,5}:bind(function(a) return
+        range(a):map(function(b) return
+          a*b
+        end)
+      end))
+    1
+    3
+    6
+    9
+    5
+    10
+    15
+    20
+    25
+
+   Corresponding to list comprehensions:
+
+   .. code-block:: python
+
+    [i, v, j
+     for i, v in enumerate("abc")
+     for j in range(i)]
+
+    [a*b
+     for a in {1, 3, 5}
+     for b in range(a)]

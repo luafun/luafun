@@ -254,3 +254,55 @@ one
 two
 one
 --test]]
+
+--------------------------------------------------------------------------------
+-- bind
+--------------------------------------------------------------------------------
+
+dump(range(3):bind(range))
+--[[test
+1
+1
+2
+1
+2
+3
+--test]]
+
+
+-- (i, v, j
+--  for i, v in enumerate("abc")
+--  for j in range(i))
+dump(enumerate("abc"):bind(function(i, v) return
+        range(i):map(function(j) return
+          i, v, j
+        end)
+      end))
+--[[test
+1 a 1
+2 b 1
+2 b 2
+3 c 1
+3 c 2
+3 c 3
+--test]]
+
+-- (a*b
+--  for a in {1, 3, 5}
+--  for b in range(a))
+dump(iter{1,3,5}:bind(function(a) return
+  range(a):map(function(b) return
+    a*b
+  end)
+end))
+--[[test
+1
+3
+6
+9
+5
+10
+15
+20
+25
+--test]]
