@@ -56,8 +56,7 @@ Status
 **Lua Fun** is in an early alpha stage. The library fully [documented]
 [Documentation] and covered with unit tests.
 
-[![Build Status](https://travis-ci.org/luafun/luafun.png)]
-(https://travis-ci.org/luafun/luafun)
+[![Build Status](https://travis-ci.org/luafun/luafun.png)](https://travis-ci.org/luafun/luafun)
 
 LuaJIT 2.1 alpha is recommended. The library designed in mind of fact that
 [LuaJIT traces tail-, up- and down-recursion][LuaJIT-Recursion] and has a lot of
