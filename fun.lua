@@ -1040,16 +1040,16 @@ methods.op = operator
 setmetatable(exports, {
     __call = function(t, override)
         for k, v in pairs(t) do
-            if _G[k] ~= nil then
+            if rawget(_G, k) ~= nil then
                 local msg = 'function ' .. k .. ' already exists in global scope.'
                 if override then
-                    _G[k] = v
+                    rawset(_G, k, v)
                     print('WARNING: ' .. msg .. ' Overwritten.')
                 else
                     print('NOTICE: ' .. msg .. ' Skipped.')
                 end
             else
-                _G[k] = v
+                rawset(_G, k, v)
             end
         end
     end,
