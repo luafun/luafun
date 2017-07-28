@@ -399,3 +399,10 @@ for _it, a in riter(iter(riter({}))) do print(a) end
 for _it, a in wrap(wrap(riter({}))) do print(a) end
 --[[test
 --test]]
+
+for _, a in ipairs(riter({1, 2, 3}):totable()) do print(a) end
+--[[test
+3
+2
+1
+--test]]
