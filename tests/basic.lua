@@ -330,3 +330,72 @@ d
 e
 f
 --test]]
+
+for _it, a in riter({1, 2, 3}) do print(a) end
+--[[test
+3
+2
+1
+--test]]
+
+for _it, a in riter("abcdef") do print(a) end
+--[[test
+f
+e
+d
+c
+b
+a
+--test]]
+
+for _it, a in riter(riter("abcdef")) do print(a) end
+--[[test
+a
+b
+c
+d
+e
+f
+--test]]
+
+for _it, a in riter("a") do print(a) end
+--[[test
+a
+--test]]
+
+for _it, a in riter("") do print(a) end
+--[[test
+--test]]
+
+for _it, a in iter(iter(riter({1, 2, 3}))) do print(a) end
+--[[test
+3
+2
+1
+--test]]
+
+for _it, a in riter(iter(riter({1, 2, 3}))) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in wrap(wrap(riter({1, 2, 3}))) do print(a) end
+--[[test
+3
+2
+1
+--test]]
+
+for _it, a in riter({}) do print(a) end
+--[[test
+--test]]
+
+for _it, a in riter(iter(riter({}))) do print(a) end
+--[[test
+--test]]
+
+for _it, a in wrap(wrap(riter({}))) do print(a) end
+--[[test
+--test]]

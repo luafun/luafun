@@ -133,6 +133,45 @@ local iter = function(obj, param, state)
 end
 exports.iter = iter
 
+local function iprev(obj, state)
+    if state > 0 then
+        return state-1, obj[state]
+    end
+end
+
+local string_rgen = function(param, state)
+    if state > 0 then
+        local r = param:sub(state, state)
+        return state-1, param:sub(state, state)
+    end
+end
+
+local function rawriter(obj, param, state)
+    assert(obj ~= nil, "invalid iterator")
+    if type(obj) == "table" then
+        if getmetatable(obj) == iterator_mt then
+            local t = exports.totable(obj, param, state)
+            return rawriter(t)
+        end
+        return iprev, obj, #obj
+    elseif (type(obj) == "function") then
+        local t = exports.totable(obj, param, state)
+        return rawriter(t)
+    elseif (type(obj) == "string") then
+        if #obj == 0 then
+            return nil_gen, nil, nil
+        end
+        return string_rgen, obj, #obj
+    end
+    error(string.format('object %s of type "%s" is not reverse iterable',
+          obj, type(obj)))
+end
+
+local riter = function(obj, param, state)
+    return wrap(rawriter(obj, param, state))
+end
+exports.riter = riter
+
 local method0 = function(fun)
     return function(self)
         return fun(self.gen, self.param, self.state)
