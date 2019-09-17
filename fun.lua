@@ -844,6 +844,43 @@ end
 methods.enumerate = method0(enumerate)
 exports.enumerate = export0(enumerate)
 
+local with_key_gen_call = function(new_state, ...)
+    if new_state == nil then
+        return nil
+    end
+    return new_state, new_state, ...
+end
+
+local with_key_gen = function(param, state)
+    local gen_x, param_x = param[1], param[2]
+    return with_key_gen_call(gen_x(param_x, state))
+end
+
+local with_key = function(gen, param, state)
+    return wrap(with_key_gen, {gen, param}, state)
+end
+methods.with_key = method0(with_key)
+exports.with_key = export0(with_key)
+
+local index_by_gen_call = function(fn, new_state, ...)
+    if new_state == nil then
+        return nil
+    end
+    local key = fn(...)
+    return new_state, key, ...
+end
+
+local index_by_gen = function(param, state)
+    local fn, gen_x, param_x = param[1], param[2], param[3]
+    return index_by_gen_call(fn, gen_x(param_x, state))
+end
+
+local index_by = function(fn, gen, param, state)
+    return wrap(index_by_gen, {fn, gen, param}, state)
+end
+methods.index_by = method1(index_by)
+exports.index_by = export1(index_by)
+
 local intersperse_call = function(i, state_x, ...)
     if state_x == nil then
         return nil

@@ -372,3 +372,23 @@ d
 e
 f
 --test]]
+
+
+--------------------------------------------------------------------------------
+-- index_by
+--------------------------------------------------------------------------------
+
+local a = string.byte('a')
+local tab = tomap(index_by(function(x, y) return x[1] .. '!' end,
+    iter({{'a', 4}, {'b', 5}, {'c', 6}})))
+print(type(tab), #tab)
+local t = {}
+for _it, k, v in iter(tab) do t[#t + 1] = {k, v[1], v[2]} end
+table.sort(t, function(a, b) return a[1] < b[1] end)
+for _, v in pairs(t) do print(v[1], v[2], v[3]) end
+--[[test
+table 0
+a! a 4
+b! b 5
+c! c 6
+--test]]
