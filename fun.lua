@@ -133,6 +133,16 @@ local iter = function(obj, param, state)
 end
 exports.iter = iter
 
+local iter_pairs = function(obj)
+    return wrap(pairs(obj))
+end
+exports.pairs = iter_pairs
+
+local iter_map_pairs = function(obj)
+    return wrap(kv_iter_gen, obj, nil)
+end
+exports.map_pairs = iter_map_pairs
+
 local method0 = function(fun)
     return function(self)
         return fun(self.gen, self.param, self.state)

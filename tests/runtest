@@ -1,7 +1,8 @@
 #!/usr/bin/env lua
 
 package.path = "../?.lua;"..package.path
-require "fun" ()
+fun = require "fun"
+fun()
 function dump(gen, init, state) each(print, gen, init, state) end
 
 local unpack = rawget(table, "unpack") or unpack

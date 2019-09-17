@@ -53,7 +53,7 @@ for _it, a in wrap(wrap(ipairs({}))) do print(a) end
 -- Check that ``iter`` for arrays is equivalent to ``ipairs``
 local t = {1, 2, 3}
 gen1, param1, state1 = iter(t):unwrap()
-gen2, param2, state2 = ipairs(t) 
+gen2, param2, state2 = ipairs(t)
 print(gen1 == gen2, param1 == param2, state1 == state2)
 --[[test
 true true true
@@ -170,6 +170,48 @@ error: object 1 of type "number" is not iterable
 for _it, a in iter(1, 2, 3, 4, 5, 6, 7) do print(a) end
 --[[test
 error: object 1 of type "number" is not iterable
+--test]]
+
+--------------------------------------------------------------------------------
+-- pairs
+--------------------------------------------------------------------------------
+
+for _it, a in fun.pairs({4, 5, 6}) do print(a) end
+--[[test
+4
+5
+6
+--test]]
+
+local t = {}
+for _it, v in fun.pairs({a = 4, b = 5, c = 6}) do t[#t + 1] = v end
+table.sort(t)
+for _it, v in iter(t) do print(v) end
+--[[test
+4
+5
+6
+--test]]
+
+--------------------------------------------------------------------------------
+-- map_pairs
+--------------------------------------------------------------------------------
+
+each(function(k, v) print(k, v) end, map_pairs({4, 5, 6}))
+--[[test
+1 4
+2 5
+3 6
+--test]]
+
+local t = {}
+each(function(k, v) t[#t + 1] = {k, v} end, map_pairs({a = 4, b = 5, c = 6}))
+table.sort(t, function(a, b) return a[1] < b[1] end)
+for _it, v in iter(t) do print(v[1], v[2]) end
+--[[test
+a 4
+b 5
+c 6
 --test]]
 
 --------------------------------------------------------------------------------
