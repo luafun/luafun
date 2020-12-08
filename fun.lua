@@ -955,6 +955,9 @@ end
 chain_gen_r1 = function(param, state)
     local i, state_x = state[1], state[2]
     local gen_x, param_x = param[3 * i - 2], param[3 * i - 1]
+	if gen_x == nil then
+		return nil
+	end
     return chain_gen_r2(param, state, gen_x(param_x, state[2]))
 end
 
