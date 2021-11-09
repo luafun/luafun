@@ -2,7 +2,7 @@ package = "fun"
 version = "scm-1"
 
 source = {
-    url = "git://github.com/luafun/luafun.git",
+    url = "git+https://github.com/luafun/luafun.git",
 }
 
 description = {
