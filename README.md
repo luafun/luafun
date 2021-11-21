@@ -89,14 +89,14 @@ See Also
 * luajit@freelists.org
 * roman@tsisyk.com
 
- [Lua]: http://www.lua.org/
- [LuaJIT]: http://luajit.org/luajit.html
+ [Lua]: https://www.lua.org/
+ [LuaJIT]: https://luajit.org/luajit.html
  [LuaJIT-Recursion]: http://lambda-the-ultimate.org/node/3851#comment-57679
  [LuaJIT-Optimizations]: http://wiki.luajit.org/Optimizations
- [MIT/X11 License]: http://opensource.org/licenses/MIT
- [Tarantool]: http://github.com/tarantool/tarantool
+ [MIT/X11 License]: https://opensource.org/licenses/MIT
+ [Tarantool]: https://github.com/tarantool/tarantool
  [Getting Started]: https://luafun.github.io/getting_started.html
- [Documentation]: http://luafun.github.io/
+ [Documentation]: https://luafun.github.io/
  [Travis]: https://travis-ci.org/luafun/luafun
  [RockSpec]: https://raw.github.com/luafun/luafun/master/fun-scm-1.rockspec
 
