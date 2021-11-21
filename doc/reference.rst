@@ -1,6 +1,8 @@
 API Reference
 =============
 
+.. module:: fun
+
 .. toctree::
 
    basic.rst

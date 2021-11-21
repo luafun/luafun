@@ -1,7 +1,7 @@
 Indexing
 ========
 
-.. module:: fun
+.. currentmodule:: fun
 
 This section contains functions to find elements by its values.
 

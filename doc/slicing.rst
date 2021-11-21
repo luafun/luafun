@@ -1,7 +1,7 @@
 Slicing
 =======
 
-.. module:: fun
+.. currentmodule:: fun
 
 This section contains functions to make subsequences from iterators.
 

@@ -1,7 +1,7 @@
 Transformations
 ===============
 
-.. module:: fun
+.. currentmodule:: fun
 
 .. function:: map(fun, gen, param, state)
               iterator:map(fun)

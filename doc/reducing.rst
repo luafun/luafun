@@ -1,7 +1,7 @@
 Reducing
 ========
 
-.. module:: fun
+.. currentmodule:: fun
 
 The section contains functions to analyze iteration values and recombine
 through use of a given combining operation the results of recursively processing
