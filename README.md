@@ -13,18 +13,20 @@ even Lisp. High-order functions such as ``map``, ``filter``, ``reduce``,
 
 Let's see an example:
 
-    > -- Functional style
-    > require "fun" ()
-    > -- calculate sum(x for x^2 in 1..n)
-    > n = 100
-    > print(reduce(operator.add, 0, map(function(x) return x^2 end, range(n))))
-    328350
+```lua
+> -- Functional style
+> require "fun" ()
+> -- calculate sum(x for x^2 in 1..n)
+> n = 100
+> print(reduce(operator.add, 0, map(function(x) return x^2 end, range(n))))
+328350
 
-    > -- Object-oriented style
-    > local fun = require "fun"
-    > -- calculate sum(x for x^2 in 1..n)
-    > print(fun.range(n):map(function(x) return x^2 end):reduce(operator.add, 0))
-    328350
+> -- Object-oriented style
+> local fun = require "fun"
+> -- calculate sum(x for x^2 in 1..n)
+> print(fun.range(n):map(function(x) return x^2 end):reduce(operator.add, 0))
+328350
+```
 
 **Lua Fun** takes full advantage of the innovative **tracing JIT compiler**
 to achieve transcendental performance on nested functional expressions.
@@ -32,18 +34,20 @@ Functional compositions and high-order functions can be translated into
 **efficient machine code**. Can you believe it? Just try to run the example
 above with ``luajit -jdump`` and see what happens:
 
-    -- skip some initilization code --
-    ->LOOP:
-    0bcaffd0  movaps xmm5, xmm7
-    0bcaffd3  movaps xmm7, xmm1
-    0bcaffd6  addsd xmm7, xmm5
-    0bcaffda  ucomisd xmm7, xmm0
-    0bcaffde  jnb 0x0bca0024        ->5
-    0bcaffe4  movaps xmm5, xmm7
-    0bcaffe7  mulsd xmm5, xmm5
-    0bcaffeb  addsd xmm6, xmm5
-    0bcaffef  jmp 0x0bcaffd0        ->LOOP
-    ---- TRACE 1 stop -> loop
+```asm
+-- skip some initilization code --
+->LOOP:
+0bcaffd0  movaps xmm5, xmm7
+0bcaffd3  movaps xmm7, xmm1
+0bcaffd6  addsd xmm7, xmm5
+0bcaffda  ucomisd xmm7, xmm0
+0bcaffde  jnb 0x0bca0024        ->5
+0bcaffe4  movaps xmm5, xmm7
+0bcaffe7  mulsd xmm5, xmm5
+0bcaffeb  addsd xmm6, xmm5
+0bcaffef  jmp 0x0bcaffd0        ->LOOP
+---- TRACE 1 stop -> loop
+```
 
 The functional chain above was translated by LuaJIT to (!) **one machine loop**
 containing just 10 CPU assembly instructions without CALL. Unbelievable!
