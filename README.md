@@ -53,11 +53,10 @@ Readable? Efficient? Can your Python/Ruby/V8 do better?
 Status
 ------
 
-**Lua Fun** is in an early alpha stage. The library fully [documented]
-[Documentation] and covered with unit tests.
+**Lua Fun** is in an early alpha stage. The library fully
+[documented][Documentation] and covered with unit tests.
 
-[![Build Status](https://travis-ci.org/luafun/luafun.png)]
-(https://travis-ci.org/luafun/luafun)
+[![Build Status](https://travis-ci.org/luafun/luafun.png)][Travis]
 
 LuaJIT 2.1 alpha is recommended. The library designed in mind of fact that
 [LuaJIT traces tail-, up- and down-recursion][LuaJIT-Recursion] and has a lot of
@@ -98,6 +97,7 @@ See Also
  [Tarantool]: http://github.com/tarantool/tarantool
  [Getting Started]: https://luafun.github.io/getting_started.html
  [Documentation]: http://luafun.github.io/
+ [Travis]: https://travis-ci.org/luafun/luafun
  [RockSpec]: https://raw.github.com/luafun/luafun/master/fun-scm-1.rockspec
 
 Please **"Star"** the project on GitHub to help it to survive! Thanks!
