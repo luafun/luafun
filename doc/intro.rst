@@ -1,7 +1,7 @@
 Introduction
 ============
 
-.. module:: fun
+.. currentmodule:: fun
 
 **Lua Fun** is a high-performance functional programming library
 designed for `LuaJIT tracing just-in-time compiler

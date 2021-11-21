@@ -1,7 +1,7 @@
 Filtering
 =========
 
-.. module:: fun
+.. currentmodule:: fun
 
 This section contains functions to filter values during iteration.
 

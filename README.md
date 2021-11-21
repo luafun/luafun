@@ -89,6 +89,7 @@ See Also
 * [Documentation]
 * [RockSpec]
 * [RPM/DEB packages](https://packagecloud.io/rtsisyk/master)
+* [Hacking]
 * lua-l@lists.lua.org
 * luajit@freelists.org
 * roman@tsisyk.com
@@ -103,6 +104,7 @@ See Also
  [Documentation]: https://luafun.github.io/
  [Travis]: https://travis-ci.org/luafun/luafun
  [RockSpec]: https://raw.github.com/luafun/luafun/master/fun-scm-1.rockspec
+ [Hacking]: HACKING.md
 
 Please **"Star"** the project on GitHub to help it to survive! Thanks!
 

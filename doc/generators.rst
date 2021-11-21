@@ -1,7 +1,7 @@
 Generators
 ==========
 
-.. module:: fun
+.. currentmodule:: fun
 
 This section contains a number of useful generators modeled after Standard ML,
 Haskell, Python, Ruby, JavaScript and other languages.

@@ -1,7 +1,7 @@
 Compositions
 ============
 
-.. module:: fun
+.. currentmodule:: fun
 
 .. function:: zip(...)
               iterator1:zip(iterator2, iterator3, ...)

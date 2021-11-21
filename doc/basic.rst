@@ -1,7 +1,7 @@
 Basic Functions
 ===============
 
-.. module:: fun
+.. currentmodule:: fun
 
 The section contains functions to create iterators from Lua objects.
 

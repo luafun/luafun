@@ -1,7 +1,7 @@
 Under the Hood
 ==============
 
-.. module:: fun
+.. currentmodule:: fun
 
 The section shed some light on the internal library structure and working
 principles.
