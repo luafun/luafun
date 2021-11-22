@@ -110,7 +110,7 @@ This section contains functions to filter values during iteration.
 
    .. code-block:: lua
 
-    > each(print, zip(partition(function(i, x) return i % 3 == 0 end, range(10))))
+    > each(print, zip(partition(function(i) return i % 3 == 0 end, range(10))))
     3       1
     6       2
     9       4
