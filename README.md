@@ -53,7 +53,7 @@ Readable? Efficient? Can your Python/Ruby/V8 do better?
 Status
 ------
 
-**Lua Fun** is in an early alpha stage. The library fully [Documentation] and covered with unit tests.
+**Lua Fun** is in an early alpha stage. The library fully [documented][Documentation] and covered with unit tests.
 
 [![Build Status](https://travis-ci.org/luafun/luafun.png)](https://travis-ci.org/luafun/luafun)
 
@@ -67,7 +67,7 @@ notice. Please use **stable** branch for your production deployments.
 If you still want to use **master**, please don't forget to grep `git log`
 for *Incompatible API changes* message. Thanks!
 
-Please check out [Documentation] for more information.
+Please check out [documentation][Documentation] for more information.
 
 Misc
 ----
