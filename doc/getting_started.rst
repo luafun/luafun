@@ -235,7 +235,45 @@ Now you can use **Lua Fun**:
     2 c
     one
 
-Please note that functions support multireturn.
+.. _multi_return:
+
+Please note that functions support multireturn - many functions return a
+triplet ``gen``, ``param`` and ``state``, so called :ref:`iterator triplet
+<iterator_triplet>`.
+
+Please note that functions support returns of two iterators. Example of these
+functions are :func:`partition` and :func:`span`. One can call ``:unwrap()``
+on iterators to pass them into the ``for <..> in <...>`` loop. Example:
+
+.. code-block:: bash
+
+   > it1, it2 = fun.range(10):partition(function(i) return i % 2 == 0 end)
+   > for i in it1:unwrap() do print(i) end
+   2
+   4
+   6
+   8
+   10
+   > for i in it2:unwrap() do print(i) end
+   1
+   3
+   5
+   7
+   9
+
+To be precise, the function returns it1, it2, param2, state2, so the second
+iterator may be used in the ``for <...> in <...>`` loop without the
+``:unwrap()`` call:
+
+.. code-block:: bash
+
+   > it1, it2, param2, state2 = fun.range(10):partition(function(i) return i % 2 == 0 end)
+   > for i in it2, param2, state2 do print(i) end
+   1
+   3
+   5
+   7
+   9
 
 Further Actions
 ---------------

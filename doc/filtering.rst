@@ -92,10 +92,11 @@ This section contains functions to filter values during iteration.
 .. function:: partition(predicate, gen, param, state)
               iterator:partition(predicate)
 
-   :returns: {gen1, param1, state1}, {gen2, param2, state2}
+   :returns: iterator, iterator
 
    The function returns two iterators where elements do and do not satisfy the
-   predicate. Equivalent to:
+   predicate. See note about multireturn in :ref:`Getting started
+   <multi_return>`. Equivalent to:
 
    .. code-block:: lua
 
