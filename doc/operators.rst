@@ -14,7 +14,7 @@ Comparison operators
 --------------------
 
 .. seealso:: `Lua Relational Operators
-              <http://www.lua.org/manual/5.2/manual.html#3.4.3>`_
+              <https://www.lua.org/manual/5.2/manual.html#3.4.3>`_
 
 .. function:: le(a, b)
 
@@ -44,7 +44,7 @@ Arithmetic operators
 --------------------
 
 .. seealso:: `Lua Arithmetic Operators 
-              <http://www.lua.org/manual/5.2/manual.html#3.4.1>`_
+              <https://www.lua.org/manual/5.2/manual.html#3.4.1>`_
 
 .. function:: add(a, b)
 
@@ -150,7 +150,7 @@ String operators
 ----------------
 
 .. seealso:: `Lua Concatenation Operator
-              <http://www.lua.org/manual/5.2/manual.html#3.4.5>`_
+              <https://www.lua.org/manual/5.2/manual.html#3.4.5>`_
 
 .. function:: concat(a, b)
 
@@ -168,7 +168,7 @@ Logical operators
 -----------------
 
 .. seealso:: `Lua Logical Operators
-              <http://www.lua.org/manual/5.2/manual.html#3.4.4>`_
+              <https://www.lua.org/manual/5.2/manual.html#3.4.4>`_
 
 .. function:: land(a, b)
 

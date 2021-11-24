@@ -5,7 +5,7 @@ Introduction
 
 **Lua Fun** is a high-performance functional programming library
 designed for `LuaJIT tracing just-in-time compiler
-<http://luajit.org/luajit.html>`_.
+<https://luajit.org/luajit.html>`_.
 
 The library provides a set of more than 50 programming primitives typically
 found in languages like Standard ML, Haskell, Erlang, JavaScript, Python and
