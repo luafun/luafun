@@ -19,11 +19,11 @@ e.g. Tarantool_ or OpenResty_.
 You might need diff_ tool to run test system and sphinx_ to regenerate the
 documentation from source files.
 
-.. _LuaJIT: http://luajit.org/
-.. _Tarantool: http://tarantool.org/
-.. _OpenResty: http://openresty.org/
-.. _diff: http://en.wikipedia.org/wiki/Diff
-.. _sphinx: http://sphinx-doc.org/
+.. _LuaJIT: https://luajit.org/
+.. _Tarantool: https://tarantool.org/
+.. _OpenResty: https://openresty.org/
+.. _diff: https://en.wikipedia.org/wiki/Diff
+.. _sphinx: https://sphinx-doc.org/
 
 Installing LuaJIT
 -----------------
@@ -38,7 +38,7 @@ You can always select this branch using ``git checkout v2.1``.
 
 .. code-block:: bash
 
-    $ git clone http://luajit.org/git/luajit-2.0.git -b v2.1 luajit-2.1
+    $ git clone https://luajit.org/git/luajit-2.0.git -b v2.1 luajit-2.1
     Cloning into 'luajit-2.1'...
 
 2. Compile LuaJIT
@@ -62,7 +62,7 @@ From a Binary Archive
 `````````````````````
 
 If operations above look too complicated for you, you always can download a
-binary archive from http://luajit.org/download.html page.
+binary archive from https://luajit.org/download.html page.
 Your favorite package manager may also have LuaJIT packages.
 
 Running LuaJIT

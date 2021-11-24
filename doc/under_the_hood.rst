@@ -145,10 +145,10 @@ tail-, up- and down-recursion [#luajit-recursion]_, unroll compositions of
 functions and inline high-order functions [#luajit-optimizations]_.
 All of these concepts make the foundation for functional programming.
 
-.. [#iterators] http://en.wikipedia.org/wiki/Turtles_all_the_way_down
-.. [#lua_for] http://www.lua.org/manual/5.2/manual.html#3.3.5
-.. [#pure_function] http://en.wikipedia.org/wiki/Pure_function
-.. [#turing] `Proved by Turing <http://en.wikipedia.org/wiki/Halting_problem>`_
-.. [#tracing_jit] http://en.wikipedia.org/wiki/Tracing_just-in-time_compilation
-.. [#luajit-recursion] http://lambda-the-ultimate.org/node/3851#comment-57679
+.. [#iterators] https://en.wikipedia.org/wiki/Turtles_all_the_way_down
+.. [#lua_for] https://www.lua.org/manual/5.2/manual.html#3.3.5
+.. [#pure_function] https://en.wikipedia.org/wiki/Pure_function
+.. [#turing] `Proved by Turing <https://en.wikipedia.org/wiki/Halting_problem>`_
+.. [#tracing_jit] https://en.wikipedia.org/wiki/Tracing_just-in-time_compilation
+.. [#luajit-recursion] https://lambda-the-ultimate.org/node/3851#comment-57679
 .. [#luajit-optimizations] http://wiki.luajit.org/Optimizations
