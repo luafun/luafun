@@ -207,8 +207,8 @@ Subsequences
    Return an iterator pair where the first operates on the longest prefix
    (possibly empty) of ``gen, param, state`` iterator of elements that
    satisfy **predicate** and second operates the remainder of
-   ``gen, param, state`` iterator. 
-   Equivalent to:
+   ``gen, param, state`` iterator. See note about multireturn in
+   :doc:`getting_started`. Equivalent to:
 
    .. code-block:: lua
 

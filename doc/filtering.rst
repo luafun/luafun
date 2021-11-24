@@ -95,7 +95,7 @@ This section contains functions to filter values during iteration.
    :returns: {gen1, param1, state1}, {gen2, param2, state2}
 
    The function returns two iterators where elements do and do not satisfy the
-   predicate. Equivalent to:
+   predicate. See note about multireturn in :doc:`getting_started`. Equivalent to:
 
    .. code-block:: lua
 
