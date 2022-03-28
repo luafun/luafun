@@ -52,6 +52,18 @@ print(nth(7, "abcdef"))
 nil
 --test]]
 
+-- gh-55: consider input iterator state in array/string optimizations
+print(nth(1, drop_n(3, {"a", "b", "c", "d", "e"})))
+--[[test
+d
+--test]]
+
+-- gh-55: consider input iterator state in array/string optimizations
+print(nth(1, drop_n(3, "abcdef")))
+--[[test
+d
+--test]]
+
 --------------------------------------------------------------------------------
 -- head
 --------------------------------------------------------------------------------

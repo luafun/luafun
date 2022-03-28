@@ -31,6 +31,9 @@ Basic
     > print(nth(2, {"a", "b", "c", "d", "e"}))
     b
 
+    > print(nth(2, drop_n(3, {"a", "b", "c", "d", "e"})))
+    e
+
     > print(nth(2, enumerate({"a", "b", "c", "d", "e"})))
     2 b
 
