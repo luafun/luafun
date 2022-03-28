@@ -299,10 +299,10 @@ local nth = function(n, gen_x, param_x, state_x)
     assert(n > 0, "invalid first argument to nth")
     -- An optimization for arrays and strings
     if gen_x == ipairs_gen then
-        return param_x[n]
+        return param_x[state_x + n]
     elseif gen_x == string_gen then
-        if n <= #param_x then
-            return string.sub(param_x, n, n)
+        if state_x + n <= #param_x then
+            return string.sub(param_x, state_x + n, state_x + n)
         else
             return nil
         end
@@ -599,7 +599,7 @@ exports.reduce = exports.foldl
 
 local length = function(gen, param, state)
     if gen == ipairs_gen or gen == string_gen then
-        return #param
+        return #param - state
     end
     local len = 0
     repeat

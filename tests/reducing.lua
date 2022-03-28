@@ -42,6 +42,19 @@ print(length(range(0)))
 0
 --test]]
 
+-- gh-55: consider input iterator state in array/string optimizations
+print(length(drop_n(3, {"a", "b", "c", "d", "e"})))
+--[[test
+2
+--test]]
+
+-- gh-55: consider input iterator state in array/string optimizations
+print(length(drop_n(3, "abcdef")))
+--[[test
+3
+--test]]
+
+
 --------------------------------------------------------------------------------
 -- is_null
 --------------------------------------------------------------------------------

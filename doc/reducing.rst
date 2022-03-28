@@ -55,10 +55,7 @@ Folds
 .. function:: length(gen, param, state)
               iterator:length()
 
-   :returns: a number of elements in ``gen, param, state`` iterator.
-
-   Return a number of elements in ``gen, param, state`` iterator.
-   This function is equivalent to ``#obj`` for basic array and string iterators.
+   Return a number of remaining elements in ``gen, param, state`` iterator.
 
    Examples:
 
@@ -66,6 +63,9 @@ Folds
 
     > print(length({"a", "b", "c", "d", "e"}))
     5
+
+    > print(length(drop_n(3, {"a", "b", "c", "d", "e"})))
+    2
 
     > print(length({}))
     0
@@ -77,7 +77,7 @@ Folds
                 result an infinite loop.
 
    .. note:: This function has ``O(n)`` complexity for all iterators except
-             basic array and string iterators.
+             basic array and string iterators, where it has ``O(1)`` complexity.
 
 .. function:: totable(gen, param, state)
 
