@@ -9,7 +9,7 @@ LuaJIT.
 Prerequisites
 -------------
 
-The library is designed for LuaJIT_. **LuaJIT 2.1 alpha** is high^W **Highly**
+The library is designed for LuaJIT_. **LuaJIT 2.1 alpha** is **highly**
 recommended for performance reasons. Lua 5.1--5.3 are also supported.
 
 The library is platform-independent and expected to work on all platforms that
