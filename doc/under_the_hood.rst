@@ -3,18 +3,18 @@ Under the Hood
 
 .. currentmodule:: fun
 
-The section shed some light on the internal library structure and working
+The section sheds some light on the internal library structure and working
 principles.
 
 Iterators
 ---------
 
-A basic primitive of the library after functions is an iterator. Most functions
-takes an iterator and returns a new iteraror(s). Iterators all the way down!
+Another basic primitive of the library (after functions) is the iterator. Most functions
+take an iterator and return a new iterator or several ones. Iterators all the way down!
 [#iterators]_.
 
-The simplest iterator is (surprise!) :func:`pairs` and :func:`ipairs`
-Lua functions. Have you ever tried to call, say, :func:`ipairs` function
+The simplest iterators are (surprise!) the :func:`pairs` and :func:`ipairs`
+Lua functions. Have you ever tried calling, say, the :func:`ipairs` function
 without using it inside a ``for`` loop? Try to do that on any Lua
 implementation:
 
@@ -25,23 +25,23 @@ implementation:
     function: builtin#6     table: 0x40f80e38       0
 
 The function returned three strange values which look useless without a ``for``
-loop. We call these values **iterator triplet**.
-Let's see how each value is used for:
+loop. We call these values an **iterator triplet**.
+Let's see what each value is used for:
 
 ``gen`` -- first value
    A generating function that can produce a next value on each iteration.
    Usually returns a new ``state`` and iteration values (multireturn).
 
 ``param`` -- second value
-   A permanent (constant) parameter of a generating function is used to create
-   specific instance of the generating function. For example, a table itself
-   for ``ipairs`` case.
+   A permanent (constant) parameter of the generating function. It is used to create
+   a specific instance of the generating function. For example, the table itself
+   in the ``ipairs`` case.
 
 ``state`` -- third value
    A some transient state of an iterator that is changed after each iteration.
-   For example, an array index for ``ipairs`` case.
+   For example, the array index in the ``ipairs`` case.
 
-Try to call ``gen`` function manually:
+Try calling the ``gen`` function manually:
 
    .. code-block:: lua
 
@@ -51,11 +51,11 @@ Try to call ``gen`` function manually:
 
 The ``gen`` function returned a new state ``1`` and the next iteration
 value ``a``. The second call to ``gen`` with the new state will return the next
-state  and the next iteration value. When the iterator finishes to the end
+state and the next iteration value. When the iterator gets to the end
 the ``nil`` value is returned instead of the next state.
 
 **Please do not panic!** You do not have to use these values directly.
-It is just a nice trick to get ``for .. in`` loop working in Lua.
+It is just a nice trick to get ``for .. in`` loops working in Lua.
 
 Iterations
 ----------
@@ -84,12 +84,11 @@ According to Lua reference manual [#lua_for]_ the code above is equivalent to::
 What does it mean for us?
 
 * An iterator can be used together with ``for .. in`` to generate a loop
-* An iterator is fully defined using ``gen``, ``param`` and ``state`` iterator
+* An iterator is fully defined by the ``gen``, ``param`` and ``state`` iterator
   triplet
 * The ``nil`` state marks the end of an iteration
 * An iterator can return an arbitrary number of values (multireturn)
 * It is possible to make some wrapping functions to take an iterator and
-
   return a new modified iterator
 
 **The library provides a set of iterators** that can be used like ``pairs``
@@ -101,13 +100,13 @@ Iterator Types
 Pure functional iterators
 `````````````````````````
 
-Iterators can be either pure functional or have some side effects and returns
-different values for some initial conditions [#pure_function]_. An **iterator is
-pure functional** if it meets the following criteria:
+Iterators can be either purely functional or have some side effects and return
+different values for the same initial conditions [#pure_function]_. An **iterator is
+purely functional** if it meets the following criteria:
 
 - ``gen`` function always returns the same values for the same ``param`` and
   ``state`` values (idempotence property)
-- ``param`` and ``state`` values are not modified during ``gen`` call and
+- ``param`` and ``state`` values are not modified during the ``gen`` call and
   a new ``state`` object is returned instead (referential transparency
   property).
 
@@ -122,7 +121,7 @@ Iterators can be **finite** (sooner or later end up) or **infinite**
 (never end).
 Since there is no way to determine automatically if an iterator is finite or
 not [#turing]_ the library function can not automatically resolve infinite
-loops. It is your obligation to do not pass infinite iterator to reducing
+loops. It is your obligation not to pass infinite iterators to reducing
 functions.
 
 Tracing JIT
@@ -136,11 +135,11 @@ machine code and executing them.
 First profiling information for loops is collected. After a hot loop has been
 identified, a special tracing mode is entered which records all executed
 operations of that loop. This sequence of operations is called a **trace**.
-The trace is then optimized and compiled to machine code (trace). When this
+The trace is then optimized and compiled to machine code. When this
 loop is executed again the compiled trace is called instead of the program
 counterpart [#tracing_jit]_.
 
-Why the tracing JIT is important for us? The LuaJIT tracing compiler can detect
+Why is tracing JIT important for us? The LuaJIT tracing compiler can detect
 tail-, up- and down-recursion [#luajit-recursion]_, unroll compositions of
 functions and inline high-order functions [#luajit-optimizations]_.
 All of these concepts make the foundation for functional programming.
