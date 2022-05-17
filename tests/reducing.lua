@@ -283,7 +283,7 @@ print(max_by(max_cmp, {}))
 error: max: iterator is empty
 --test]]
 
-print(maximum_by == maximum_by) -- an alias
+print(maximum_by == max_by) -- an alias
 --[[test
 true
 --test]]
