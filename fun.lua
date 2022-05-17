@@ -769,8 +769,8 @@ local max_by = function(cmp, gen_x, param_x, state_x)
 end
 methods.max_by = method1(max_by)
 exports.max_by = export1(max_by)
-methods.maximum_by = methods.maximum_by
-exports.maximum_by = exports.maximum_by
+methods.maximum_by = methods.max_by
+exports.maximum_by = exports.max_by
 
 local totable = function(gen_x, param_x, state_x)
     local tab, key, val = {}
