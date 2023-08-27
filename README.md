@@ -35,7 +35,7 @@ Functional compositions and high-order functions can be translated into
 above with ``luajit -jdump`` and see what happens:
 
 ```asm
--- skip some initilization code --
+-- skip some initialization code --
 ->LOOP:
 0bcaffd0  movaps xmm5, xmm7
 0bcaffd3  movaps xmm7, xmm1

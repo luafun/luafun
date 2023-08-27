@@ -89,7 +89,7 @@ Arithmetic operators
 
    Performs C-like integer division.
 
-   Equvalent to:
+   Equivalent to:
 
    .. code-block:: lua
 
