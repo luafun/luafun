@@ -46,7 +46,7 @@ with ``luajit -jdump`` and see what happens:
 .. code-block:: none
    :emphasize-lines: 2,14
 
-    -- skip some initilization code --
+    -- skip some initialization code --
     ->LOOP:
     0bcaffd0  movsd [rsp+0x8], xmm7
     0bcaffd6  addsd xmm4, xmm5

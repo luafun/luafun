@@ -7,7 +7,7 @@ Files: *
 Copyright: 2013-2017 Roman Tsisyk <roman@tsisyk.com>
 Comment: In the Lua community this license is better known as "MIT".
   Unfortunately other variants of this license are also known as "MIT".
-  To obtain a machine intepretable copyright file Debian prefers to name this
+  To obtain a machine interpretable copyright file Debian prefers to name this
   version of the MIT license using the non ambiguous term "Expat".
 License: Expat
  Permission is hereby granted, free of charge, to any person obtaining

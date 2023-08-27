@@ -241,7 +241,7 @@ Special folds
               iterator:min()
 
    Return a minimum value from the iterator using :func:`operator.min` or ``<``
-   for numbers and other types respectivly. The iterator must be
+   for numbers and other types respectively. The iterator must be
    non-null, otherwise an error is raised.
 
    Examples:
@@ -283,7 +283,7 @@ Special folds
               iterator:max()
 
    Return a maximum value from the iterator using :func:`operator.max` or ``>``
-   for numbers and other types respectivly.
+   for numbers and other types respectively.
 
    The iterator must be non-null, otherwise an error is raised.
 
