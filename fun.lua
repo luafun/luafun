@@ -90,9 +90,9 @@ end
 local ipairs_gen = ipairs({}) -- get the generating function from ipairs
 
 local pairs_gen = pairs({ a = 0 }) -- get the generating function from pairs
-local map_gen = function(tab, key)
+local kv_iter_gen = function(tab, key)
     local value
-    local key, value = pairs_gen(tab, key)
+    key, value = pairs_gen(tab, key)
     return key, key, value
 end
 
@@ -114,7 +114,7 @@ local rawiter = function(obj, param, state)
             return ipairs(obj)
         else
             -- hash
-            return map_gen, obj, nil
+            return kv_iter_gen, obj, nil
         end
     elseif (type(obj) == "function") then
         return obj, param, state
