@@ -1026,6 +1026,12 @@ local operator = {
     lor = function(a, b) return a or b end,
     lnot = function(a) return not a end,
     truth = function(a) return not not a end,
+    ----------------------------------------------------------------------------
+    -- Index operators
+    ----------------------------------------------------------------------------    
+    first = function(a) return a end,
+    second = function(_, a) return a end,
+    index = function(fname) return function(t) return t[fname] end end,
 }
 exports.operator = operator
 methods.operator = operator
