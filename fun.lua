@@ -13,6 +13,27 @@ local methods = {}
 local unpack = rawget(table, "unpack") or unpack
 
 --------------------------------------------------------------------------------
+-- JIT utils
+--------------------------------------------------------------------------------
+
+-- Clone a function with a new prototype.
+-- Context: https://github.com/LuaJIT/LuaJIT/issues/208
+local clone_function = function(fn)
+  local dumped = string.dump(fn)
+  local cloned = loadstring(dumped)
+  local i = 1
+  while true do
+    local name = debug.getupvalue(fn, i)
+    if not name then
+      break
+    end
+    debug.upvaluejoin(cloned, i, fn, i)
+    i = i + 1
+  end
+  return cloned
+end
+
+--------------------------------------------------------------------------------
 -- Tools
 --------------------------------------------------------------------------------
 
@@ -583,7 +604,10 @@ local foldl_call = function(fun, start, state, ...)
     return state, fun(start, ...)
 end
 
-local foldl = function(fun, start, gen_x, param_x, state_x)
+-- Maintain a set of cloned fold functions.
+-- Each is trace-optimized for a different usage.
+local foldl_clones = {}
+local foldl_impl = function(fun, start, gen_x, param_x, state_x)
     while true do
         state_x, start = foldl_call(fun, start, gen_x(param_x, state_x))
         if state_x == nil then
@@ -592,6 +616,18 @@ local foldl = function(fun, start, gen_x, param_x, state_x)
     end
     return start
 end
+
+local funcinfo = require("jit.util").funcinfo
+
+local foldl = function(fun, start, gen_x, param_x, state_x)
+    -- Compile a separate foldl root trace for each calling function.
+    local pt = funcinfo(debug.getinfo(2, "f").func).proto
+    if foldl_clones[pt] == nil then
+        foldl_clones[pt] = clone_function(foldl_impl)
+    end
+    return foldl_clones[pt](fun, start, gen_x, param_x, state_x)
+end
+
 methods.foldl = method2(foldl)
 exports.foldl = export2(foldl)
 methods.reduce = methods.foldl
