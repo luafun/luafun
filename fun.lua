@@ -622,16 +622,19 @@ local is_prefix_of = function(iter_x, iter_y)
     local gen_y, param_y, state_y = iter(iter_y)
 
     local r_x, r_y
-    for i=1,10,1 do
+    repeat
         state_x, r_x = gen_x(param_x, state_x)
-        state_y, r_y = gen_y(param_y, state_y)
         if state_x == nil then
             return true
         end
-        if state_y == nil or r_x ~= r_y then
+
+        state_y, r_y = gen_y(param_y, state_y)
+        if state_y == nil then
             return false
         end
-    end
+    until r_x ~= r_y
+
+    return false
 end
 methods.is_prefix_of = is_prefix_of
 exports.is_prefix_of = is_prefix_of
