@@ -785,6 +785,10 @@ local totable = function(gen_x, param_x, state_x)
 end
 methods.totable = method0(totable)
 exports.totable = export0(totable)
+methods.tosequence = methods.totable
+exports.tosequence = exports.totable
+methods.toseq = methods.totable
+exports.toseq = exports.totable
 
 local tomap = function(gen_x, param_x, state_x)
     local tab, key, val = {}
