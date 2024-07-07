@@ -815,6 +815,38 @@ end
 methods.map = method1(map)
 exports.map = export1(map)
 
+local pick = function(i, gen, param, state)
+    return map(function(...)
+        local x = select(i, ...); return x
+    end, gen, param, state)
+end
+methods.pick = method1(pick)
+exports.pick = export1(pick)
+
+local keys_gen = function(param, state)
+    local gen_x, param_x = param[1], param[2]
+    local state, k, _ = gen_x(param_x, state)
+    return state, k
+end
+
+local keys = function(gen, param, state)
+    return wrap(keys_gen, {gen, param}, state)
+end
+methods.keys = method0(keys)
+exports.keys = export0(keys)
+
+local values_gen = function(param, state)
+    local gen_x, param_x = param[1], param[2]
+    local state, _, v = gen_x(param_x, state)
+    return state, v
+end
+
+local values = function(gen, param, state)
+    return wrap(values_gen, { gen, param }, state)
+end
+methods.values = method0(values)
+exports.values = export0(values)
+
 local enumerate_gen_call = function(state, i, state_x, ...)
     if state_x == nil then
         return nil
@@ -1026,6 +1058,13 @@ local operator = {
     lor = function(a, b) return a or b end,
     lnot = function(a) return not a end,
     truth = function(a) return not not a end,
+
+    ----------------------------------------------------------------------------
+    -- Tuple operators
+    ----------------------------------------------------------------------------
+    select = function(i) return function(...) local x = select(i, ...); return x end end,
+    fst = function(...) local x = select(1, ...); return x end,
+    snd = function(...) local x = select(2, ...); return x end
 }
 exports.operator = operator
 methods.operator = operator
