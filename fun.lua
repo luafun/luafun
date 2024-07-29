@@ -411,24 +411,41 @@ end
 methods.drop_n = method1(drop_n)
 exports.drop_n = export1(drop_n)
 
-local drop_while_x = function(fun, state_x, ...)
-    if state_x == nil or not fun(...) then
-        return state_x, false
+-- Unpack values from param[3] on the first iteration, then return
+-- values from the provided iterator.
+--
+-- A generator function for drop_while().
+local drop_while_gen = function(param, state)
+    local results = param[3]
+    if not results then
+        return param[1](param[2], state)
+    else
+        param[3] = nil
+        return state, unpack(results, 1, table.maxn(results))
     end
-    return state_x, true, ...
+end
+
+-- Checks if drop_while should continue skipping. If iterator is not exhausted
+-- and skipping is over, elements returned by iterator are wrapped into a table
+-- and returned as the second return value. Note that a table is created only
+-- once, on the last iteration, for the sake of performance.
+local drop_while_x = function(fun, state_x, ...)
+    if state_x ~= nil and not fun(...) then
+        return state_x, {...}
+    end
+    return state_x
 end
 
 local drop_while = function(fun, gen_x, param_x, state_x)
     assert(type(fun) == "function", "invalid first argument to drop_while")
-    local cont, state_x_prev
-    repeat
-        state_x_prev = deepcopy(state_x)
-        state_x, cont = drop_while_x(fun, gen_x(param_x, state_x))
-    until not cont
+    local pivot = nil
+    while state_x ~= nil and pivot == nil do
+        state_x, pivot = drop_while_x(fun, gen_x(param_x, state_x))
+    end
     if state_x == nil then
         return wrap(nil_gen, nil, nil)
     end
-    return wrap(gen_x, param_x, state_x_prev)
+    return wrap(drop_while_gen, {gen_x, param_x, pivot}, state_x)
 end
 methods.drop_while = method1(drop_while)
 exports.drop_while = export1(drop_while)
