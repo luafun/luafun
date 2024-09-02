@@ -31,6 +31,61 @@ Transformations
     map 3
     map 4
 
+.. function:: pick(i, gen, param, state)
+              iterator:pick(i)
+
+    :param i: index of value to pick
+    :type  i: number
+    :returns: a new iterator
+
+    Return a new iterator that selects the **ith** value of every element.
+
+    Examples:
+
+    .. code-block:: lua
+
+     > each(print, pick(2, zip({1, 2, 3}, {"a", "b", "c"}, {5, 6, 7})))
+     2
+     b
+     6
+
+.. function:: keys(gen, param, state)
+              iterator:keys()
+
+    :returns: a new iterator
+
+    Returns a new iterator that includes the 1st value of every element. For
+    non-array tables, this corresponds to the key set.
+
+    Examples:
+
+    .. code-block:: lua
+
+     > each(print, keys({a = 1, b = 2, c = 3}))
+     a
+     b
+     c
+
+.. function:: values(gen, param, state)
+              iterator:values()
+
+    :returns: a new iterator
+
+    Returns a new iterator that includes the 2nd value of every element. For
+    non-array tables, this corresponds to the value list.
+
+    Examples:
+
+    .. code-block:: lua
+
+     > each(print, values({a = 1, b = 2, c = 3}))
+     1
+     2
+     3
+
+     > print(sum(values({a = 1, b = 2, c = 3})))
+     6
+
 .. function:: enumerate(gen, param, state)
               iterator:enumerate()
 

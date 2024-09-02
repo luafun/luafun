@@ -320,3 +320,57 @@ false
 true
 true
 --test]]
+
+----------------------------------------------------------------------------
+-- Tuple operators
+----------------------------------------------------------------------------
+
+local op = operator.select(1)
+print(op(1, 2, 3))
+print(op(true, false))
+print(op("a"))
+print(op())
+local op = operator.select(2)
+print(op(1, 2, 3))
+print(op(true, false))
+print(op("a"))
+print(op())
+local op = operator.select(3)
+print(op(1, 2, 3, 4))
+print(op("a", "b", "c", "d"))
+print(op())
+--[[test
+1
+true
+a
+nil
+2
+false
+nil
+nil
+3
+c
+nil
+--test]]
+
+print(operator.fst(1, 2, 3))
+print(operator.fst(true, false))
+print(operator.fst("a"))
+print(operator.fst())
+--[[test
+1
+true
+a
+nil
+--test]]
+
+print(operator.snd(1, 2, 3))
+print(operator.snd(true, false))
+print(operator.snd("a"))
+print(operator.snd())
+--[[test
+2
+false
+nil
+nil
+--test]]
