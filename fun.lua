@@ -90,9 +90,9 @@ end
 local ipairs_gen = ipairs({}) -- get the generating function from ipairs
 
 local pairs_gen = pairs({ a = 0 }) -- get the generating function from pairs
-local map_gen = function(tab, key)
+local kv_iter_gen = function(tab, key)
     local value
-    local key, value = pairs_gen(tab, key)
+    key, value = pairs_gen(tab, key)
     return key, key, value
 end
 
@@ -114,7 +114,7 @@ local rawiter = function(obj, param, state)
             return ipairs(obj)
         else
             -- hash
-            return map_gen, obj, nil
+            return kv_iter_gen, obj, nil
         end
     elseif (type(obj) == "function") then
         return obj, param, state
@@ -132,6 +132,16 @@ local iter = function(obj, param, state)
     return wrap(rawiter(obj, param, state))
 end
 exports.iter = iter
+
+local iter_pairs = function(obj)
+    return wrap(pairs(obj))
+end
+exports.pairs = iter_pairs
+
+local iter_map_pairs = function(obj)
+    return wrap(kv_iter_gen, obj, nil)
+end
+exports.map_pairs = iter_map_pairs
 
 local method0 = function(fun)
     return function(self)
@@ -833,6 +843,43 @@ local enumerate = function(gen, param, state)
 end
 methods.enumerate = method0(enumerate)
 exports.enumerate = export0(enumerate)
+
+local with_key_gen_call = function(new_state, ...)
+    if new_state == nil then
+        return nil
+    end
+    return new_state, new_state, ...
+end
+
+local with_key_gen = function(param, state)
+    local gen_x, param_x = param[1], param[2]
+    return with_key_gen_call(gen_x(param_x, state))
+end
+
+local with_key = function(gen, param, state)
+    return wrap(with_key_gen, {gen, param}, state)
+end
+methods.with_key = method0(with_key)
+exports.with_key = export0(with_key)
+
+local index_by_gen_call = function(fn, new_state, ...)
+    if new_state == nil then
+        return nil
+    end
+    local key = fn(...)
+    return new_state, key, ...
+end
+
+local index_by_gen = function(param, state)
+    local fn, gen_x, param_x = param[1], param[2], param[3]
+    return index_by_gen_call(fn, gen_x(param_x, state))
+end
+
+local index_by = function(fn, gen, param, state)
+    return wrap(index_by_gen, {fn, gen, param}, state)
+end
+methods.index_by = method1(index_by)
+exports.index_by = export1(index_by)
 
 local intersperse_call = function(i, state_x, ...)
     if state_x == nil then
