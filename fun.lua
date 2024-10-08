@@ -960,7 +960,7 @@ local chain_gen_r2 = function(param, state, state_x, ...)
     if state_x == nil then
         local i = state[1]
         i = i + 1
-        if param[3 * i - 1] == nil then
+        if param[3 * i - 2] == nil then
             return nil
         end
         local state_x = param[3 * i]
