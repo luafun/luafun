@@ -4,6 +4,13 @@ package.path = "../?.lua;"..package.path
 require "fun" ()
 function dump(gen, init, state) each(print, gen, init, state) end
 
+-- Check if state is preserved
+function dump_state(gen, init, state)
+    for s in gen, init, state do
+        print(s)
+    end
+end
+
 local unpack = rawget(table, "unpack") or unpack
 local loadstring = rawget(_G, "loadstring") or load
 
