@@ -168,3 +168,33 @@ dump(chain(range(0), range(1), range(0)))
 --[[test
 error: invalid iterator
 --test]]
+
+-- Similar to fun.range(), but accepts just 'stop' for simplicity.
+--
+-- The key point of this iterator generator is that it doesn't use
+-- 'param' (the second value in the gen-param-state triplet) and
+-- pass nil to it. This is needed to reproduce the next scenario.
+function myrange(stop)
+    local function gen(_param, i)
+        if i < stop then
+            return i + 1, i + 1
+        end
+        return nil
+    end
+    return wrap(gen, nil, 0)
+end
+
+-- gh-86: verify that chain don't stop on an iterator that uses
+-- param = nil.
+dump(chain(myrange(3), myrange(3), myrange(3)))
+--[[test
+1
+2
+3
+1
+2
+3
+1
+2
+3
+--test]]
