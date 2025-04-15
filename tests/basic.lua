@@ -257,6 +257,16 @@ table 5
 5
 --test]]
 
+local tab = tosequence(range(3))
+print(type(tab), #tab)
+each(print, tab)
+--[[test
+table 3
+1
+2
+3
+--test]]
+
 local tab = totable(range(0))
 print(type(tab), #tab)
 --[[test
