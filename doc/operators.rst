@@ -201,3 +201,40 @@ Logical operators
     > print(operator.truth({}))
     true
 
+Tuple operators
+-----------------
+
+.. function:: select(i)
+
+   :returns: An operator that selects the **ith** value of multiple values. Examples:
+
+   .. code-block:: lua
+
+    > print(operator.select(3)("a", "b", "c", "d"))
+    c
+
+.. function:: fst(...)
+
+   :returns: The first of a group of values. Examples:
+
+   .. code-block:: lua
+
+    > print(operator.fst(1, 2, 3))
+    1
+    > print(operator.fst("a", "b"))
+    a
+    > print(operator.fst())
+    nil
+
+.. function:: snd(...)
+
+   :returns: The second of a group of values. Examples:
+
+   .. code-block:: lua
+
+    > print(operator.snd(1, 2, 3))
+    2
+    > print(operator.snd("a", "b"))
+    b
+    > print(operator.snd())
+    nil
