@@ -96,6 +96,50 @@ The section contains functions to create iterators from Lua objects.
    .. [#luajit_lua52compat] http://luajit.org/extensions.html
    .. [#lua52_ipairs] http://www.lua.org/manual/5.2/manual.html#pdf-ipairs
 
+.. function:: from(gen, param, state)
+
+   :returns: ``gen, param, state`` -- :ref:`iterator triplet <iterator_triplet>`
+
+   Wraps an existing :ref:`iterator triplet <iterator_triplet>` into a form
+   which is compatible with library functions. It is designed to directly adapt
+   existing iterator triplets (e.g., from ``ipairs`` or ``string.gmatch``).
+   
+   Unlike :func:`iter`, this wrapper preserves all values returned by the
+   generating function. For historical reasons, when using :func:`iter` with a
+   generator triplet, the first element returned by the generating function,
+   usually the state, is inaccessible. :func:`from` avoids this behavior, making
+   it suitable for iterators whose first returned values are needed.
+
+   Examples:
+
+   .. code-block:: lua
+
+    > for _it, i, v in from(ipairs({"a", "b", "c"})) do print(i, v) end
+    1 a
+    2 b
+    3 c
+
+    > for _it, a, b in from(string.gmatch('a1b2c3', '(%a)(%d)')) do print(a, b) end
+    a 1
+    b 2
+    c 3
+
+   Contrast with :func:`iter`'s behavior:
+
+   .. code-block:: lua
+
+    > -- ``i``` is inaccessible
+    > for _it, v in iter(ipairs({"a", "b", "c"})) do print(v) end
+    a
+    b
+    c
+
+    > -- ``a``` is inaccessible
+    > for _it, b in iter(string.gmatch('a1b2c3', '(%a)(%d)')) do print(b) end
+    1
+    2
+    3
+
 .. function:: each(fun, gen, param, state)
               iterator:each(fun)
 

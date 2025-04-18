@@ -30,6 +30,10 @@ local call_if_not_empty = function(fun, state_x, ...)
     return state_x, fun(...)
 end
 
+local duplicate_state = function(state_x, ...)
+    return state_x, state_x, ...
+end
+
 local function deepcopy(orig) -- used by cycle()
     local orig_type = type(orig)
     local copy
@@ -56,6 +60,12 @@ local iterator_mt = {
     __index = methods;
 }
 
+local to_duplicate_state_gen = function(gen)
+	return function (param, state)
+		return duplicate_state(gen(param, state))
+	end
+end
+
 local wrap = function(gen, param, state)
     return setmetatable({
         gen = gen,
@@ -65,8 +75,18 @@ local wrap = function(gen, param, state)
 end
 exports.wrap = wrap
 
+local from = function(gen, param, state)
+    return setmetatable({
+        raw_gen = gen,
+        gen = to_duplicate_state_gen(gen),
+        param = param,
+        state = state
+    }, iterator_mt), param, state
+end
+exports.from = from
+
 local unwrap = function(self)
-    return self.gen, self.param, self.state
+    return self.raw_gen or self.gen, self.param, self.state
 end
 methods.unwrap = unwrap
 
@@ -90,11 +110,7 @@ end
 local ipairs_gen = ipairs({}) -- get the generating function from ipairs
 
 local pairs_gen = pairs({ a = 0 }) -- get the generating function from pairs
-local map_gen = function(tab, key)
-    local value
-    local key, value = pairs_gen(tab, key)
-    return key, key, value
-end
+local kkv_gen = to_duplicate_state_gen(pairs_gen)
 
 local rawiter = function(obj, param, state)
     assert(obj ~= nil, "invalid iterator")
@@ -106,7 +122,7 @@ local rawiter = function(obj, param, state)
             elseif mt.__ipairs ~= nil then
                 return mt.__ipairs(obj)
             elseif mt.__pairs ~= nil then
-                return mt.__pairs(obj)
+                return from(mt.__pairs(obj))
             end
         end
         if #obj > 0 then
@@ -114,7 +130,7 @@ local rawiter = function(obj, param, state)
             return ipairs(obj)
         else
             -- hash
-            return map_gen, obj, nil
+            return kkv_gen, obj, nil
         end
     elseif (type(obj) == "function") then
         return obj, param, state
