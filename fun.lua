@@ -30,6 +30,10 @@ local call_if_not_empty = function(fun, state_x, ...)
     return state_x, fun(...)
 end
 
+local duplicate_state = function(state_x, ...)
+    return state_x, state_x, ...
+end
+
 local function deepcopy(orig) -- used by cycle()
     local orig_type = type(orig)
     local copy
@@ -56,17 +60,33 @@ local iterator_mt = {
     __index = methods;
 }
 
-local wrap = function(gen, param, state)
+local to_duplicate_state_gen = function(gen)
+	return function (param, state)
+		return duplicate_state(gen(param, state))
+	end
+end
+
+local new_iterator = function(gen, param, state, raw_gen)
     return setmetatable({
         gen = gen,
         param = param,
-        state = state
+        state = state,
+        raw_gen = raw_gen,
     }, iterator_mt), param, state
+end
+
+local wrap = function(gen, param, state)
+    return new_iterator(gen, param, state)
 end
 exports.wrap = wrap
 
+local from = function(gen, param, state)
+    return new_iterator(to_duplicate_state_gen(gen), param, state, gen)
+end
+exports.from = from
+
 local unwrap = function(self)
-    return self.gen, self.param, self.state
+    return self.raw_gen or self.gen, self.param, self.state
 end
 methods.unwrap = unwrap
 
@@ -88,13 +108,9 @@ local string_gen = function(param, state)
 end
 
 local ipairs_gen = ipairs({}) -- get the generating function from ipairs
-
+local iiv_gen = to_duplicate_state_gen(ipairs_gen)
 local pairs_gen = pairs({ a = 0 }) -- get the generating function from pairs
-local map_gen = function(tab, key)
-    local value
-    local key, value = pairs_gen(tab, key)
-    return key, key, value
-end
+local kkv_gen = to_duplicate_state_gen(pairs_gen)
 
 local rawiter = function(obj, param, state)
     assert(obj ~= nil, "invalid iterator")
@@ -106,7 +122,7 @@ local rawiter = function(obj, param, state)
             elseif mt.__ipairs ~= nil then
                 return mt.__ipairs(obj)
             elseif mt.__pairs ~= nil then
-                return mt.__pairs(obj)
+                return from(mt.__pairs(obj))
             end
         end
         if #obj > 0 then
@@ -114,7 +130,7 @@ local rawiter = function(obj, param, state)
             return ipairs(obj)
         else
             -- hash
-            return map_gen, obj, nil
+            return kkv_gen, obj, nil
         end
     elseif (type(obj) == "function") then
         return obj, param, state
@@ -132,6 +148,36 @@ local iter = function(obj, param, state)
     return wrap(rawiter(obj, param, state))
 end
 exports.iter = iter
+
+local items = function(tab)
+    local mt = getmetatable(tab)
+    if mt and mt.__ipairs then
+        return wrap(mt.__ipairs(tab))
+    end
+    assert(type(tab) == "table", "invalid argument to items")
+    return wrap(ipairs(tab))
+end
+exports.items = items
+
+local ipairs_of = function(tab)
+    local mt = getmetatable(tab)
+    if mt and mt.__ipairs then
+        return from(mt.__ipairs(tab))
+    end
+    assert(type(tab) == "table", "invalid argument to ipairs_of")
+    return new_iterator(iiv_gen, tab, 0, ipairs_gen)
+end
+exports.ipairs_of = ipairs_of
+
+local pairs_of = function(tab)
+    local mt = getmetatable(tab)
+    if mt and mt.__pairs then
+        return from(mt.__pairs(tab))
+    end
+    assert(type(tab) == "table", "invalid argument to pairs_of")
+    return new_iterator(kkv_gen, tab, nil, pairs_gen)
+end
+exports.pairs_of = pairs_of
 
 local method0 = function(fun)
     return function(self)

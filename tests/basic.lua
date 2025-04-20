@@ -34,6 +34,109 @@ for _it, a in wrap(wrap(ipairs({1, 2, 3}))) do print(a) end
 3
 --test]]
 
+tab_with_ipairs = setmetatable({}, {
+    __ipairs = function() return ipairs({1, 2, 3}) end,
+})
+for _it, a in iter(tab_with_ipairs) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in iter(iter(iter(tab_with_ipairs))) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in wrap(wrap(iter(tab_with_ipairs))) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in
+    wrap(wrap(getmetatable(tab_with_ipairs).__ipairs(tab_with_ipairs)))
+do
+    print(a)
+end
+--[[test
+1
+2
+3
+--test]]
+
+-- Check that ``iter`` treats tables with both array part and map part as arrays
+for _it, a in iter({ 1, 2, 3, a = 4, b = 5, c = 6 }) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in iter(iter(iter({ 1, 2, 3, a = 4, b = 5, c = 6 }))) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in wrap(wrap(iter({ 1, 2, 3, a = 4, b = 5, c = 6 }))) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in wrap(wrap(ipairs({ 1, 2, 3, a = 4, b = 5, c = 6 }))) do
+    print(a)
+end
+--[[test
+1
+2
+3
+--test]]
+
+-- Check that ``iter`` treats objects with both ``__ipairs`` and ``__pairs``
+-- metamethods as arrays
+tab_with_ipairs_and_pairs = setmetatable({}, {
+    __ipairs = function() return ipairs({1, 2, 3}) end,
+    __pairs = function() return pairs({ a = 4, b = 5, c = 6 }) end,
+})
+
+for _it, a in iter(tab_with_ipairs_and_pairs) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in iter(iter(iter(tab_with_ipairs_and_pairs))) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in wrap(wrap(iter(tab_with_ipairs_and_pairs))) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in wrap(wrap(
+    getmetatable(tab_with_ipairs_and_pairs).__ipairs(tab_with_ipairs_and_pairs)
+)) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
 for _it, a in iter({}) do print(a) end
 --[[test
 --test]]
@@ -91,6 +194,30 @@ b
 c
 --test]]
 
+tab_with_pairs = setmetatable({}, {
+    __pairs = function() return pairs({ a = 1, b = 2, c = 3 }) end,
+})
+
+local t = {}
+for _it, k, v in iter(tab_with_pairs) do t[#t + 1] = k end
+table.sort(t)
+for _it, v in iter(t) do print(v) end
+--[[test
+a
+b
+c
+--test]]
+
+local t = {}
+for _it, k, v in iter(iter(iter(tab_with_pairs))) do t[#t + 1] = k end
+table.sort(t)
+for _it, v in iter(t) do print(v) end
+--[[test
+a
+b
+c
+--test]]
+
 for _it, k, v in iter({}) do print(k, v) end
 --[[test
 --test]]
@@ -140,7 +267,7 @@ local function mypairs_gen(max, state)
         return state + 1, state + 1
 end
 
-local function mypairs(max)
+function mypairs(max)
     return mypairs_gen, max, 0
 end
 
@@ -170,6 +297,183 @@ error: object 1 of type "number" is not iterable
 for _it, a in iter(1, 2, 3, 4, 5, 6, 7) do print(a) end
 --[[test
 error: object 1 of type "number" is not iterable
+--test]]
+
+--------------------------------------------------------------------------------
+-- from
+--------------------------------------------------------------------------------
+
+for _it, i, v in from(ipairs({1, 2, 3})) do print(i, v) end
+--[[test
+1 1
+2 2
+3 3
+--test]]
+
+local t = {}
+local keys = {}
+for _it, k, v in from(pairs({ a = 1, b = 2, c = 3 })) do
+    t[k] = v
+    keys[#keys + 1] = k
+end
+table.sort(keys)
+for _, k in ipairs(keys) do print(k, t[k]) end
+--[[test
+a 1
+b 2
+c 3
+--test]]
+
+for _it, a, b in from(string.gmatch('a1b2c3', '(%a)(%d)')) do print(a, b) end
+--[[test
+a 1
+b 2
+c 3
+--test]]
+
+for _it, a, b in from(mypairs(3)) do print(a, b) end
+--[[test
+1 1
+2 2
+3 3
+--test]]
+
+-- Check that ``from`` holds the original generator
+gen1, param1, state1 = pairs({ a = 1, b = 2, c = 3 })
+gen2, param2, state2 = from(gen1, param1, state1):unwrap()
+print(gen1 == gen2, param1 == param2, state1 == state2)
+--[[test
+true true true
+--test]]
+
+--------------------------------------------------------------------------------
+-- items, ipairs_of, pairs_of
+--------------------------------------------------------------------------------
+
+--
+-- items
+--
+
+for _it, a in items({1, 2, 3}) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in items(tab_with_ipairs) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in items({ 1, 2, 3, a = 4, b = 5, c = 6 }) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in items(tab_with_ipairs_and_pairs) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+--
+-- ipairs_of
+--
+
+for _it, i, v in ipairs_of({1, 2, 3}) do print(i, v) end
+--[[test
+1 1
+2 2
+3 3
+--test]]
+
+for _it, i, v in ipairs_of(tab_with_ipairs) do print(i, v) end
+--[[test
+1 1
+2 2
+3 3
+--test]]
+
+for _it, i, v in ipairs_of({ 1, 2, 3, a = 4, b = 5, c = 6 }) do print(i, v) end
+--[[test
+1 1
+2 2
+3 3
+--test]]
+
+for _it, i, v in ipairs_of(tab_with_ipairs_and_pairs) do print(i, v) end
+--[[test
+1 1
+2 2
+3 3
+--test]]
+
+local t = { 1 }
+local gen1, param1, state1 = ipairs(t)
+local gen2, param2, state2 = ipairs_of(t):unwrap()
+print(gen1 == gen2, param1 == param2, state1 == state2)
+--[[test
+true true true
+--test]]
+
+--
+-- pairs_of
+--
+
+local t = {}
+local keys = {}
+for _it, k, v in pairs_of({ a = 1, b = 2, c = 3 }) do
+    t[k] = v
+    keys[#keys + 1] = k
+end
+table.sort(keys)
+for _, k in ipairs(keys) do print(k, t[k]) end
+--[[test
+a 1
+b 2
+c 3
+--test]]
+
+local t = {}
+local keys = {}
+for _it, k, v in pairs_of(tab_with_pairs) do
+    t[k] = v
+    keys[#keys + 1] = k
+end
+table.sort(keys)
+for _, k in ipairs(keys) do print(k, t[k]) end
+--[[test
+a 1
+b 2
+c 3
+--test]]
+
+local t = {}
+local keys = {}
+for _it, k, v in pairs_of(tab_with_ipairs_and_pairs) do
+    t[k] = v
+    keys[#keys + 1] = k
+end
+table.sort(keys)
+for _, k in ipairs(keys) do print(k, t[k]) end
+--[[test
+a 4
+b 5
+c 6
+--test]]
+
+local t = { a = 1 }
+local gen1, param1, state1 = pairs(t)
+local gen2, param2, state2 = pairs_of(t):unwrap()
+print(gen1 == gen2, param1 == param2, state1 == state2)
+--[[test
+true true true
 --test]]
 
 --------------------------------------------------------------------------------
