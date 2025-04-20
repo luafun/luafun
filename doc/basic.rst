@@ -140,6 +140,54 @@ The section contains functions to create iterators from Lua objects.
     2
     3
 
+.. function:: ipairs_of(array)
+
+   :returns: ``gen, param, state`` -- :ref:`iterator triplet <iterator_triplet>`
+
+   Returns an iterator triplet equivalent to ``from(ipairs(array))``. This
+   function is aware of the ``__ipairs`` metamethod.
+
+   Example:
+
+   .. code-block:: lua
+
+    > for _it, i, v in ipairs_of({"a", "b", "c"}) do print(i, v) end
+    1 a
+    2 b
+    3 c
+
+.. function:: pairs_of(map)
+
+   :returns: ``gen, param, state`` -- :ref:`iterator triplet <iterator_triplet>`
+
+   Returns an iterator triplet equivalent to ``from(pairs(map))``. This function 
+   is aware of the ``__pairs`` metamethod.
+
+   Example:
+
+   .. code-block:: lua
+
+    > for _it, k, v in pairs_of({ a = 1, b = 2, c = 3 }) do print(k, v) end
+    b 2
+    a 1
+    c 3
+
+.. function:: items(tab)
+
+   :returns: ``gen, param, state`` -- :ref:`iterator triplet <iterator_triplet>`
+
+   Returns an iterator triplet that iterates over array elements of a table
+   using ``ipairs``. This function is aware of the ``__ipairs`` metamethod.
+
+   Example:
+
+   .. code-block:: lua
+
+    > for _it, a in items({ 1, 2, 3, a = 4, b = 5, c = 6 }) do print(a) end
+    1
+    2
+    3
+
 .. function:: each(fun, gen, param, state)
               iterator:each(fun)
 

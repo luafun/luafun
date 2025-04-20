@@ -347,6 +347,136 @@ true true true
 --test]]
 
 --------------------------------------------------------------------------------
+-- items, ipairs_of, pairs_of
+--------------------------------------------------------------------------------
+
+--
+-- items
+--
+
+for _it, a in items({1, 2, 3}) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in items(tab_with_ipairs) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in items({ 1, 2, 3, a = 4, b = 5, c = 6 }) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+for _it, a in items(tab_with_ipairs_and_pairs) do print(a) end
+--[[test
+1
+2
+3
+--test]]
+
+--
+-- ipairs_of
+--
+
+for _it, i, v in ipairs_of({1, 2, 3}) do print(i, v) end
+--[[test
+1 1
+2 2
+3 3
+--test]]
+
+for _it, i, v in ipairs_of(tab_with_ipairs) do print(i, v) end
+--[[test
+1 1
+2 2
+3 3
+--test]]
+
+for _it, i, v in ipairs_of({ 1, 2, 3, a = 4, b = 5, c = 6 }) do print(i, v) end
+--[[test
+1 1
+2 2
+3 3
+--test]]
+
+for _it, i, v in ipairs_of(tab_with_ipairs_and_pairs) do print(i, v) end
+--[[test
+1 1
+2 2
+3 3
+--test]]
+
+local t = { 1 }
+local gen1, param1, state1 = ipairs(t)
+local gen2, param2, state2 = ipairs_of(t):unwrap()
+print(gen1 == gen2, param1 == param2, state1 == state2)
+--[[test
+true true true
+--test]]
+
+--
+-- pairs_of
+--
+
+local t = {}
+local keys = {}
+for _it, k, v in pairs_of({ a = 1, b = 2, c = 3 }) do
+    t[k] = v
+    keys[#keys + 1] = k
+end
+table.sort(keys)
+for _, k in ipairs(keys) do print(k, t[k]) end
+--[[test
+a 1
+b 2
+c 3
+--test]]
+
+local t = {}
+local keys = {}
+for _it, k, v in pairs_of(tab_with_pairs) do
+    t[k] = v
+    keys[#keys + 1] = k
+end
+table.sort(keys)
+for _, k in ipairs(keys) do print(k, t[k]) end
+--[[test
+a 1
+b 2
+c 3
+--test]]
+
+local t = {}
+local keys = {}
+for _it, k, v in pairs_of(tab_with_ipairs_and_pairs) do
+    t[k] = v
+    keys[#keys + 1] = k
+end
+table.sort(keys)
+for _, k in ipairs(keys) do print(k, t[k]) end
+--[[test
+a 4
+b 5
+c 6
+--test]]
+
+local t = { a = 1 }
+local gen1, param1, state1 = pairs(t)
+local gen2, param2, state2 = pairs_of(t):unwrap()
+print(gen1 == gen2, param1 == param2, state1 == state2)
+--[[test
+true true true
+--test]]
+
+--------------------------------------------------------------------------------
 -- each
 --------------------------------------------------------------------------------
 

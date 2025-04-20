@@ -66,22 +66,22 @@ local to_duplicate_state_gen = function(gen)
 	end
 end
 
-local wrap = function(gen, param, state)
+local new_iterator = function(gen, param, state, raw_gen)
     return setmetatable({
         gen = gen,
         param = param,
-        state = state
+        state = state,
+        raw_gen = raw_gen,
     }, iterator_mt), param, state
+end
+
+local wrap = function(gen, param, state)
+    return new_iterator(gen, param, state)
 end
 exports.wrap = wrap
 
 local from = function(gen, param, state)
-    return setmetatable({
-        raw_gen = gen,
-        gen = to_duplicate_state_gen(gen),
-        param = param,
-        state = state
-    }, iterator_mt), param, state
+    return new_iterator(to_duplicate_state_gen(gen), param, state, gen)
 end
 exports.from = from
 
@@ -108,7 +108,7 @@ local string_gen = function(param, state)
 end
 
 local ipairs_gen = ipairs({}) -- get the generating function from ipairs
-
+local iiv_gen = to_duplicate_state_gen(ipairs_gen)
 local pairs_gen = pairs({ a = 0 }) -- get the generating function from pairs
 local kkv_gen = to_duplicate_state_gen(pairs_gen)
 
@@ -148,6 +148,36 @@ local iter = function(obj, param, state)
     return wrap(rawiter(obj, param, state))
 end
 exports.iter = iter
+
+local items = function(tab)
+    local mt = getmetatable(tab)
+    if mt and mt.__ipairs then
+        return wrap(mt.__ipairs(tab))
+    end
+    assert(type(tab) == "table", "invalid argument to items")
+    return wrap(ipairs(tab))
+end
+exports.items = items
+
+local ipairs_of = function(tab)
+    local mt = getmetatable(tab)
+    if mt and mt.__ipairs then
+        return from(mt.__ipairs(tab))
+    end
+    assert(type(tab) == "table", "invalid argument to ipairs_of")
+    return new_iterator(iiv_gen, tab, 0, ipairs_gen)
+end
+exports.ipairs_of = ipairs_of
+
+local pairs_of = function(tab)
+    local mt = getmetatable(tab)
+    if mt and mt.__pairs then
+        return from(mt.__pairs(tab))
+    end
+    assert(type(tab) == "table", "invalid argument to pairs_of")
+    return new_iterator(kkv_gen, tab, nil, pairs_gen)
+end
+exports.pairs_of = pairs_of
 
 local method0 = function(fun)
     return function(self)
