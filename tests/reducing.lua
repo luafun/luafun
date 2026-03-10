@@ -297,16 +297,16 @@ true
 -- min_by
 --------------------------------------------------------------------------------
 
-function min_cmp(a, b) if -a < -b then return a else return b end end
+function opp_cmp(a, b) return -a < -b end
 --[[test
 --test]]
 
-print(min_by(min_cmp, range(1, 10, 1)))
+print(min_by(opp_cmp, range(1, 10, 1)))
 --[[test
 10
 --test]]
 
-print(min_by(min_cmp, {}))
+print(min_by(opp_cmp, {}))
 --[[test
 error: min: iterator is empty
 --test]]
@@ -344,16 +344,16 @@ true
 -- max_by
 --------------------------------------------------------------------------------
 
-function max_cmp(a, b) if -a > -b then return a else return b end end
+function opp_cmp(a, b) return -a < -b end
 --[[test
 --test]]
 
-print(max_by(max_cmp, range(1, 10, 1)))
+print(max_by(opp_cmp, range(1, 10, 1)))
 --[[test
 1
 --test]]
 
-print(max_by(max_cmp, {}))
+print(max_by(opp_cmp, {}))
 --[[test
 error: max: iterator is empty
 --test]]
