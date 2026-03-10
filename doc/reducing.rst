@@ -271,9 +271,9 @@ Special folds
 
    .. code-block:: lua
 
-    > function min_cmp(a, b) if -a < -b then return a else return b end end
-    > print(min_by(min_cmp, range(1, 10, 1)))
-    9
+    > function opp_cmp(a, b) return -a < -b end
+    > print(min_by(opp_cmp, range(1, 10, 1)))
+    10
 
 .. function:: minimum_by(cmp, gen, param, state)
 
@@ -307,14 +307,14 @@ Special folds
 .. function:: max_by(cmp, gen, param, state)
               iterator:max_by(cmp)
 
-   Return a maximum value from the iterator using the **cmp** as a `>`
+   Return a maximum value from the iterator using the **cmp** as a `<`
    operator. The iterator must be non-null, otherwise an error is raised.
 
    Examples:
 
    .. code-block:: lua
 
-    > function max_cmp(a, b) if -a > -b then return a else return b end end
+    > function max_cmp(a, b) return -a < -b end
     > print(max_by(max_cmp, range(1, 10, 1)))
     1
 

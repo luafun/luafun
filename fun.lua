@@ -740,7 +740,7 @@ local min_by = function(cmp, gen_x, param_x, state_x)
     end
 
     for _, r in gen_x, param_x, state_x do
-        m = cmp(m, r)
+        m = cmp(m, r) and m or r
     end
     return m
 end
@@ -780,7 +780,7 @@ local max_by = function(cmp, gen_x, param_x, state_x)
     end
 
     for _, r in gen_x, param_x, state_x do
-        m = cmp(m, r)
+        m = cmp(m, r) and r or m
     end
     return m
 end
