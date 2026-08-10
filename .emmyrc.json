@@ -7,7 +7,6 @@
     "disable": [
       "redefined-local",
       "unbalanced-assignments",
-      "undefined-global",
       "unused"
     ]
   }

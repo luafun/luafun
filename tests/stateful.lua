@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 -- compatibility with Lua 5.1/5.2
 local unpack = rawget(table, "unpack") or unpack
 
