@@ -14,7 +14,7 @@ local unpack = rawget(table, "unpack") or unpack
 
 -- table.maxn was removed in Lua 5.3+
 local maxn = table.maxn or function(t)
-    local maxn = 0
+    local maxn = 0.0
     for k in pairs(t) do
         if type(k) == "number" and k > maxn then
             maxn = k
