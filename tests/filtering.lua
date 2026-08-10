@@ -15,7 +15,7 @@ dump(filter(function(x) return x % 3 == 0 end, range(0)))
 --test]]
 
 
-dump(take(5, filter(function(i, x) return i % 3 == 0 end,
+dump(take(5, filter(function(i, _x) return i % 3 == 0 end,
     enumerate(duplicate('x')))))
 --[[test
 3 x
@@ -25,7 +25,7 @@ dump(take(5, filter(function(i, x) return i % 3 == 0 end,
 15 x
 --test]]
 
-function filter_fun(a, b, c)
+function filter_fun(a, _b, _c)
     if a % 16 == 0 then
         return true
     else
@@ -108,7 +108,7 @@ dump_state(grep("^Em", lines_to_grep))
 -- partition
 --------------------------------------------------------------------------------
 
-dump(zip(partition(function(i, x) return i % 3 == 0 end, range(10))))
+dump(zip(partition(function(i, _x) return i % 3 == 0 end, range(10))))
 --[[test
 3 1
 6 2
