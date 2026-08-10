@@ -62,7 +62,7 @@ dump(gen_stateful_iter({{1, nil, 10}, {3, nil, 30}, {5, nil, 50}, {6, nil, 60}, 
 --test]]
 
 -- Multireturn with condition on second returned value
-dump(gen_stateful_iter({{0, 1}, {0, 3}, {0, 5}, {0, 4}}):drop_while(function(x, y) return y < 5 end))
+dump(gen_stateful_iter({{0, 1}, {0, 3}, {0, 5}, {0, 4}}):drop_while(function(_x, y) return y < 5 end))
 --[[test
 0 5
 0 4

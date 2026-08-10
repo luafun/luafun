@@ -60,7 +60,7 @@ local iterator_mt = {
     __call = function(self, param, state)
         return self.gen(param, state)
     end;
-    __tostring = function(self)
+    __tostring = function(_self)
         return '<generator>'
     end;
     -- add all exported methods
@@ -102,7 +102,7 @@ local ipairs_gen = ipairs({}) -- get the generating function from ipairs
 
 local pairs_gen = pairs({ a = 0 }) -- get the generating function from pairs
 local map_gen = function(tab, key)
-    local value
+    local _value
     local key, value = pairs_gen(tab, key)
     return key, key, value
 end
@@ -320,7 +320,7 @@ local nth = function(n, gen_x, param_x, state_x)
             return nil
         end
     end
-    for i=1,n-1,1 do
+    for _=1,n-1,1 do
         state_x = gen_x(param_x, state_x)
         if state_x == nil then
             return nil
@@ -412,8 +412,7 @@ exports.take = export1(take)
 
 local drop_n = function(n, gen, param, state)
     assert(n >= 0, "invalid first argument to drop_n")
-    local i
-    for i=1,n,1 do
+    for _=1,n,1 do
         state = gen(param, state)
         if state == nil then
             return wrap(nil_gen, nil, nil)
@@ -804,7 +803,7 @@ methods.maximum_by = methods.max_by
 exports.maximum_by = exports.max_by
 
 local totable = function(gen_x, param_x, state_x)
-    local tab, key, val = {}
+    local tab, _key, val = {}
     while true do
         state_x, val = gen_x(param_x, state_x)
         if state_x == nil then
@@ -846,7 +845,7 @@ end
 methods.map = method1(map)
 exports.map = export1(map)
 
-local enumerate_gen_call = function(state, i, state_x, ...)
+local enumerate_gen_call = function(_state, i, state_x, ...)
     if state_x == nil then
         return nil
     end
@@ -935,7 +934,7 @@ local zip = function(...)
     local param = { [2 * n] = 0 }
     local state = { [n] = 0 }
 
-    local i, gen_x, param_x, state_x
+    local _i, gen_x, param_x, state_x
     for i=1,n,1 do
         local it = select(n - i + 1, ...)
         gen_x, param_x, state_x = rawiter(it)
@@ -958,7 +957,7 @@ local cycle_gen_call = function(param, state_x, ...)
 end
 
 local cycle_gen = function(param, state_x)
-    local gen_x, param_x, state_x0 = param[1], param[2], param[3]
+    local gen_x, param_x, _state_x0 = param[1], param[2], param[3]
     return cycle_gen_call(param, gen_x(param_x, state_x))
 end
 
@@ -985,7 +984,7 @@ local chain_gen_r2 = function(param, state, state_x, ...)
 end
 
 chain_gen_r1 = function(param, state)
-    local i, state_x = state[1], state[2]
+    local i, _state_x = state[1], state[2]
     local gen_x, param_x = param[3 * i - 2], param[3 * i - 1]
     return chain_gen_r2(param, state, gen_x(param_x, state[2]))
 end
@@ -997,7 +996,7 @@ local chain = function(...)
     end
 
     local param = { [3 * n] = 0 }
-    local i, gen_x, param_x, state_x
+    local _i, gen_x, param_x, state_x
     for i=1,n,1 do
         local elem = select(i, ...)
         gen_x, param_x, state_x = iter(elem)

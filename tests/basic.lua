@@ -73,7 +73,7 @@ true true true
 --
 
 local t = {}
-for _it, k, v in iter({ a = 1, b = 2, c = 3}) do t[#t + 1] = k end
+for _it, k, _v in iter({ a = 1, b = 2, c = 3}) do t[#t + 1] = k end
 table.sort(t)
 for _it, v in iter(t) do print(v) end
 --[[test
@@ -83,7 +83,7 @@ c
 --test]]
 
 local t = {}
-for _it, k, v in iter(iter(iter({ a = 1, b = 2, c = 3}))) do t[#t + 1] = k end
+for _it, k, _v in iter(iter(iter({ a = 1, b = 2, c = 3}))) do t[#t + 1] = k end
 table.sort(t)
 for _it, v in iter(t) do print(v) end
 --[[test
