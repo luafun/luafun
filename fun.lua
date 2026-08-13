@@ -546,6 +546,7 @@ end
 -- call each other
 local filterm_gen
 local filterm_gen_shrink = function(fun, gen_x, param_x, state_x)
+    ---@diagnostic disable-next-line: need-check-nil
     return filterm_gen(fun, gen_x, param_x, gen_x(param_x, state_x))
 end
 
@@ -975,6 +976,7 @@ local chain_gen_r2 = function(param, state, state_x, ...)
             return nil
         end
         local state_x = param[3 * i]
+        ---@diagnostic disable-next-line: need-check-nil
         return chain_gen_r1(param, {i, state_x})
     end
     return {state[1], state_x}, ...
