@@ -5,7 +5,6 @@
   },
   "diagnostics": {
     "disable": [
-      "need-check-nil",
       "param-type-mismatch",
       "redefined-local",
       "unbalanced-assignments",
