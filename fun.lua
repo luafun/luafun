@@ -12,6 +12,17 @@ local methods = {}
 -- compatibility with Lua 5.1/5.2
 local unpack = rawget(table, "unpack") or unpack
 
+-- table.maxn was removed in Lua 5.3+
+local maxn = table.maxn or function(t)
+    local maxn = 0
+    for k in pairs(t) do
+        if type(k) == "number" and k > maxn then
+            maxn = k
+        end
+    end
+    return maxn
+end
+
 --------------------------------------------------------------------------------
 -- Tools
 --------------------------------------------------------------------------------
@@ -421,7 +432,7 @@ local drop_while_gen = function(param, state)
         return param[1](param[2], state)
     else
         param[3] = nil
-        return state, unpack(results, 1, table.maxn(results))
+        return state, unpack(results, 1, maxn(results))
     end
 end
 

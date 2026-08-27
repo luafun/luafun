@@ -1,0 +1,30 @@
+name: Testing
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  testing:
+    strategy:
+      matrix:
+        luaVersion:
+          - "5.5"
+          - "5.4"
+          - "5.3"
+          - "5.2"
+          - "5.1"
+          - "luajit-2.1"
+      fail-fast: false
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install Lua
+        uses: leafo/gh-actions-lua@v13
+        with:
+          luaVersion: ${{ matrix.luaVersion }}
+
+      - name: Run testing
+        working-directory: tests
+        run: lua runtest *.lua

@@ -1,6 +1,17 @@
 -- compatibility with Lua 5.1/5.2
 local unpack = rawget(table, "unpack") or unpack
 
+-- table.maxn was removed in Lua 5.3+
+local maxn = table.maxn or function(t)
+    local maxn = 0
+    for k in pairs(t) do
+        if type(k) == "number" and k > maxn then
+            maxn = k
+        end
+    end
+    return maxn
+end
+
 function gen_stateful_iter(values)
     local i = 1
     local gen = function(_param, values)
@@ -10,7 +21,7 @@ function gen_stateful_iter(values)
         local t = values[i]
         i = i + 1
         if type(t) == 'table' then
-            return values, unpack(t, 1, table.maxn(t))
+            return values, unpack(t, 1, maxn(t))
         else
             return values, t
         end

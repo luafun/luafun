@@ -1,0 +1,25 @@
+name: Static analysis
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  luacheck:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup luarocks
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y luarocks
+
+      - name: Setup luacheck
+        run: luarocks install --local --server=https://luarocks.org/dev luacheck
+
+      - run: echo $(luarocks path --lr-bin) >> $GITHUB_PATH
+
+      - name: Run luacheck
+        run: luacheck .
