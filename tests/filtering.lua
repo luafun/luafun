@@ -73,11 +73,13 @@ lines_to_grep = {
 }
 
 dump(grep("lab", lines_to_grep))
+-- luacheck: push ignore 614
 --[[test
 sed do eiusmod tempor incididunt ut labore et dolore magna 
 ullamco laboris nisi ut aliquip ex ea commodo consequat.
 deserunt mollit anim id est laborum.
 --test]]
+-- luacheck: pop
 
 lines_to_grep = {
     [[Emily]],

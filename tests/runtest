@@ -15,7 +15,7 @@ local unpack = rawget(table, "unpack") or unpack
 local loadstring = rawget(_G, "loadstring") or load
 
 function file_print(file, ...)
-    local n, i = select("#",...)
+    local n = select("#",...)
     for i=1,n do
         local x = select(i, ...)
         if type(x) == "number" and math.floor(x) == math.ceil(x) then
@@ -57,7 +57,6 @@ local function process(test_name)
     print = function(...) file_print(new_file, ...) end
 
     io.flush()
-    local expr
     for expr in content:gmatch("(.-)%s*--%[%[test.-test%]%]") do
         new_file:write(expr)
         new_file:write("\n--[[test\n")
@@ -90,7 +89,7 @@ if #arg <= 0 then
     os.exit(1)
 end
 
-local failed, i = {}
+local failed = {}
 for i=1,#arg,1 do
     local test_name = arg[i]
     if not process(test_name) then
@@ -110,7 +109,7 @@ end
 if next(globals) then
     io.write("\n")
     io.write("Some global variables have been declared by mistake:", "\n")
-    for k, pollution in pairs(globals) do
+    for _, pollution in pairs(globals) do
         local file, line, func, var = unpack(pollution)
         io.write(file..":"..line.." function "..func.."() = var '"..var.."'", "\n")
     end
