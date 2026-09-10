@@ -5,7 +5,6 @@
   },
   "diagnostics": {
     "disable": [
-      "param-type-mismatch",
       "redefined-local",
       "unbalanced-assignments",
       "undefined-global",
