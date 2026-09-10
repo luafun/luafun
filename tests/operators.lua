@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 --
 -- All these functions are fully covered by Lua tests.
 -- This test just checks that all functions were defined correctly.

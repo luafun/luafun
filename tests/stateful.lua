@@ -1,9 +1,11 @@
+---@diagnostic disable: undefined-global
+
 -- compatibility with Lua 5.1/5.2
 local unpack = rawget(table, "unpack") or unpack
 
 -- table.maxn was removed in Lua 5.3+
 local maxn = table.maxn or function(t)
-    local maxn = 0
+    local maxn = 0.0
     for k in pairs(t) do
         if type(k) == "number" and k > maxn then
             maxn = k
@@ -52,6 +54,7 @@ dump(gen_stateful_iter({{1, 10}, {3, 30}, {5, 50}, {6, 60}, {3, 20}}):drop_while
 --test]]
 
 -- Multireturn with nil
+-- luacheck: ignore 631
 dump(gen_stateful_iter({{1, nil, 10}, {3, nil, 30}, {5, nil, 50}, {6, nil, 60}, {3, nil, 20}}):drop_while(function(x) return x < 5 end))
 --[[test
 5 nil 50
@@ -60,7 +63,7 @@ dump(gen_stateful_iter({{1, nil, 10}, {3, nil, 30}, {5, nil, 50}, {6, nil, 60}, 
 --test]]
 
 -- Multireturn with condition on second returned value
-dump(gen_stateful_iter({{0, 1}, {0, 3}, {0, 5}, {0, 4}}):drop_while(function(x, y) return y < 5 end))
+dump(gen_stateful_iter({{0, 1}, {0, 3}, {0, 5}, {0, 4}}):drop_while(function(_x, y) return y < 5 end))
 --[[test
 0 5
 0 4

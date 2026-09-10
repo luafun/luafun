@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 --------------------------------------------------------------------------------
 -- iter
 --------------------------------------------------------------------------------
@@ -53,7 +54,7 @@ for _it, a in wrap(wrap(ipairs({}))) do print(a) end
 -- Check that ``iter`` for arrays is equivalent to ``ipairs``
 local t = {1, 2, 3}
 gen1, param1, state1 = iter(t):unwrap()
-gen2, param2, state2 = ipairs(t) 
+gen2, param2, state2 = ipairs(t)
 print(gen1 == gen2, param1 == param2, state1 == state2)
 --[[test
 true true true
@@ -72,7 +73,7 @@ true true true
 --
 
 local t = {}
-for _it, k, v in iter({ a = 1, b = 2, c = 3}) do t[#t + 1] = k end
+for _it, k, _v in iter({ a = 1, b = 2, c = 3}) do t[#t + 1] = k end
 table.sort(t)
 for _it, v in iter(t) do print(v) end
 --[[test
@@ -82,7 +83,7 @@ c
 --test]]
 
 local t = {}
-for _it, k, v in iter(iter(iter({ a = 1, b = 2, c = 3}))) do t[#t + 1] = k end
+for _it, k, _v in iter(iter(iter({ a = 1, b = 2, c = 3}))) do t[#t + 1] = k end
 table.sort(t)
 for _it, v in iter(t) do print(v) end
 --[[test
