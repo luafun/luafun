@@ -54,7 +54,7 @@ for _it, a in wrap(wrap(ipairs({}))) do print(a) end
 -- Check that ``iter`` for arrays is equivalent to ``ipairs``
 local t = {1, 2, 3}
 gen1, param1, state1 = iter(t):unwrap()
-gen2, param2, state2 = ipairs(t) 
+gen2, param2, state2 = ipairs(t)
 print(gen1 == gen2, param1 == param2, state1 == state2)
 --[[test
 true true true

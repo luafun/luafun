@@ -976,9 +976,8 @@ local chain_gen_r2 = function(param, state, state_x, ...)
         if param[3 * i - 2] == nil then
             return nil
         end
-        local state_x = param[3 * i]
         ---@diagnostic disable-next-line: need-check-nil
-        return chain_gen_r1(param, {i, state_x})
+        return chain_gen_r1(param, {i, param[3 * i]})
     end
     return {state[1], state_x}, ...
 end

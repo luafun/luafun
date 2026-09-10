@@ -54,6 +54,7 @@ dump(gen_stateful_iter({{1, 10}, {3, 30}, {5, 50}, {6, 60}, {3, 20}}):drop_while
 --test]]
 
 -- Multireturn with nil
+-- luacheck: ignore 631
 dump(gen_stateful_iter({{1, nil, 10}, {3, nil, 30}, {5, nil, 50}, {6, nil, 60}, {3, nil, 20}}):drop_while(function(x) return x < 5 end))
 --[[test
 5 nil 50

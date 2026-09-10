@@ -74,7 +74,7 @@ lines_to_grep = {
 
 dump(grep("lab", lines_to_grep))
 --[[test
-sed do eiusmod tempor incididunt ut labore et dolore magna 
+sed do eiusmod tempor incididunt ut labore et dolore magna
 ullamco laboris nisi ut aliquip ex ea commodo consequat.
 deserunt mollit anim id est laborum.
 --test]]
