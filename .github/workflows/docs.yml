@@ -1,0 +1,70 @@
+#
+# Build the documentation from fun.lua annotations and publish it
+# to GitHub Pages (luafun.github.io):
+#   - push to master  -> https://luafun.github.io/
+#   - pull request    -> https://luafun.github.io/stage/
+#
+# Requires a personal access token with write access to the
+# luafun/luafun.github.io repository, stored in the GH_PAGES_TOKEN secret.
+#
+
+name: docs
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: docs-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-emmylua-doc
+
+      - uses: ./.github/actions/setup-sphinx
+
+      - name: Set build and deploy parameters
+        id: params
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "site_url=https://luafun.github.io/stage/" >> "$GITHUB_OUTPUT"
+            echo "destination_dir=stage" >> "$GITHUB_OUTPUT"
+          else
+            echo "site_url=https://luafun.github.io/" >> "$GITHUB_OUTPUT"
+            echo "destination_dir=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check deploy eligibility
+        id: deploy
+        run: |
+          if [ "${{ github.event_name }}" = "push" ] || \
+             [ "${{ github.event.pull_request.head.repo.full_name }}" = "${{ github.repository }}" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build docs
+        env:
+          SITE_URL: ${{ steps.params.outputs.site_url }}
+        run: make docs
+
+      - name: Deploy to GitHub Pages
+        if: steps.deploy.outputs.enabled == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.GH_PAGES_TOKEN }}
+          external_repository: luafun/luafun.github.io
+          publish_branch: master
+          publish_dir: ./site
+          destination_dir: ${{ steps.params.outputs.destination_dir }}
+          keep_files: true
