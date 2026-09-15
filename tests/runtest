@@ -76,12 +76,19 @@ local function process(test_name)
 
     local r = os.execute(string.format('diff -U4 "%s" "%s" 2>&1',
         test_name, new_name))
-    if r then
+    -- Lua 5.1 and LuaJIT return a numeric status, Lua 5.2+ return true on
+    -- success and nil (followed by "exit" and the status) otherwise.
+    local ok
+    if type(r) == "number" then
+        ok = (r == 0)
+    else
+        ok = (r == true)
+    end
+    if ok then
         os.remove(new_name)
         return true
-    else
-        return false
     end
+    return false
 end
 
 if #arg <= 0 then
@@ -114,7 +121,10 @@ if next(globals) then
         io.write(file..":"..line.." function "..func.."() = var '"..var.."'", "\n")
     end
     io.write("\n", "Please declare them with the local statement", "\n")
+    os.exit(1)
 elseif #failed == 0 then
     io.write("All tests have passed!", "\n")
     os.exit(0)
+else
+    os.exit(1)
 end
