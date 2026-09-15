@@ -2,3 +2,5 @@
 temp/
 fun.lua.c
 5.?-fun/
+build/
+site/
