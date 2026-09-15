@@ -18,9 +18,16 @@ function file_print(file, ...)
     local n = select("#",...)
     for i=1,n do
         local x = select(i, ...)
-        if type(x) == "number" and math.floor(x) == math.ceil(x) then
-            -- A special hack for Lua 5.3: remove .0 for integer
-            x = string.match(select(i,...), '^-?%d+')
+        if type(x) == "number" then
+            if math.floor(x) == math.ceil(x) then
+                -- A special hack for Lua 5.3: remove .0 for integer
+                x = string.match(select(i,...), '^-?%d+')
+            else
+                -- Lua 5.5 prints floats in the shortest round-trip form,
+                -- while Lua 5.1-5.4 and LuaJIT use %.14g. Pin the
+                -- precision so that the expected values match everywhere.
+                x = string.format("%.14g", x)
+            end
         end
         file:write(tostring(x))
         if i~=n then
