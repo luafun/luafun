@@ -96,7 +96,7 @@ Installing the Library
 Using LuaRocks
 ``````````````
 
-Use the rockspec_ file.
+Use the rockspec_ file for https://luarocks.org/modules/rtsisyk/fun.
 
 .. _rockspec: https://raw.github.com/luafun/luafun/master/fun-scm-1.rockspec
 
