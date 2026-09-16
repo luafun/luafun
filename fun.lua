@@ -53,7 +53,7 @@ local maxn = table.maxn or function(t)
 end
 
 --------------------------------------------------------------------------------
--- Tools
+-- Internal
 --------------------------------------------------------------------------------
 
 local return_if_not_empty = function(state_x, ...)
@@ -96,7 +96,7 @@ local iterator_mt = {
     __index = methods;
 }
 
----@category Basic Functions
+---@category Internal
 ---@param gen fun.Generator @the generator function
 ---@param param any @the generator parameter (usually a constant)
 ---@param state any @the initial generator state

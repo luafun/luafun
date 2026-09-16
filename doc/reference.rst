@@ -15,4 +15,18 @@ API Reference
    transformations
    compositions
    operators
-   types/*
+   internal
+
+Types
+=====
+
+.. toctree::
+   :maxdepth: 1
+
+   types/fun.Iterator
+   types/fun.OperatorTable
+   types/fun.Generator
+   types/fun.Iterable
+   types/fun.Predicate
+   types/fun.Comparator
+   types/fun.Reducer
