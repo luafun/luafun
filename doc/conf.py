@@ -10,9 +10,7 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
 
 
 # -- Project information -----------------------------------------------------
@@ -34,6 +32,26 @@ release = '0.1.3'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'myst_parser',
+]
+
+# Source file suffixes and the parsers used for them. Markdown files are
+# produced by emmylua_doc_cli and parsed with MyST.
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
+
+# Generate stable anchors for section headings, so that the cross references
+# between the generated API pages (e.g. "See also: [span](slicing.md#fun-span)")
+# resolve.
+myst_heading_anchors = 3
+
+# emmylua_doc_cli emits decorative "---" separators after headings and
+# pseudo-Lua type signatures in code blocks; both cause non-fatal warnings.
+suppress_warnings = [
+    'docutils',
+    'misc.highlighting_failure',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -59,6 +77,9 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 #
 html_theme = 'haiku'
 
+# The base URL used for the canonical link (set by CI; empty for local builds)
+html_baseurl = os.environ.get('SITE_URL', '')
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
@@ -67,6 +88,10 @@ html_static_path = ['_static']
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
 html_logo = 'logo.png'
+
+# The haiku theme, unlike newer Sphinx, checks the `logo` context variable
+# (Sphinx itself only provides `logo_url`), so expose it here.
+html_context = {'logo': html_logo}
 
 # If true, the reST sources are included in the HTML build as _sources/name.
 # The default is True.

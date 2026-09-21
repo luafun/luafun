@@ -3,6 +3,11 @@
   "runtime": {
     "version": "LuaJIT"
   },
+  "doc": {
+    "known_tags": [
+      "category"
+    ]
+  },
   "diagnostics": {
     "disable": [
       "redefined-local",

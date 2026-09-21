@@ -1,0 +1,12 @@
+name: Setup Sphinx and MyST
+runs:
+  using: composite
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install Sphinx and MyST
+      run: pip install sphinx==9.1.0 myst-parser==5.1.0
+      shell: bash
